@@ -7,10 +7,6 @@
   <link rel="icon" href="res/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="res/favicon.png">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap');
     
@@ -33,377 +29,405 @@
   </style>
 </head>
 <body class="min-h-screen bg-white text-gray-900 font-sans">
-  <div id="root"></div>
+  <!-- 导航栏 Header -->
+  <header class="fixed top-0 w-full z-50 transition-all duration-300 bg-transparent py-6">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
+      <div class="text-xl font-serif font-bold tracking-wider text-gray-900">
+        Aviva Luo
+      </div>
+      <nav class="hidden md:flex space-x-8 text-sm font-medium tracking-wide">
+        <a href="#home" class="text-gray-600 hover:text-red-700 transition-colors duration-200 relative group">
+          首页
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-700 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        <a href="#experience" class="text-gray-600 hover:text-red-700 transition-colors duration-200 relative group">
+          个人经历
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-700 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        <a href="#projects" class="text-gray-600 hover:text-red-700 transition-colors duration-200 relative group">
+          项目
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-700 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        <a href="#works" class="text-gray-600 hover:text-red-700 transition-colors duration-200 relative group">
+          作品
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-700 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+      </nav>
+    </div>
+  </header>
 
-  <script type="text/babel">
-    const { useState, useEffect } = React;
-    const { ChevronLeft, ChevronRight, ArrowUp, MapPin } = lucide;
-
-    function App() {
-      const [isScrolled, setIsScrolled] = useState(false);
-      const [currentGalleryPage, setCurrentGalleryPage] = useState(0);
-
-      // 监听滚动以改变导航栏样式
-      useEffect(() => {
-        const handleScroll = () => {
-          setIsScrolled(window.scrollY > 50);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-      }, []);
-
-      // 模拟 40 张作品图片数据
-      const works = Array.from({ length: 40 }).map((_, i) => ({
-        id: i,
-        // 使用随机图片占位，这里选用了一些带点艺术感的图片种子
-        url: `https://picsum.photos/seed/illustration${i + 10}/600/600`,
-        title: `插画作品 ${i + 1}`,
-      }));
-
-      const itemsPerPage = 8;
-      const totalPages = Math.ceil(works.length / itemsPerPage);
-
-      const handleNextPage = () => {
-        setCurrentGalleryPage((prev) => (prev + 1) % totalPages);
-      };
-
-      const handlePrevPage = () => {
-        setCurrentGalleryPage((prev) => (prev - 1 + totalPages) % totalPages);
-      };
-
-      const currentWorks = works.slice(
-        currentGalleryPage * itemsPerPage,
-        (currentGalleryPage + 1) * itemsPerPage
-      );
-
-      const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      };
-
-      return (
-        <div className="min-h-screen bg-white text-gray-900 font-sans selection:bg-red-100 selection:text-red-900">
-          {/* 导航栏 Header */}
-          <header
-            className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-              isScrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-4' : 'bg-transparent py-6'
-            }`}
-          >
-            <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-              <div className="text-xl font-serif font-bold tracking-wider text-gray-900">
-                Aviva Luo
-              </div>
-              <nav className="hidden md:flex space-x-8 text-sm font-medium tracking-wide">
-                {['首页', '个人经历', '项目', '作品'].map((item, index) => {
-                  const ids = ['home', 'experience', 'projects', 'works'];
-                  return (
-                    <a
-                      key={item}
-                      href={`#${ids[index]}`}
-                      className="text-gray-600 hover:text-red-700 transition-colors duration-200 relative group"
-                    >
-                      {item}
-                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-700 transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                  );
-                })}
-              </nav>
-            </div>
-          </header>
-
-          <main>
-            {/* 首页 / 关于本人 */}
-            <section id="home" className="pt-40 pb-20 md:pt-48 md:pb-32 px-6 md:px-12 max-w-7xl mx-auto">
-              <div className="flex flex-col md:flex-row items-center gap-12 md:gap-20">
-                {/* 左侧照片 */}
-                <div className="w-full md:w-[45%] relative group">
-                  <div className="absolute inset-0 bg-red-700/10 translate-x-4 translate-y-4 rounded-lg transition-transform group-hover:translate-x-6 group-hover:translate-y-6"></div>
-                  <img
-                    src="res/aviva.jpg"
-                    alt="Aviva Luo"
-                    className="relative z-10 w-full aspect-[4/5] object-cover rounded-lg shadow-lg grayscale-[20%] hover:grayscale-0 transition-all duration-500"
-                  />
-                </div>
-                
-                {/* 右侧介绍 */}
-                <div className="w-full md:w-[55%] space-y-8">
-                  <div className="space-y-4">
-                    <h1 className="text-4xl md:text-6xl font-serif text-gray-900 leading-tight">
-                      罗经 <span className="text-red-700 italic">Aviva Luo</span>
-                    </h1>
-                    <p className="text-lg md:text-xl text-gray-500 font-light tracking-wide leading-relaxed">
-                      插画设计师 <span className="text-red-700 mx-2">·</span> 
-                      创意工作室主理人 <span className="text-red-700 mx-2">·</span> 
-                      冰激凌品牌主理人 <span className="text-red-700 mx-2">·</span> 
-                      Bistro 主理人
-                    </p>
-                  </div>
-                  <div className="w-12 h-1 bg-red-700"></div>
-                  <p className="text-2xl font-medium text-gray-800">
-                    用画笔和风味，为日常增添一抹温度
-                  </p>
-                  <div className="flex items-center text-gray-500 space-x-2 pt-4">
-                    <MapPin size={18} className="text-red-700" />
-                    <span>上海 / 天津</span>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* 个人经历 */}
-            <section id="experience" className="py-24 bg-gray-50 px-6 md:px-12">
-              <div className="max-w-4xl mx-auto">
-                <h2 className="text-3xl md:text-4xl font-serif mb-16 text-center">
-                  个人经历 <span className="block text-sm font-sans text-red-700 mt-2 tracking-widest">CAREER PATH</span>
-                </h2>
-                <div className="space-y-12">
-                  {/* 经历项 1 */}
-                  <div className="flex flex-col md:flex-row gap-6 md:gap-12 items-start relative before:absolute before:left-[11px] md:before:left-1/2 before:top-8 before:bottom-[-48px] before:w-px before:bg-gray-200 last:before:hidden">
-                    <div className="md:w-1/2 md:text-right pr-8">
-                      <h3 className="text-xl font-bold text-gray-900">从欢·酒饭 主理人</h3>
-                      <p className="text-red-700 text-sm mt-1">天津</p>
-                    </div>
-                    <div className="absolute left-0 md:left-1/2 w-6 h-6 rounded-full border-4 border-white bg-red-700 -translate-x-[5px] md:-translate-x-3 mt-1"></div>
-                    <div className="md:w-1/2 pl-10 md:pl-8 text-gray-600 leading-relaxed">
-                      天津第一家正宗法式 Bistro 主理人，设计师，创始人。
-                    </div>
-                  </div>
-
-                  {/* 经历项 2 */}
-                  <div className="flex flex-col md:flex-row gap-6 md:gap-12 items-start relative before:absolute before:left-[11px] md:before:left-1/2 before:top-8 before:bottom-[-48px] before:w-px before:bg-gray-200 last:before:hidden">
-                    <div className="md:w-1/2 md:text-right pr-8">
-                      <h3 className="text-xl font-bold text-gray-900">Gegelato 品牌主理人</h3>
-                      <p className="text-red-700 text-sm mt-1">天津</p>
-                    </div>
-                    <div className="absolute left-0 md:left-1/2 w-6 h-6 rounded-full border-4 border-white bg-red-700 -translate-x-[5px] md:-translate-x-3 mt-1"></div>
-                    <div className="md:w-1/2 pl-10 md:pl-8 text-gray-600 leading-relaxed">
-                      意式冰激凌品牌 Gegelato 设计师、主理人、创始人。
-                    </div>
-                  </div>
-
-                  {/* 经历项 3 */}
-                  <div className="flex flex-col md:flex-row gap-6 md:gap-12 items-start relative before:absolute before:left-[11px] md:before:left-1/2 before:top-8 before:bottom-[-48px] before:w-px before:bg-gray-200 last:before:hidden">
-                    <div className="md:w-1/2 md:text-right pr-8">
-                      <h3 className="text-xl font-bold text-gray-900">FLUFFY.LFB 首席内容官</h3>
-                      <p className="text-red-700 text-sm mt-1">上海</p>
-                    </div>
-                    <div className="absolute left-0 md:left-1/2 w-6 h-6 rounded-full border-4 border-white bg-red-700 -translate-x-[5px] md:-translate-x-3 mt-1"></div>
-                    <div className="md:w-1/2 pl-10 md:pl-8 text-gray-600 leading-relaxed">
-                      上海本土冰激凌品牌 FLUFFY.LFB 全品内容设计开发。
-                    </div>
-                  </div>
-
-                  {/* 经历项 4 */}
-                  <div className="flex flex-col md:flex-row gap-6 md:gap-12 items-start relative before:absolute before:left-[11px] md:before:left-1/2 before:top-8 before:bottom-[-48px] before:w-px before:bg-gray-200 last:before:hidden">
-                    <div className="md:w-1/2 md:text-right pr-8">
-                      <h3 className="text-xl font-bold text-gray-900">主导设计合作</h3>
-                      <p className="text-red-700 text-sm mt-1">跨界合作</p>
-                    </div>
-                    <div className="absolute left-0 md:left-1/2 w-6 h-6 rounded-full border-4 border-white bg-red-700 -translate-x-[5px] md:-translate-x-3 mt-1"></div>
-                    <div className="md:w-1/2 pl-10 md:pl-8 text-gray-600 leading-relaxed">
-                      法国春天百货 PRINTEMPS、法国 Le Havre 自然博物馆、法国电信 sosh、美图秀秀、Capella Hotel 嘉佩乐酒店、Bonjour BRAND、Apple 中国以及多家杂志社、文创品牌合作。
-                    </div>
-                  </div>
-
-                  {/* 经历项 5 */}
-                  <div className="flex flex-col md:flex-row gap-6 md:gap-12 items-start relative last:before:hidden">
-                    <div className="md:w-1/2 md:text-right pr-8">
-                      <h3 className="text-xl font-bold text-gray-900">留学 6 年</h3>
-                      <p className="text-red-700 text-sm mt-1">法国</p>
-                    </div>
-                    <div className="absolute left-0 md:left-1/2 w-6 h-6 rounded-full border-4 border-white bg-red-700 -translate-x-[5px] md:-translate-x-3 mt-1"></div>
-                    <div className="md:w-1/2 pl-10 md:pl-8 text-gray-600 leading-relaxed">
-                      毕业于巴黎高等应用艺术学院，平面设计与数字艺术专业。
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* 项目 */}
-            <section id="projects" className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-serif mb-16 text-center">
-                专注项目 <span className="block text-sm font-sans text-red-700 mt-2 tracking-widest">CURRENT FOCUS</span>
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="group border border-gray-100 p-8 hover:shadow-xl transition-all duration-300 hover:border-red-100 bg-white">
-                  <div className="w-12 h-12 bg-red-50 text-red-700 rounded-full flex items-center justify-center mb-6 group-hover:bg-red-700 group-hover:text-white transition-colors">
-                    <span className="font-serif italic text-xl">B</span>
-                  </div>
-                  <h3 className="text-xl font-bold mb-1">丛欢酒饭 · 主理人</h3>
-                  <p className="text-red-700 text-xs tracking-wider mb-3">天津五大道常德道</p>
-                  <p className="text-gray-600 leading-relaxed text-sm">
-                    一家温馨又有温度的法式小酒馆，在街角等你。
-                  </p>
-                </div>
-                
-                <div className="group border border-gray-100 p-8 hover:shadow-xl transition-all duration-300 hover:border-red-100 bg-white">
-                  <div className="w-12 h-12 bg-red-50 text-red-700 rounded-full flex items-center justify-center mb-6 group-hover:bg-red-700 group-hover:text-white transition-colors">
-                    <span className="font-serif italic text-xl">R</span>
-                  </div>
-                  <h3 className="text-xl font-bold mb-1">丛欢意大利小酒馆 · 合伙人</h3>
-                  <p className="text-red-700 text-xs tracking-wider mb-3">天津五大道成都道</p>
-                  <p className="text-gray-600 leading-relaxed text-sm">
-                    主打地道意大利西餐，藏在小洋楼里的风味日常。
-                  </p>
-                </div>
-
-                <div className="group border border-gray-100 p-8 hover:shadow-xl transition-all duration-300 hover:border-red-100 bg-white">
-                  <div className="w-12 h-12 bg-red-50 text-red-700 rounded-full flex items-center justify-center mb-6 group-hover:bg-red-700 group-hover:text-white transition-colors">
-                    <span className="font-serif italic text-xl">G</span>
-                  </div>
-                  <h3 className="text-xl font-bold mb-1">Gegelato 意式冰淇淋 · 主理人</h3>
-                  <p className="text-red-700 text-xs tracking-wider mb-3">五大道成都道｜河东棉三创意街区</p>
-                  <p className="text-gray-600 leading-relaxed text-sm">
-                    专注意式Gelato，一口下去，是意大利的甜。
-                  </p>
-                </div>
-              </div>
-            </section>
-
-            {/* 作品 */}
-            <section id="works" className="py-24 bg-white text-gray-900 px-6 md:px-12">
-              <div className="max-w-7xl mx-auto">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-12">
-                  <div>
-                    <h2 className="text-3xl md:text-4xl font-serif">
-                      我的作品 <span className="block text-sm font-sans text-red-700 mt-2 tracking-widest">PORTFOLIO</span>
-                    </h2>
-                    <p className="text-gray-500 mt-4 text-sm">共 40 幅插画作品</p>
-                  </div>
-                  
-                  {/* 导航按钮 */}
-                  <div className="flex space-x-4 mt-6 md:mt-0">
-                    <button 
-                      onClick={handlePrevPage}
-                      className="w-12 h-12 rounded-full border border-gray-200 text-gray-600 flex items-center justify-center hover:bg-red-700 hover:text-white hover:border-red-700 transition-colors"
-                    >
-                      <ChevronLeft size={20} />
-                    </button>
-                    <button 
-                      onClick={handleNextPage}
-                      className="w-12 h-12 rounded-full border border-gray-200 text-gray-600 flex items-center justify-center hover:bg-red-700 hover:text-white hover:border-red-700 transition-colors"
-                    >
-                      <ChevronRight size={20} />
-                    </button>
-                  </div>
-                </div>
-
-                {/* 作品画廊 (2行4列) */}
-                <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-2 gap-4 md:gap-6 min-h-[600px]">
-                  {currentWorks.map((work) => (
-                    <div key={work.id} className="group relative overflow-hidden bg-gray-100 rounded-sm aspect-square border border-gray-50">
-                      <img 
-                        src={work.url} 
-                        alt={work.title} 
-                        className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                        <p className="p-4 md:p-6 text-sm md:text-base font-medium text-white">{work.title}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* 分页指示器 */}
-                <div className="flex justify-center mt-10 space-x-2">
-                  {Array.from({ length: totalPages }).map((_, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setCurrentGalleryPage(idx)}
-                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                        currentGalleryPage === idx ? 'w-8 bg-red-700' : 'bg-gray-300 hover:bg-gray-400'
-                      }`}
-                    />
-                  ))}
-                </div>
-              </div>
-            </section>
-
-            {/* 关于我（爱好与交流） */}
-            <section className="py-24 px-6 md:px-12 max-w-5xl mx-auto">
-              <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-4xl font-serif mb-4">关于我</h2>
-                <p className="text-gray-500">我感兴趣的领域，欢迎随时与我交流</p>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
-                <div className="flex items-start space-x-6 group">
-                  <div className="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0 group-hover:bg-red-700 group-hover:text-white transition-colors duration-300 text-red-700 text-xl font-serif">01</div>
-                  <div>
-                    <h3 className="text-xl font-bold mb-2">艺术类相关</h3>
-                    <p className="text-gray-600">插画、绘画、手工。用双手创造美好，将想象转化为触手可及的艺术品。</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start space-x-6 group">
-                  <div className="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0 group-hover:bg-red-700 group-hover:text-white transition-colors duration-300 text-red-700 text-xl font-serif">02</div>
-                  <div>
-                    <h3 className="text-xl font-bold mb-2">养花</h3>
-                    <p className="text-gray-600">喜爱各种花花草草。在打理植物的过程中感受生命的力量与平静。</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-6 group">
-                  <div className="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0 group-hover:bg-red-700 group-hover:text-white transition-colors duration-300 text-red-700 text-xl font-serif">03</div>
-                  <div>
-                    <h3 className="text-xl font-bold mb-2">睡觉</h3>
-                    <p className="text-gray-600">享受长时间睡眠。充足的休息是迸发新灵感与保持创作精力的最佳方式。</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-6 group">
-                  <div className="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0 group-hover:bg-red-700 group-hover:text-white transition-colors duration-300 text-red-700 text-xl font-serif">04</div>
-                  <div>
-                    <h3 className="text-xl font-bold mb-2">不爱运动</h3>
-                    <p className="text-gray-600">确实如此。更偏爱静态的专注与沉思，在宁静中构建自己的精神世界。</p>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </main>
-
-          {/* 网页 Footer */}
-          <footer className="bg-white border-t border-gray-100 py-12 px-6 md:px-12">
-            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
-              
-              {/* 左侧信息 */}
-              <div className="space-y-2">
-                <h3 className="text-xl font-serif font-bold text-gray-900">
-                  罗经 <span className="italic font-normal">Aviva Luo</span>
-                </h3>
-                <p className="text-sm text-gray-500">
-                  插画设计师<span className="mx-1">·</span>创意工作室主理人<span className="mx-1">·</span>冰激凌品牌主理人<span className="mx-1">·</span>Bistro 主理人
-                </p>
-                <p className="text-sm text-red-700 font-medium pt-1">
-                  用画笔和风味，为日常增添一抹温度
-                </p>
-              </div>
-
-              {/* 右侧信息 & 返回顶部 */}
-              <div className="flex flex-col items-start md:items-end space-y-4">
-                <div className="flex flex-col md:flex-row items-start md:items-center text-sm text-gray-600 gap-2 md:gap-6">
-                  <span>联系方式：xxxxx@gmail.com</span>
-                  <span className="hidden md:inline text-gray-300">|</span>
-                  <span>上海 / 天津</span>
-                </div>
-                
-                <button 
-                  onClick={scrollToTop}
-                  className="flex items-center space-x-2 text-sm text-gray-500 hover:text-red-700 transition-colors group mt-4 md:mt-0"
-                >
-                  <span>返回顶部（点击回到导航栏）</span>
-                  <div className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center group-hover:border-red-700 transition-colors">
-                    <ArrowUp size={16} />
-                  </div>
-                </button>
-              </div>
-            </div>
-          </footer>
+  <main>
+    <!-- 首页 / 关于本人 -->
+    <section id="home" class="pt-40 pb-20 md:pt-48 md:pb-32 px-6 md:px-12 max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row items-center gap-12 md:gap-20">
+        <!-- 左侧照片 -->
+        <div class="w-full md:w-[45%] relative group">
+          <div class="absolute inset-0 bg-red-700/10 translate-x-4 translate-y-4 rounded-lg transition-transform group-hover:translate-x-6 group-hover:translate-y-6"></div>
+          <img
+            src="res/aviva.jpg"
+            alt="Aviva Luo"
+            class="relative z-10 w-full aspect-[4/5] object-cover rounded-lg shadow-lg grayscale-[20%] hover:grayscale-0 transition-all duration-500"
+          />
         </div>
-      );
-    }
+        
+        <!-- 右侧介绍 -->
+        <div class="w-full md:w-[55%] space-y-8">
+          <div class="space-y-4">
+            <h1 class="text-4xl md:text-6xl font-serif text-gray-900 leading-tight">
+              罗经 <span class="text-red-700 italic">Aviva Luo</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-500 font-light tracking-wide leading-relaxed">
+              插画设计师 <span class="text-red-700 mx-2">·</span> 
+              创意工作室主理人 <span class="text-red-700 mx-2">·</span> 
+              冰激凌品牌主理人 <span class="text-red-700 mx-2">·</span> 
+              Bistro 主理人
+            </p>
+          </div>
+          <div class="w-12 h-1 bg-red-700"></div>
+          <p class="text-2xl font-medium text-gray-800">
+            用画笔和风味，为日常增添一抹温度
+          </p>
+          <div class="flex items-center text-gray-500 space-x-2 pt-4">
+            <svg class="w-5 h-5 text-red-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            <span>上海 / 天津</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    ReactDOM.render(<App />, document.getElementById('root'));
+    <!-- 个人经历 -->
+    <section id="experience" class="py-24 bg-gray-50 px-6 md:px-12">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-serif mb-16 text-center">
+          个人经历 <span class="block text-sm font-sans text-red-700 mt-2 tracking-widest">CAREER PATH</span>
+        </h2>
+        <div class="space-y-12">
+          <!-- 经历项 1 -->
+          <div class="flex flex-col md:flex-row gap-6 md:gap-12 items-start relative before:absolute before:left-[11px] md:before:left-1/2 before:top-8 before:bottom-[-48px] before:w-px before:bg-gray-200 last:before:hidden">
+            <div class="md:w-1/2 md:text-right pr-8">
+              <h3 class="text-xl font-bold text-gray-900">从欢·酒饭 主理人</h3>
+              <p class="text-red-700 text-sm mt-1">天津</p>
+            </div>
+            <div class="absolute left-0 md:left-1/2 w-6 h-6 rounded-full border-4 border-white bg-red-700 -translate-x-[5px] md:-translate-x-3 mt-1"></div>
+            <div class="md:w-1/2 pl-10 md:pl-8 text-gray-600 leading-relaxed">
+              天津第一家正宗法式 Bistro 主理人，设计师，创始人。
+            </div>
+          </div>
+
+          <!-- 经历项 2 -->
+          <div class="flex flex-col md:flex-row gap-6 md:gap-12 items-start relative before:absolute before:left-[11px] md:before:left-1/2 before:top-8 before:bottom-[-48px] before:w-px before:bg-gray-200 last:before:hidden">
+            <div class="md:w-1/2 md:text-right pr-8">
+              <h3 class="text-xl font-bold text-gray-900">Gegelato 品牌主理人</h3>
+              <p class="text-red-700 text-sm mt-1">天津</p>
+            </div>
+            <div class="absolute left-0 md:left-1/2 w-6 h-6 rounded-full border-4 border-white bg-red-700 -translate-x-[5px] md:-translate-x-3 mt-1"></div>
+            <div class="md:w-1/2 pl-10 md:pl-8 text-gray-600 leading-relaxed">
+              意式冰激凌品牌 Gegelato 设计师、主理人、创始人。
+            </div>
+          </div>
+
+          <!-- 经历项 3 -->
+          <div class="flex flex-col md:flex-row gap-6 md:gap-12 items-start relative before:absolute before:left-[11px] md:before:left-1/2 before:top-8 before:bottom-[-48px] before:w-px before:bg-gray-200 last:before:hidden">
+            <div class="md:w-1/2 md:text-right pr-8">
+              <h3 class="text-xl font-bold text-gray-900">FLUFFY.LFB 首席内容官</h3>
+              <p class="text-red-700 text-sm mt-1">上海</p>
+            </div>
+            <div class="absolute left-0 md:left-1/2 w-6 h-6 rounded-full border-4 border-white bg-red-700 -translate-x-[5px] md:-translate-x-3 mt-1"></div>
+            <div class="md:w-1/2 pl-10 md:pl-8 text-gray-600 leading-relaxed">
+              上海本土冰激凌品牌 FLUFFY.LFB 全品内容设计开发。
+            </div>
+          </div>
+
+          <!-- 经历项 4 -->
+          <div class="flex flex-col md:flex-row gap-6 md:gap-12 items-start relative before:absolute before:left-[11px] md:before:left-1/2 before:top-8 before:bottom-[-48px] before:w-px before:bg-gray-200 last:before:hidden">
+            <div class="md:w-1/2 md:text-right pr-8">
+              <h3 class="text-xl font-bold text-gray-900">主导设计合作</h3>
+              <p class="text-red-700 text-sm mt-1">跨界合作</p>
+            </div>
+            <div class="absolute left-0 md:left-1/2 w-6 h-6 rounded-full border-4 border-white bg-red-700 -translate-x-[5px] md:-translate-x-3 mt-1"></div>
+            <div class="md:w-1/2 pl-10 md:pl-8 text-gray-600 leading-relaxed">
+              法国春天百货 PRINTEMPS、法国 Le Havre 自然博物馆、法国电信 sosh、美图秀秀、Capella Hotel 嘉佩乐酒店、Bonjour BRAND、Apple 中国以及多家杂志社、文创品牌合作。
+            </div>
+          </div>
+
+          <!-- 经历项 5 -->
+          <div class="flex flex-col md:flex-row gap-6 md:gap-12 items-start relative last:before:hidden">
+            <div class="md:w-1/2 md:text-right pr-8">
+              <h3 class="text-xl font-bold text-gray-900">留学 6 年</h3>
+              <p class="text-red-700 text-sm mt-1">法国</p>
+            </div>
+            <div class="absolute left-0 md:left-1/2 w-6 h-6 rounded-full border-4 border-white bg-red-700 -translate-x-[5px] md:-translate-x-3 mt-1"></div>
+            <div class="md:w-1/2 pl-10 md:pl-8 text-gray-600 leading-relaxed">
+              毕业于巴黎高等应用艺术学院，平面设计与数字艺术专业。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 项目 -->
+    <section id="projects" class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-serif mb-16 text-center">
+        专注项目 <span class="block text-sm font-sans text-red-700 mt-2 tracking-widest">CURRENT FOCUS</span>
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="group border border-gray-100 p-8 hover:shadow-xl transition-all duration-300 hover:border-red-100 bg-white">
+          <div class="w-12 h-12 bg-red-50 text-red-700 rounded-full flex items-center justify-center mb-6 group-hover:bg-red-700 group-hover:text-white transition-colors">
+            <span class="font-serif italic text-xl">B</span>
+          </div>
+          <h3 class="text-xl font-bold mb-1">丛欢酒饭 · 主理人</h3>
+          <p class="text-red-700 text-xs tracking-wider mb-3">天津五大道常德道</p>
+          <p class="text-gray-600 leading-relaxed text-sm">
+            一家温馨又有温度的法式小酒馆，在街角等你。
+          </p>
+        </div>
+        
+        <div class="group border border-gray-100 p-8 hover:shadow-xl transition-all duration-300 hover:border-red-100 bg-white">
+          <div class="w-12 h-12 bg-red-50 text-red-700 rounded-full flex items-center justify-center mb-6 group-hover:bg-red-700 group-hover:text-white transition-colors">
+            <span class="font-serif italic text-xl">R</span>
+          </div>
+          <h3 class="text-xl font-bold mb-1">丛欢意大利小酒馆 · 合伙人</h3>
+          <p class="text-red-700 text-xs tracking-wider mb-3">天津五大道成都道</p>
+          <p class="text-gray-600 leading-relaxed text-sm">
+            主打地道意大利西餐，藏在小洋楼里的风味日常。
+          </p>
+        </div>
+
+        <div class="group border border-gray-100 p-8 hover:shadow-xl transition-all duration-300 hover:border-red-100 bg-white">
+          <div class="w-12 h-12 bg-red-50 text-red-700 rounded-full flex items-center justify-center mb-6 group-hover:bg-red-700 group-hover:text-white transition-colors">
+            <span class="font-serif italic text-xl">G</span>
+          </div>
+          <h3 class="text-xl font-bold mb-1">Gegelato 意式冰淇淋 · 主理人</h3>
+          <p class="text-red-700 text-xs tracking-wider mb-3">五大道成都道｜河东棉三创意街区</p>
+          <p class="text-gray-600 leading-relaxed text-sm">
+            专注意式Gelato，一口下去，是意大利的甜。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 作品 -->
+    <section id="works" class="py-24 bg-white text-gray-900 px-6 md:px-12">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+          <div>
+            <h2 class="text-3xl md:text-4xl font-serif">
+              我的作品 <span class="block text-sm font-sans text-red-700 mt-2 tracking-widest">PORTFOLIO</span>
+            </h2>
+            <p class="text-gray-500 mt-4 text-sm">共 40 幅插画作品</p>
+          </div>
+          
+          <!-- 导航按钮 -->
+          <div class="flex space-x-4 mt-6 md:mt-0">
+            <button class="w-12 h-12 rounded-full border border-gray-200 text-gray-600 flex items-center justify-center hover:bg-red-700 hover:text-white hover:border-red-700 transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+              </svg>
+            </button>
+            <button class="w-12 h-12 rounded-full border border-gray-200 text-gray-600 flex items-center justify-center hover:bg-red-700 hover:text-white hover:border-red-700 transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 作品画廊 (2行4列) -->
+        <div class="grid grid-cols-2 md:grid-cols-4 grid-rows-2 gap-4 md:gap-6 min-h-[600px]">
+          <!-- 示例作品 -->
+          <div class="group relative overflow-hidden bg-gray-100 rounded-sm aspect-square border border-gray-50">
+            <img 
+              src="https://picsum.photos/seed/illustration10/600/600" 
+              alt="插画作品 1" 
+              class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+              <p class="p-4 md:p-6 text-sm md:text-base font-medium text-white">插画作品 1</p>
+            </div>
+          </div>
+          <div class="group relative overflow-hidden bg-gray-100 rounded-sm aspect-square border border-gray-50">
+            <img 
+              src="https://picsum.photos/seed/illustration11/600/600" 
+              alt="插画作品 2" 
+              class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+              <p class="p-4 md:p-6 text-sm md:text-base font-medium text-white">插画作品 2</p>
+            </div>
+          </div>
+          <div class="group relative overflow-hidden bg-gray-100 rounded-sm aspect-square border border-gray-50">
+            <img 
+              src="https://picsum.photos/seed/illustration12/600/600" 
+              alt="插画作品 3" 
+              class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+              <p class="p-4 md:p-6 text-sm md:text-base font-medium text-white">插画作品 3</p>
+            </div>
+          </div>
+          <div class="group relative overflow-hidden bg-gray-100 rounded-sm aspect-square border border-gray-50">
+            <img 
+              src="https://picsum.photos/seed/illustration13/600/600" 
+              alt="插画作品 4" 
+              class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+              <p class="p-4 md:p-6 text-sm md:text-base font-medium text-white">插画作品 4</p>
+            </div>
+          </div>
+          <div class="group relative overflow-hidden bg-gray-100 rounded-sm aspect-square border border-gray-50">
+            <img 
+              src="https://picsum.photos/seed/illustration14/600/600" 
+              alt="插画作品 5" 
+              class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+              <p class="p-4 md:p-6 text-sm md:text-base font-medium text-white">插画作品 5</p>
+            </div>
+          </div>
+          <div class="group relative overflow-hidden bg-gray-100 rounded-sm aspect-square border border-gray-50">
+            <img 
+              src="https://picsum.photos/seed/illustration15/600/600" 
+              alt="插画作品 6" 
+              class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+              <p class="p-4 md:p-6 text-sm md:text-base font-medium text-white">插画作品 6</p>
+            </div>
+          </div>
+          <div class="group relative overflow-hidden bg-gray-100 rounded-sm aspect-square border border-gray-50">
+            <img 
+              src="https://picsum.photos/seed/illustration16/600/600" 
+              alt="插画作品 7" 
+              class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+              <p class="p-4 md:p-6 text-sm md:text-base font-medium text-white">插画作品 7</p>
+            </div>
+          </div>
+          <div class="group relative overflow-hidden bg-gray-100 rounded-sm aspect-square border border-gray-50">
+            <img 
+              src="https://picsum.photos/seed/illustration17/600/600" 
+              alt="插画作品 8" 
+              class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+              <p class="p-4 md:p-6 text-sm md:text-base font-medium text-white">插画作品 8</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 分页指示器 -->
+        <div class="flex justify-center mt-10 space-x-2">
+          <button class="w-8 h-2 rounded-full bg-red-700"></button>
+          <button class="w-2 h-2 rounded-full bg-gray-300 hover:bg-gray-400"></button>
+          <button class="w-2 h-2 rounded-full bg-gray-300 hover:bg-gray-400"></button>
+          <button class="w-2 h-2 rounded-full bg-gray-300 hover:bg-gray-400"></button>
+          <button class="w-2 h-2 rounded-full bg-gray-300 hover:bg-gray-400"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 关于我（爱好与交流） -->
+    <section class="py-24 px-6 md:px-12 max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-serif mb-4">关于我</h2>
+        <p class="text-gray-500">我感兴趣的领域，欢迎随时与我交流</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
+        <div class="flex items-start space-x-6 group">
+          <div class="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0 group-hover:bg-red-700 group-hover:text-white transition-colors duration-300 text-red-700 text-xl font-serif">01</div>
+          <div>
+            <h3 class="text-xl font-bold mb-2">艺术类相关</h3>
+            <p class="text-gray-600">插画、绘画、手工。用双手创造美好，将想象转化为触手可及的艺术品。</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start space-x-6 group">
+          <div class="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0 group-hover:bg-red-700 group-hover:text-white transition-colors duration-300 text-red-700 text-xl font-serif">02</div>
+          <div>
+            <h3 class="text-xl font-bold mb-2">养花</h3>
+            <p class="text-gray-600">喜爱各种花花草草。在打理植物的过程中感受生命的力量与平静。</p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-6 group">
+          <div class="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0 group-hover:bg-red-700 group-hover:text-white transition-colors duration-300 text-red-700 text-xl font-serif">03</div>
+          <div>
+            <h3 class="text-xl font-bold mb-2">睡觉</h3>
+            <p class="text-gray-600">享受长时间睡眠。充足的休息是迸发新灵感与保持创作精力的最佳方式。</p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-6 group">
+          <div class="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0 group-hover:bg-red-700 group-hover:text-white transition-colors duration-300 text-red-700 text-xl font-serif">04</div>
+          <div>
+            <h3 class="text-xl font-bold mb-2">不爱运动</h3>
+            <p class="text-gray-600">确实如此。更偏爱静态的专注与沉思，在宁静中构建自己的精神世界。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 网页 Footer -->
+  <footer class="bg-white border-t border-gray-100 py-12 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+      
+      <!-- 左侧信息 -->
+      <div class="space-y-2">
+        <h3 class="text-xl font-serif font-bold text-gray-900">
+          罗经 <span class="italic font-normal">Aviva Luo</span>
+        </h3>
+        <p class="text-sm text-gray-500">
+          插画设计师<span class="mx-1">·</span>创意工作室主理人<span class="mx-1">·</span>冰激凌品牌主理人<span class="mx-1">·</span>Bistro 主理人
+        </p>
+        <p class="text-sm text-red-700 font-medium pt-1">
+          用画笔和风味，为日常增添一抹温度
+        </p>
+      </div>
+
+      <!-- 右侧信息 & 返回顶部 -->
+      <div class="flex flex-col items-start md:items-end space-y-4">
+        <div class="flex flex-col md:flex-row items-start md:items-center text-sm text-gray-600 gap-2 md:gap-6">
+          <span>联系方式：xxxxx@gmail.com</span>
+          <span class="hidden md:inline text-gray-300">|</span>
+          <span>上海 / 天津</span>
+        </div>
+        
+        <button class="flex items-center space-x-2 text-sm text-gray-500 hover:text-red-700 transition-colors group mt-4 md:mt-0">
+          <span>返回顶部（点击回到导航栏）</span>
+          <div class="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center group-hover:border-red-700 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+            </svg>
+          </div>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 监听滚动以改变导航栏样式
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('header');
+      if (window.scrollY > 50) {
+        header.classList.remove('bg-transparent', 'py-6');
+        header.classList.add('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'py-4');
+      } else {
+        header.classList.remove('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'py-4');
+        header.classList.add('bg-transparent', 'py-6');
+      }
+    });
+
+    // 返回顶部功能
+    document.querySelector('button:last-child').addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   </script>
 </body>
 </html>
