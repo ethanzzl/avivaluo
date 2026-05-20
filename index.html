@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Aviva Luo 的个人作品网站，展示插画、项目、个人经历与创意生活。"
+    />
+    <title>Aviva Luo | 插画设计师</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#home">跳到主要内容</a>
+    <header class="site-header" id="top">
+      <a class="brand" href="#home" aria-label="返回首页">Aviva Luo</a>
+      <nav class="main-nav" aria-label="主导航">
+        <a href="#home" data-nav-link>首页</a>
+        <a href="#experience" data-nav-link>个人经历</a>
+        <a href="#projects" data-nav-link>项目</a>
+        <a href="#works" data-nav-link>作品</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero section" id="home" aria-labelledby="hero-title">
+        <div class="portrait-frame">
+          <img src="assets/profile.jpg" alt="罗经 Aviva Luo 本人照片" />
+          <div class="portrait-fallback" aria-hidden="true">
+            <span>Aviva</span>
+            <small>profile.jpg</small>
+          </div>
+        </div>
+        <div class="hero-copy">
+          <p class="eyebrow">Illustrator / Brand Founder</p>
+          <h1 id="hero-title">罗经 Aviva Luo</h1>
+          <p class="roles">插画设计师 · 创意工作室主理人 · 冰激凌品牌主理人 · Bistro 主理人</p>
+          <p class="hero-line">用画笔与风味，为日常增添一抹温度</p>
+          <p class="location">上海 / 天津</p>
+        </div>
+      </section>
+
+      <section class="section experience" id="experience" aria-labelledby="experience-title">
+        <div class="section-heading">
+          <p class="eyebrow">Career Path</p>
+          <h2 id="experience-title">个人经历</h2>
+        </div>
+        <div class="timeline" aria-label="职业发展规划">
+          <article class="timeline-item">
+            <span class="timeline-mark">01</span>
+            <div>
+              <h3>设计师、主理人、创始人</h3>
+              <p>在天津持续推进多个品牌的设计规划与运营，将视觉语言、空间体验和日常服务连接起来。</p>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-mark">02</span>
+            <div>
+              <h3>Fluffy 冰激凌视觉负责人</h3>
+              <p>参与上海本土冰激凌品牌 Fluffy 的设计研发，以轻盈、柔软的视觉回应品牌气质。</p>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-mark">03</span>
+            <div>
+              <h3>法国留学 6 年</h3>
+              <p>在跨文化生活与艺术训练中积累审美经验，也把法式日常的松弛与温度带回创作实践。</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section projects" id="projects" aria-labelledby="projects-title">
+        <div class="section-heading">
+          <p class="eyebrow">Current Focus</p>
+          <h2 id="projects-title">正在专注的项目</h2>
+        </div>
+        <div class="project-grid">
+          <article class="project-card">
+            <p class="project-role">主理人</p>
+            <h3>丛欢酒饭</h3>
+            <p class="project-place">天津五大道常德道</p>
+            <p>一家温馨的法式小酒馆，在五大道的街角，留住轻松的晚餐时刻。</p>
+          </article>
+          <article class="project-card">
+            <p class="project-role">合伙人</p>
+            <h3>丛欢意大利小酒馆</h3>
+            <p class="project-place">天津五大道成都道</p>
+            <p>主打地道意大利西餐，把小洋楼里的风味日常做得亲切而有层次。</p>
+          </article>
+          <article class="project-card">
+            <p class="project-role">主理人</p>
+            <h3>Gegelato 意式冰淇淋</h3>
+            <p class="project-place">成都道 / 棉三</p>
+            <p>专注意式 Gelato，以清爽、细腻的甜，把旅途里的味道带回城市日常。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section works" id="works" aria-labelledby="works-title">
+        <div class="section-heading works-heading">
+          <div>
+            <p class="eyebrow">Selected Works</p>
+            <h2 id="works-title">我的作品</h2>
+          </div>
+          <div class="gallery-controls" aria-label="作品导航">
+            <button class="icon-button" type="button" data-gallery-prev aria-label="上一组作品">←</button>
+            <span class="gallery-status" data-gallery-status aria-live="polite">1 / 4</span>
+            <button class="icon-button" type="button" data-gallery-next aria-label="下一组作品">→</button>
+          </div>
+        </div>
+        <div class="gallery-shell">
+          <div class="volume-tabs" aria-label="作品册">
+            <button class="volume-tab active" type="button" data-volume="0">上册</button>
+            <button class="volume-tab" type="button" data-volume="1">下册</button>
+          </div>
+          <div class="gallery-track" data-gallery-track aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="section about" aria-labelledby="about-title">
+        <div class="section-heading">
+          <p class="eyebrow">About Me</p>
+          <h2 id="about-title">生活侧记</h2>
+        </div>
+        <div class="interest-grid">
+          <article>
+            <span>01</span>
+            <h3>艺术类相关</h3>
+            <p>插画、绘画、手工，都是我观察世界、整理情绪的方式。</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>养花</h3>
+            <p>喜爱各种花花草草，也喜欢它们带来的缓慢秩序。</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>睡觉</h3>
+            <p>享受长时间睡眠，让身体和灵感一起恢复明亮。</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>不爱运动</h3>
+            <p>确实如此，也愿意把这份坦诚留在自我介绍里。</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <h2>罗经 Aviva Luo</h2>
+        <p>插画设计师 · 创意工作室主理人 · 冰激凌品牌主理人 · Bistro 主理人</p>
+        <p>用画笔与风味，为日常增添一抹温度</p>
+      </div>
+      <address>
+        <a href="mailto:avivaluojing@163.com">avivaluojing@163.com</a>
+        <span>上海 / 天津</span>
+        <a href="#top">返回顶部</a>
+      </address>
+    </footer>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
