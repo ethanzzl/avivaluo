@@ -145,7 +145,7 @@ summary {
   width: var(--page);
   margin: 0 auto clamp(110px, 12vw, 180px);
   display: grid;
-  grid-template-columns: minmax(230px, 0.82fr) minmax(0, 3fr);
+  grid-template-columns: minmax(250px, 0.95fr) minmax(0, 2.8fr);
   align-items: center;
   gap: clamp(38px, 5vw, 88px);
 }
@@ -168,7 +168,7 @@ summary {
 .hero h1 {
   max-width: 9em;
   margin: 0;
-  font-size: clamp(2.1rem, 3.5vw, 4.1rem);
+  font-size: clamp(2rem, 2.8vw, 3.35rem);
   font-weight: 520;
   letter-spacing: -0.055em;
   line-height: 1.12;
@@ -186,6 +186,10 @@ summary {
   max-width: 24em;
   margin: 0 0 34px;
   color: #4e4a45;
+}
+
+.hero-copy .text-link {
+  color: var(--accent-dark);
 }
 
 .hero-art {
