@@ -324,8 +324,8 @@ function Contact({ locale }: { locale: Locale }) {
       <h1>{locale === "zh" ? "聊聊你想一起完成的项目。" : "Let’s talk about what we could make together."}</h1>
       <p className="contact-lead">
         {locale === "zh"
-          ? "欢迎介绍品牌、使用场景、期望交付物和大致时间。联系方式将在确认后开放。"
-          : "Tell me about your brand, where the work will be used, the deliverables you need, and your broad timing. Contact details will be added after confirmation."}
+          ? "欢迎通过邮箱介绍品牌、使用场景、期望交付物和大致时间。"
+          : "Email me about your brand, where the work will be used, the deliverables you need, and your broad timing."}
       </p>
       <dl className="contact-methods">
         <div className="contact-method">
@@ -335,10 +335,6 @@ function Contact({ locale }: { locale: Locale }) {
               avivaluojing@163.com
             </a>
           </dd>
-        </div>
-        <div className="contact-method">
-          <dt>{locale === "zh" ? "电话" : "Phone"}</dt>
-          <dd>{locale === "zh" ? "待补充" : "To be confirmed"}</dd>
         </div>
         <div className="contact-method">
           <dt className="social-label">

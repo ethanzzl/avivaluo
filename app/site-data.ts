@@ -138,7 +138,7 @@ export const copy = {
     footer: {
       title: "有一个想一起完成的项目？",
       cta: "发起合作",
-      note: "邮箱已开放，电话与社交链接待补充",
+      note: "邮箱已开放，社交链接待补充",
       privacy: "隐私说明",
     },
   },
@@ -181,7 +181,7 @@ export const copy = {
     footer: {
       title: "Have a project in mind?",
       cta: "Start a project",
-      note: "Email available; phone and social links to be confirmed",
+      note: "Email available; social links to be confirmed",
       privacy: "Privacy",
     },
   },
