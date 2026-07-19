@@ -82,13 +82,16 @@ function Footer({ locale }: { locale: Locale }) {
           <p>© {new Date().getFullYear()} Aviva大双</p>
           <div className="footer-socials">
             <p>{c.note}</p>
-            <span
-              className="social-placeholder social-placeholder-light"
-              aria-label={locale === "zh" ? "小红书链接待补充" : "Xiaohongshu link to be confirmed"}
-              title={locale === "zh" ? "小红书链接待补充" : "Xiaohongshu link to be confirmed"}
+            <a
+              className="social-link social-link-light"
+              href="https://xhslink.com/m/7SoyMlHCsdd"
+              target="_blank"
+              rel="noreferrer"
+              aria-label={locale === "zh" ? "访问 Aviva大双的小红书" : "Visit Aviva Dashuang on Xiaohongshu"}
+              title={locale === "zh" ? "小红书" : "Xiaohongshu"}
             >
               <SiXiaohongshu aria-hidden="true" />
-            </span>
+            </a>
             <span
               className="social-placeholder social-placeholder-light"
               aria-label={locale === "zh" ? "Instagram 链接待补充" : "Instagram link to be confirmed"}
@@ -302,8 +305,14 @@ function About({ locale }: { locale: Locale }) {
         <h2>{locale === "zh" ? "Aviva大双" : "Aviva Dashuang"}</h2>
         <p>
           {locale === "zh"
-            ? "Aviva大双是一位插画创作者，关注人物、食物、城市和日常生活中的细小情绪。完整个人经历、所在地与可合作地区待补充。"
-            : "Aviva Dashuang is an illustrator interested in people, food, cities, and the small emotions of everyday life. Full biography, location, and collaboration regions are to be confirmed."}
+            ? "Aviva大双（罗经）是一名插画设计师与创意工作室主理人，也拥有餐饮及冰淇淋品牌的联合创业经验。她在法国学习生活八年，现工作与生活于上海和天津，关注人物、食物、城市和日常生活中的细小情绪。"
+            : "Aviva Dashuang (Luo Jing) is an illustrator and creative studio lead with hands-on experience co-founding food and gelato brands. After eight years of study and life in France, she now works between Shanghai and Tianjin, drawing inspiration from people, food, cities, and the small emotions of everyday life."}
+        </p>
+        <h2>{locale === "zh" ? "餐饮与品牌经历" : "Food & brand experience"}</h2>
+        <p>
+          {locale === "zh"
+            ? "作为 Fluffy、Gegelato、丛欢酒饭与丛欢意大利小酒馆的联合创始人，她参与品牌的设计规划与运营，也因此更了解插画如何真正进入产品、包装、菜单、空间与顾客体验。"
+            : "As a co-founder of Fluffy, Gegelato, 丛欢酒饭, and 丛欢意大利小酒馆, she has contributed to brand planning, design, and operations. This experience shapes a practical understanding of how illustration can live across products, packaging, menus, spaces, and customer experiences."}
         </p>
         <h2>{locale === "zh" ? "合作方式" : "How we can work together"}</h2>
         <ol>
@@ -341,7 +350,16 @@ function Contact({ locale }: { locale: Locale }) {
             <SiXiaohongshu aria-hidden="true" />
             <span>{locale === "zh" ? "小红书" : "Xiaohongshu"}</span>
           </dt>
-          <dd>{locale === "zh" ? "链接待补充" : "Link to be confirmed"}</dd>
+          <dd>
+            <a
+              className="contact-value-link"
+              href="https://xhslink.com/m/7SoyMlHCsdd"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {locale === "zh" ? "访问小红书主页" : "View Xiaohongshu profile"}
+            </a>
+          </dd>
         </div>
         <div className="contact-method">
           <dt className="social-label">

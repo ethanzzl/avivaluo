@@ -516,7 +516,8 @@ summary {
   margin: 0;
 }
 
-.social-placeholder {
+.social-placeholder,
+.social-link {
   width: 32px;
   height: 32px;
   display: inline-flex;
@@ -525,13 +526,37 @@ summary {
   color: var(--muted);
 }
 
-.social-placeholder svg {
+.social-placeholder svg,
+.social-link svg {
   width: 18px;
   height: 18px;
 }
 
+.social-link {
+  width: 44px;
+  height: 44px;
+  transition: color 160ms ease, opacity 160ms ease;
+}
+
+.social-link:hover {
+  color: var(--accent-dark);
+}
+
+.social-link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
 .social-placeholder-light {
   color: rgba(255, 255, 255, 0.72);
+}
+
+.social-link-light {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.social-link-light:hover {
+  color: white;
 }
 
 .site-footer {
