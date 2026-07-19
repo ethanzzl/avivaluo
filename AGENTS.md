@@ -14,7 +14,7 @@
 
 - 不得编造客户、项目背景、职责、成果、数字、奖项、报价或评价。
 - 不确定事实统一标记为“待确认 / To be confirmed”。
-- 邮箱使用用户已确认的 `avivaluojing@163.com`；小红书使用已确认的 `https://xhslink.com/m/7SoyMlHCsdd`；微信与电话入口不显示。Instagram 链接在提供前保持为空，不得使用示例信息冒充真实联系方式。
+- 邮箱使用用户已确认的 `avivaluojing@163.com`；小红书使用已确认的 `https://xhslink.com/m/7SoyMlHCsdd`；Instagram 使用已确认的 `https://www.instagram.com/jingluo_?igsh=NXc4bW9kd2o5OGlj&utm_source=qr`；微信与电话入口不显示。
 - 已确认背景：Aviva大双本名罗经，是插画设计师与创意工作室主理人；曾在法国学习生活八年，现工作与生活于上海和天津；是 Fluffy、Gegelato、丛欢酒饭及丛欢意大利小酒馆的联合创始人。
 - 没有真实接收端时，不得制作看似可提交的联系表单。
 - 客户 Logo、品牌项目和商业图片发布前必须确认公开与使用授权。
@@ -154,7 +154,7 @@ tests/
 
 ## 10. 联系与隐私
 
-- 联系页支持邮箱、小红书和 Instagram；微信与电话入口已取消。小红书链接已确认，Instagram 链接由用户后续提供。
+- 联系页支持邮箱、小红书和 Instagram；微信与电话入口已取消。小红书与 Instagram 链接均已确认。
 - 如果未来增加表单，必须先确认接收方式、字段、隐私说明和保存期限。
 - 表单必须包含服务端验证、防垃圾、成功、失败、等待和重复提交状态。
 - 不得将密钥、邮箱凭据或第三方 Secret 写入客户端或仓库。

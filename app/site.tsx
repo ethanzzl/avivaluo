@@ -92,13 +92,16 @@ function Footer({ locale }: { locale: Locale }) {
             >
               <SiXiaohongshu aria-hidden="true" />
             </a>
-            <span
-              className="social-placeholder social-placeholder-light"
-              aria-label={locale === "zh" ? "Instagram 链接待补充" : "Instagram link to be confirmed"}
-              title={locale === "zh" ? "Instagram 链接待补充" : "Instagram link to be confirmed"}
+            <a
+              className="social-link social-link-light"
+              href="https://www.instagram.com/jingluo_?igsh=NXc4bW9kd2o5OGlj&utm_source=qr"
+              target="_blank"
+              rel="noreferrer"
+              aria-label={locale === "zh" ? "访问 Aviva大双的 Instagram" : "Visit Aviva Dashuang on Instagram"}
+              title="Instagram"
             >
               <SiInstagram aria-hidden="true" />
-            </span>
+            </a>
           </div>
           <a className="text-link" href={localePath(locale, "privacy")}>
             {c.privacy}
@@ -366,7 +369,16 @@ function Contact({ locale }: { locale: Locale }) {
             <SiInstagram aria-hidden="true" />
             <span>Instagram</span>
           </dt>
-          <dd>{locale === "zh" ? "链接待补充" : "Link to be confirmed"}</dd>
+          <dd>
+            <a
+              className="contact-value-link"
+              href="https://www.instagram.com/jingluo_?igsh=NXc4bW9kd2o5OGlj&utm_source=qr"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {locale === "zh" ? "访问 Instagram 主页" : "View Instagram profile"}
+            </a>
+          </dd>
         </div>
       </dl>
     </section>
