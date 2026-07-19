@@ -1,5 +1,6 @@
+/* eslint-disable @next/next/no-img-element -- source artwork uses prepared static derivatives */
 import { notFound } from "next/navigation";
-import Image from "next/image";
+import { SiInstagram, SiXiaohongshu } from "react-icons/si";
 import { copy, type Locale, type Project, projects } from "./site-data";
 
 type SitePageProps = {
@@ -79,7 +80,23 @@ function Footer({ locale }: { locale: Locale }) {
         </div>
         <div className="footer-bottom">
           <p>© {new Date().getFullYear()} Aviva大双</p>
-          <p>{c.note}</p>
+          <div className="footer-socials">
+            <p>{c.note}</p>
+            <span
+              className="social-placeholder social-placeholder-light"
+              aria-label={locale === "zh" ? "小红书链接待补充" : "Xiaohongshu link to be confirmed"}
+              title={locale === "zh" ? "小红书链接待补充" : "Xiaohongshu link to be confirmed"}
+            >
+              <SiXiaohongshu aria-hidden="true" />
+            </span>
+            <span
+              className="social-placeholder social-placeholder-light"
+              aria-label={locale === "zh" ? "Instagram 链接待补充" : "Instagram link to be confirmed"}
+              title={locale === "zh" ? "Instagram 链接待补充" : "Instagram link to be confirmed"}
+            >
+              <SiInstagram aria-hidden="true" />
+            </span>
+          </div>
           <a className="text-link" href={localePath(locale, "privacy")}>
             {c.privacy}
           </a>
@@ -93,13 +110,12 @@ function WorkCard({ project, locale }: { project: Project; locale: Locale }) {
   return (
     <a className={`work-card ${project.className ?? ""}`} href={localePath(locale, `work/${project.slug}`)}>
       <div className="work-card-image">
-        <Image
+        <img
           src={project.image}
           width={project.width}
           height={project.height}
           alt={project.alt[locale]}
           loading="lazy"
-          sizes="(max-width: 640px) 91vw, 47vw"
         />
       </div>
       <div className="work-card-copy">
@@ -144,13 +160,12 @@ function Home({ locale }: { locale: Locale }) {
           </a>
         </div>
         <div className="hero-art">
-          <Image
+          <img
             src={projects[0].image}
             width={projects[0].width}
             height={projects[0].height}
             alt={projects[0].alt[locale]}
-            priority
-            sizes="(max-width: 900px) 94vw, 72vw"
+            fetchPriority="high"
           />
         </div>
       </section>
@@ -248,13 +263,12 @@ function ProjectDetail({ locale, project }: { locale: Locale; project: Project }
         </dl>
       </section>
       <div className="detail-hero">
-        <Image
+        <img
           src={project.image}
           width={project.width}
           height={project.height}
           alt={project.alt[locale]}
-          priority
-          sizes="94vw"
+          fetchPriority="high"
         />
       </div>
       <section className="project-body">
@@ -304,9 +318,6 @@ function About({ locale }: { locale: Locale }) {
 }
 
 function Contact({ locale }: { locale: Locale }) {
-  const methods = locale === "zh"
-    ? [["微信", "待补充"], ["电话", "待补充"], ["邮箱", "待补充"]]
-    : [["WeChat", "To be confirmed"], ["Phone", "To be confirmed"], ["Email", "To be confirmed"]];
   return (
     <section className="contact-panel">
       <p className="eyebrow">{locale === "zh" ? "发起合作" : "Start a project"}</p>
@@ -317,12 +328,32 @@ function Contact({ locale }: { locale: Locale }) {
           : "Tell me about your brand, where the work will be used, the deliverables you need, and your broad timing. Contact details will be added after confirmation."}
       </p>
       <dl className="contact-methods">
-        {methods.map(([label, value]) => (
-          <div className="contact-method" key={label}>
-            <dt>{label}</dt>
-            <dd>{value}</dd>
-          </div>
-        ))}
+        <div className="contact-method">
+          <dt>{locale === "zh" ? "邮箱" : "Email"}</dt>
+          <dd>
+            <a className="contact-value-link" href="mailto:avivaluojing@163.com">
+              avivaluojing@163.com
+            </a>
+          </dd>
+        </div>
+        <div className="contact-method">
+          <dt>{locale === "zh" ? "电话" : "Phone"}</dt>
+          <dd>{locale === "zh" ? "待补充" : "To be confirmed"}</dd>
+        </div>
+        <div className="contact-method">
+          <dt className="social-label">
+            <SiXiaohongshu aria-hidden="true" />
+            <span>{locale === "zh" ? "小红书" : "Xiaohongshu"}</span>
+          </dt>
+          <dd>{locale === "zh" ? "链接待补充" : "Link to be confirmed"}</dd>
+        </div>
+        <div className="contact-method">
+          <dt className="social-label">
+            <SiInstagram aria-hidden="true" />
+            <span>Instagram</span>
+          </dt>
+          <dd>{locale === "zh" ? "链接待补充" : "Link to be confirmed"}</dd>
+        </div>
       </dl>
     </section>
   );
