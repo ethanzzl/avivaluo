@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element -- source artwork uses prepared static derivatives */
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { SiInstagram, SiXiaohongshu } from "react-icons/si";
 import { copy, type Locale, type Project, projects } from "./site-data";
 
@@ -113,14 +113,15 @@ function Footer({ locale }: { locale: Locale }) {
 }
 
 function WorkCard({ project, locale }: { project: Project; locale: Locale }) {
+  const cover = project.cover;
   return (
     <a className={`work-card ${project.className ?? ""}`} href={localePath(locale, `work/${project.slug}`)}>
       <div className="work-card-image">
         <img
-          src={project.image}
-          width={project.width}
-          height={project.height}
-          alt={project.alt[locale]}
+          src={cover.src}
+          width={cover.width}
+          height={cover.height}
+          alt={cover.alt[locale]}
           loading="lazy"
         />
       </div>
@@ -153,6 +154,8 @@ function SectionHeading({
 
 function Home({ locale }: { locale: Locale }) {
   const c = copy[locale];
+  const heroProject = projects[2];
+  const heroCover = heroProject.gallery[0] ?? heroProject.cover;
   return (
     <>
       <section className="hero">
@@ -166,13 +169,15 @@ function Home({ locale }: { locale: Locale }) {
           </a>
         </div>
         <div className="hero-art">
-          <img
-            src={projects[0].image}
-            width={projects[0].width}
-            height={projects[0].height}
-            alt={projects[0].alt[locale]}
-            fetchPriority="high"
-          />
+          <a href={localePath(locale, `work/${heroProject.slug}`)}>
+            <img
+              src={heroCover.src}
+              width={heroCover.width}
+              height={heroCover.height}
+              alt={heroCover.alt[locale]}
+              fetchPriority="high"
+            />
+          </a>
         </div>
       </section>
 
@@ -183,8 +188,8 @@ function Home({ locale }: { locale: Locale }) {
           services={c.groups.foodServices}
         />
         <div className="work-grid">
-          <WorkCard project={projects[1]} locale={locale} />
-          <WorkCard project={projects[2]} locale={locale} />
+          <WorkCard project={projects[0]} locale={locale} />
+          <WorkCard project={projects[3]} locale={locale} />
         </div>
       </section>
 
@@ -194,7 +199,7 @@ function Home({ locale }: { locale: Locale }) {
           secondary={c.groups.packageEn}
           services={c.groups.packageServices}
         />
-        <WorkCard project={projects[3]} locale={locale} />
+        <WorkCard project={projects[1]} locale={locale} />
       </section>
 
       <section className="work-section">
@@ -203,7 +208,7 @@ function Home({ locale }: { locale: Locale }) {
           secondary={c.groups.brandEn}
           services={c.groups.brandServices}
         />
-        <WorkCard project={projects[0]} locale={locale} />
+        <WorkCard project={projects[2]} locale={locale} />
       </section>
 
       <section className="services" id="services">
@@ -250,6 +255,7 @@ function Work({ locale }: { locale: Locale }) {
 }
 
 function ProjectDetail({ locale, project }: { locale: Locale; project: Project }) {
+  const cover = project.cover;
   return (
     <>
       <section className="detail-header">
@@ -264,16 +270,16 @@ function ProjectDetail({ locale, project }: { locale: Locale; project: Project }
           </div>
           <div>
             <dt className="meta-label">{locale === "zh" ? "项目信息" : "Project info"}</dt>
-            <dd>{locale === "zh" ? "待确认" : "To be confirmed"}</dd>
+            <dd>{project.projectInfo[locale]}</dd>
           </div>
         </dl>
       </section>
       <div className="detail-hero">
         <img
-          src={project.image}
-          width={project.width}
-          height={project.height}
-          alt={project.alt[locale]}
+          src={cover.src}
+          width={cover.width}
+          height={cover.height}
+          alt={cover.alt[locale]}
           fetchPriority="high"
         />
       </div>
@@ -283,14 +289,37 @@ function ProjectDetail({ locale, project }: { locale: Locale; project: Project }
           <p>{project.summary[locale]}</p>
           <p>
             {locale === "zh"
-              ? "客户、年份、职责与公开授权信息将在确认后补充。"
-              : "Client, date, role, and publication permissions will be added after confirmation."}
+              ? "作品公开展示已确认；缺少的客户、年份或合作信息会在确认后补充。"
+              : "Publication is confirmed. Any missing client, date, or collaboration details will be added once confirmed."}
           </p>
           <a className="text-link" href={localePath(locale, "work")}>
             {locale === "zh" ? "返回全部作品" : "Back to all work"}
           </a>
         </div>
       </section>
+      {project.gallery.length > 0 && (
+        <section className="project-gallery" aria-label={locale === "zh" ? "项目图片" : "Project images"}>
+          {project.gallery.map((image) => {
+            const orientation =
+              image.width > image.height * 1.22
+                ? "gallery-wide"
+                : image.height > image.width * 1.22
+                  ? "gallery-portrait"
+                  : "gallery-square";
+            return (
+              <div className={orientation} key={image.src}>
+                <img
+                  src={image.src}
+                  width={image.width}
+                  height={image.height}
+                  alt={image.alt[locale]}
+                  loading="lazy"
+                />
+              </div>
+            );
+          })}
+        </section>
+      )}
     </>
   );
 }
@@ -415,7 +444,11 @@ export function SitePage({ path }: SitePageProps) {
   else if (key === "work" && route.length === 1) content = <Work locale={locale} />;
   else if (key === "work" && route.length === 2) {
     const project = projects.find((item) => item.slug === route[1]);
-    if (!project) notFound();
+    if (!project) {
+      const legacyProject = projects.find((item) => item.legacySlugs?.includes(route[1]));
+      if (legacyProject) redirect(localePath(locale, `work/${legacyProject.slug}`));
+      notFound();
+    }
     content = <ProjectDetail locale={locale} project={project} />;
   } else if (key === "about" && route.length === 1) content = <About locale={locale} />;
   else if (key === "contact" && route.length === 1) content = <Contact locale={locale} />;
