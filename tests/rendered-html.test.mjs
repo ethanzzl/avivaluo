@@ -1,25 +1,49 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { spawn } from "node:child_process";
+import test, { after, before } from "node:test";
 
-async function render(path = "/") {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}-${path}`);
-  const { default: worker } = await import(workerUrl.href);
+const port = 43119;
+const origin = `http://127.0.0.1:${port}`;
+let server;
+let serverOutput = "";
 
-  return worker.fetch(
-    new Request(`http://localhost${path}`, {
-      headers: { accept: "text/html" },
-    }),
+before(async () => {
+  server = spawn(
+    process.execPath,
+    ["node_modules/next/dist/bin/next", "start", "-H", "127.0.0.1", "-p", String(port)],
     {
-      ASSETS: {
-        fetch: async () => new Response("Not found", { status: 404 }),
-      },
-    },
-    {
-      waitUntil() {},
-      passThroughOnException() {},
+      cwd: new URL("..", import.meta.url),
+      env: { ...process.env, NEXT_TELEMETRY_DISABLED: "1" },
+      stdio: ["ignore", "pipe", "pipe"],
     },
   );
+
+  server.stdout.on("data", (chunk) => {
+    serverOutput += chunk;
+  });
+  server.stderr.on("data", (chunk) => {
+    serverOutput += chunk;
+  });
+
+  for (let attempt = 0; attempt < 80; attempt += 1) {
+    try {
+      const response = await fetch(origin);
+      if (response.ok) return;
+    } catch {
+      // The production server is still starting.
+    }
+    await new Promise((resolve) => setTimeout(resolve, 250));
+  }
+
+  throw new Error(`Next.js production server did not start.\n${serverOutput}`);
+}, { timeout: 25_000 });
+
+after(() => {
+  server?.kill("SIGTERM");
+});
+
+function render(path = "/") {
+  return fetch(`${origin}${path}`, { redirect: "manual" });
 }
 
 test("server-renders the finished portfolio homepage", async () => {
@@ -79,5 +103,7 @@ test("English project route uses rewritten English content", async () => {
 test("legacy project URLs redirect to the curated project structure", async () => {
   const response = await render("/work/corner-cafe");
   assert.ok([307, 308].includes(response.status));
-  assert.equal(response.headers.get("location"), "http://localhost/work/food-hospitality");
+  const location = response.headers.get("location");
+  assert.ok(location);
+  assert.equal(new URL(location, origin).pathname, "/work/food-hospitality");
 });
