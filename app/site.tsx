@@ -154,7 +154,17 @@ function SectionHeading({
 
 function Home({ locale }: { locale: Locale }) {
   const c = copy[locale];
-  const heroProject = projects[2];
+  const projectBySlug = (slug: string) => {
+    const project = projects.find((item) => item.slug === slug);
+    if (!project) throw new Error(`Missing homepage project: ${slug}`);
+    return project;
+  };
+  const gegelato = projectBySlug("gegelato-brand");
+  const foodHospitality = projectBySlug("food-hospitality");
+  const illustratedObjects = projectBySlug("illustrated-objects");
+  const lemonTea = projectBySlug("lemon-tea-packaging");
+  const parisStories = projectBySlug("paris-printemps");
+  const heroProject = parisStories;
   const heroCover = heroProject.gallery[0] ?? heroProject.cover;
   return (
     <>
@@ -187,9 +197,9 @@ function Home({ locale }: { locale: Locale }) {
           secondary={c.groups.foodEn}
           services={c.groups.foodServices}
         />
-        <div className="work-grid">
-          <WorkCard project={projects[0]} locale={locale} />
-          <WorkCard project={projects[3]} locale={locale} />
+        <div className="work-grid home-work-grid">
+          <WorkCard project={gegelato} locale={locale} />
+          <WorkCard project={foodHospitality} locale={locale} />
         </div>
       </section>
 
@@ -199,7 +209,10 @@ function Home({ locale }: { locale: Locale }) {
           secondary={c.groups.packageEn}
           services={c.groups.packageServices}
         />
-        <WorkCard project={projects[1]} locale={locale} />
+        <div className="work-grid home-work-grid">
+          <WorkCard project={illustratedObjects} locale={locale} />
+          <WorkCard project={lemonTea} locale={locale} />
+        </div>
       </section>
 
       <section className="work-section">
@@ -208,7 +221,7 @@ function Home({ locale }: { locale: Locale }) {
           secondary={c.groups.brandEn}
           services={c.groups.brandServices}
         />
-        <WorkCard project={projects[2]} locale={locale} />
+        <WorkCard project={parisStories} locale={locale} />
       </section>
 
       <section className="services" id="services">
@@ -340,6 +353,11 @@ function About({ locale }: { locale: Locale }) {
           {locale === "zh"
             ? "作为 Fluffy、Gegelato、丛欢酒饭与丛欢意大利小酒馆的联合创始人，她参与品牌的设计规划与运营，也因此更了解插画如何真正进入产品、包装、菜单、空间与顾客体验。"
             : "As a co-founder of Fluffy, Gegelato, 丛欢酒饭, and 丛欢意大利小酒馆, she has contributed to brand planning, design, and operations. This experience shapes a practical understanding of how illustration can live across products, packaging, menus, spaces, and customer experiences."}
+        </p>
+        <p>
+          {locale === "zh"
+            ? "2023年，她曾现场向 Tim Cook 介绍 Fluffy 的创意，以及 iPad 在品牌设计与日常创作中的使用方式。"
+            : "In 2023, she shared Fluffy’s creative approach with Tim Cook and demonstrated how the iPad supported the brand’s design and everyday creative work."}
         </p>
         <h2>{locale === "zh" ? "合作方式" : "How we can work together"}</h2>
         <ol>

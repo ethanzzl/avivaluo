@@ -56,17 +56,19 @@ test("server-renders the finished portfolio homepage", async () => {
   assert.match(html, /为品牌画出被记住的温度/);
   assert.match(html, /Gegelato 品牌视觉/);
   assert.match(html, /柠檬茶包装/);
-  assert.match(html, /巴黎与 Printemps 插画系列/);
+  assert.match(html, /巴黎书店与城市插画/);
   assert.match(html, /餐饮与空间插画精选/);
+  assert.match(html, /插画周边与手作/);
   assert.doesNotMatch(html, /codex-preview|Building your site|react-loading-skeleton/i);
 });
 
-test("work page lists the seven curated projects", async () => {
+test("work page lists the eight curated projects", async () => {
   const response = await render("/work");
   assert.equal(response.status, 200);
   const html = await response.text();
   const slugs = [
     "gegelato-brand",
+    "illustrated-objects",
     "lemon-tea-packaging",
     "paris-printemps",
     "food-hospitality",
@@ -77,6 +79,17 @@ test("work page lists the seven curated projects", async () => {
   for (const slug of slugs) {
     assert.match(html, new RegExp(`/work/${slug}`));
   }
+});
+
+test("illustrated objects project renders the selected handmade collection", async () => {
+  const response = await render("/work/illustrated-objects");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /个人创作系列/);
+  assert.match(html, /illustrated-objects-cover\.webp/);
+  assert.match(html, /illustrated-objects-wine-stoppers\.webp/);
+  assert.match(html, /illustrated-objects-embroidered-bag\.webp/);
+  assert.match(html, /illustrated-objects-brooches\.webp/);
 });
 
 test("project detail renders its curated gallery without internal publication notes", async () => {

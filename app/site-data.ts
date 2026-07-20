@@ -36,6 +36,21 @@ function artwork(
   };
 }
 
+function recoveredArtwork(
+  file: string,
+  width: number,
+  height: number,
+  zh: string,
+  en: string,
+): ProjectImage {
+  return {
+    src: `/images/projects/recovered/${file}`,
+    width,
+    height,
+    alt: { zh, en },
+  };
+}
+
 export const projects: Project[] = [
   {
     slug: "gegelato-brand",
@@ -67,6 +82,124 @@ export const projects: Project[] = [
       artwork("gegelato-brand", "A27", 2036, 2354, "厨师冰淇淋角色与Gegelato字标贴纸图形", "Chef gelato character and Gegelato sticker graphic"),
       artwork("gegelato-brand", "A23", 1080, 1340, "Gegelato厨师冰淇淋角色刺绣标牌", "Embroidered Gegelato chef character sign"),
     ],
+  },
+  {
+    slug: "illustrated-objects",
+    title: { zh: "插画周边与手作", en: "Illustrated Objects & Handmade Pieces" },
+    category: { zh: "包装与周边", en: "Packaging & Objects" },
+    services: {
+      zh: "产品概念 · 角色开发 · 手作与周边",
+      en: "Product Concepts · Character Design · Handmade Objects",
+    },
+    summary: {
+      zh: "把手绘角色从纸面延展到餐盘、酒塞、胸针、戒指与刺绣布袋。系列保留手工制作的触感和细微差异，也展示了插画如何转化为餐饮用品、品牌礼赠与限量周边。",
+      en: "Hand-drawn characters translated into plates, wine stoppers, brooches, rings, and an embroidered tote. The series keeps the tactile irregularity of handmade work while showing how illustration can become tableware, brand gifts, and limited-edition objects.",
+    },
+    projectInfo: {
+      zh: "个人创作系列 · 可用于品牌定制开发",
+      en: "Personal series · Available for brand commissions",
+    },
+    cover: recoveredArtwork(
+      "illustrated-objects-cover.webp",
+      1080,
+      1440,
+      "酒瓶、植物与手作人物餐盘组成的静物场景",
+      "Still life with wine bottles, plants, and handmade character plates",
+    ),
+    gallery: [
+      recoveredArtwork(
+        "illustrated-objects-plates-group.webp",
+        1080,
+        1440,
+        "不同人物表情的手作餐盘、胸针与挂饰组合",
+        "Collection of handmade character plates, brooches, and charms",
+      ),
+      recoveredArtwork(
+        "illustrated-objects-plate-dove.webp",
+        1080,
+        1440,
+        "带有白色小鸟浮雕的人物手作餐盘",
+        "Handmade character plate with a small white bird relief",
+      ),
+      recoveredArtwork(
+        "illustrated-objects-green-plate.webp",
+        1080,
+        1440,
+        "悬挂在窗边的绿色边框人物餐盘",
+        "Green-rimmed character plate hanging by a window",
+      ),
+      recoveredArtwork(
+        "illustrated-objects-wine-stoppers.webp",
+        1280,
+        960,
+        "制作中的人物粘土酒塞与小型饰物",
+        "Clay character wine stoppers and small objects in progress",
+      ),
+      recoveredArtwork(
+        "illustrated-objects-small-objects.webp",
+        1280,
+        960,
+        "花纹餐盘中的人物粘土饰物与酒塞",
+        "Small clay characters and a wine stopper arranged on a patterned plate",
+      ),
+      recoveredArtwork(
+        "illustrated-objects-embroidery-sketch.webp",
+        1080,
+        1440,
+        "绣绷中的人物草图与刺绣起针细节",
+        "Character drawing and first stitches inside an embroidery hoop",
+      ),
+      recoveredArtwork(
+        "illustrated-objects-embroidery-process.webp",
+        1080,
+        1439,
+        "刺绣布袋人物图案的制作过程",
+        "Embroidered character tote in progress",
+      ),
+      recoveredArtwork(
+        "illustrated-objects-embroidered-bag.webp",
+        1080,
+        1439,
+        "放在座椅上的人物刺绣布袋成品",
+        "Finished embroidered character tote displayed on a seat",
+      ),
+      recoveredArtwork(
+        "illustrated-objects-brooch-collection.webp",
+        1080,
+        1441,
+        "手持展示的一组人物胸针与戒指",
+        "Hand-held collection of character brooches and rings",
+      ),
+      recoveredArtwork(
+        "illustrated-objects-brooches.webp",
+        1080,
+        1441,
+        "四枚不同人物造型的手作胸针",
+        "Four handmade character brooches",
+      ),
+      recoveredArtwork(
+        "illustrated-objects-ring.webp",
+        1080,
+        1421,
+        "佩戴在手上的人物造型手作戒指",
+        "Handmade character ring worn on a hand",
+      ),
+      recoveredArtwork(
+        "illustrated-objects-fruit-relief.webp",
+        1080,
+        1184,
+        "手持水果静物粘土浮雕的创作过程",
+        "Hand-held clay fruit relief during the making process",
+      ),
+      recoveredArtwork(
+        "illustrated-objects-parrot-relief.webp",
+        1080,
+        1183,
+        "工作台前手持鹦鹉粘土浮雕",
+        "Hand-held parrot clay relief in front of the studio desk",
+      ),
+    ],
+    className: "objects-project",
   },
   {
     slug: "lemon-tea-packaging",
@@ -106,19 +239,19 @@ export const projects: Project[] = [
   },
   {
     slug: "paris-printemps",
-    title: { zh: "巴黎与 Printemps 插画系列", en: "Paris & Printemps Illustration Series" },
+    title: { zh: "巴黎书店与城市插画", en: "Paris Bookshops & City Stories" },
     category: { zh: "品牌插画", en: "Brand Illustration" },
     services: {
       zh: "城市叙事 · 人物角色 · 场景插画",
       en: "City Storytelling · Characters · Scene Illustration",
     },
     summary: {
-      zh: "以巴黎建筑、人物、动物角色与日常生活片段组成的插画系列，在城市识别与轻松叙事之间建立丰富的视觉世界。",
-      en: "A character-led illustration series combining Parisian architecture, people, animals, and everyday moments into a lively visual world.",
+      zh: "以巴黎建筑、人物、动物角色与书店日常组成的插画系列，并在2021年的上海线下展陈中放大为纸本作品进入真实空间，呈现插画从城市观察到展览应用的完整过程。",
+      en: "A character-led series of Parisian architecture, people, animals, and bookshop life. In 2021, selected works were enlarged and displayed in a Shanghai exhibition, extending the illustrations from city observation into a physical space.",
     },
     projectInfo: {
-      zh: "合作信息与年份待补充",
-      en: "Collaboration details and date to be confirmed",
+      zh: "个人创作与线下展陈 · 2021",
+      en: "Personal work and exhibition display · 2021",
     },
     cover: artwork(
       "paris-printemps",
@@ -136,6 +269,34 @@ export const projects: Project[] = [
       artwork("paris-printemps", "A57", 2400, 1697, "巴黎露台上人物与象角色的城市线稿", "Paris terrace line drawing with a woman and elephant character"),
       artwork("paris-printemps", "A07", 2048, 2048, "巴黎圆顶建筑与秋色植物插画", "Paris domed building with autumn foliage"),
       artwork("paris-printemps", "A08", 2224, 1668, "巴黎圆顶建筑、花叶与蓝黄图形", "Paris dome with flowers and blue-and-yellow graphic shapes"),
+      recoveredArtwork(
+        "paris-bookshop-framed-work.webp",
+        1080,
+        1441,
+        "上海展览空间中装裱展示的巴黎书店插画",
+        "Framed Paris bookshop illustration displayed in a Shanghai exhibition space",
+      ),
+      recoveredArtwork(
+        "paris-bookshop-making.webp",
+        1441,
+        1080,
+        "Aviva大双在书店空间中绘制放大版插画",
+        "Aviva Dashuang drawing an enlarged illustration in a bookshop setting",
+      ),
+      recoveredArtwork(
+        "paris-bookshop-large-print.webp",
+        1080,
+        1441,
+        "窗边桌面上展开的巴黎书店大型纸本插画",
+        "Large-format Paris bookshop illustration unrolled on a table by the window",
+      ),
+      recoveredArtwork(
+        "paris-bookshop-gallery-wall.webp",
+        1441,
+        1080,
+        "白色砖墙上并列展出的两幅巴黎书店插画",
+        "Two framed Paris bookshop illustrations shown on a white brick wall",
+      ),
     ],
   },
   {

@@ -290,6 +290,22 @@ summary {
   background: #f2f4f5;
 }
 
+.home-work-grid .work-card-image {
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-items: center;
+  background: #f1ede5;
+}
+
+.home-work-grid .work-card-image img,
+.home-work-grid .wide-project .work-card-image img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: contain;
+  background: transparent;
+}
+
 .narrative-project .work-card-image img {
   width: 100%;
   aspect-ratio: 2.85 / 1;
@@ -744,6 +760,15 @@ summary {
 
   .work-card-copy p {
     margin-top: 4px;
+  }
+
+  .home-work-grid .work-card-image {
+    aspect-ratio: auto;
+  }
+
+  .home-work-grid .work-card-image img,
+  .home-work-grid .wide-project .work-card-image img {
+    height: auto;
   }
 
   .work-section {
