@@ -287,11 +287,6 @@ function ProjectDetail({ locale, project }: { locale: Locale; project: Project }
         <h2>{locale === "zh" ? "作品说明" : "About the work"}</h2>
         <div>
           <p>{project.summary[locale]}</p>
-          <p>
-            {locale === "zh"
-              ? "作品公开展示已确认；缺少的客户、年份或合作信息会在确认后补充。"
-              : "Publication is confirmed. Any missing client, date, or collaboration details will be added once confirmed."}
-          </p>
           <a className="text-link" href={localePath(locale, "work")}>
             {locale === "zh" ? "返回全部作品" : "Back to all work"}
           </a>

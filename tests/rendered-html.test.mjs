@@ -79,12 +79,13 @@ test("work page lists the seven curated projects", async () => {
   }
 });
 
-test("project detail renders its curated gallery and confirmed publication note", async () => {
+test("project detail renders its curated gallery without internal publication notes", async () => {
   const response = await render("/work/gegelato-brand");
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /联合创始人项目/);
-  assert.match(html, /作品公开展示已确认/);
+  assert.doesNotMatch(html, /作品公开展示已确认/);
+  assert.doesNotMatch(html, /缺少的客户、年份或合作信息/);
   assert.match(html, /gegelato-brand-a24\.webp/);
   assert.match(html, /gegelato-brand-a28\.webp/);
   assert.match(html, /gegelato-brand-a27\.webp/);
@@ -97,7 +98,8 @@ test("English project route uses rewritten English content", async () => {
   const html = await response.text();
   assert.match(html, /Everyday Observations/);
   assert.match(html, /Personal work collection/);
-  assert.match(html, /Publication is confirmed/);
+  assert.doesNotMatch(html, /Publication is confirmed/);
+  assert.doesNotMatch(html, /missing client, date, or collaboration details/);
 });
 
 test("legacy project URLs redirect to the curated project structure", async () => {

@@ -1,98 +1,53 @@
-# vinext-starter
+# Aviva大双插画作品集
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+Aviva大双的中英双语插画师作品集与商业合作网站，面向餐饮、饮品、食品、生活方式品牌及插画周边合作。
 
-## Prerequisites
+- 正式网站：https://www.avivaluo.com
+- GitHub：https://github.com/ethanzzl/avivaluo
+- 完整项目文档：[docs/Aviva大双网站项目文档.md](docs/Aviva大双网站项目文档.md)
+- 设计规范：[DESIGN.md](DESIGN.md)
+- 开发规则：[AGENTS.md](AGENTS.md)
 
-- Node.js `>=22.13.0`
+## 当前技术方案
 
-## Quick Start
+- Next.js 16 + React 19 + TypeScript
+- 原生 CSS 与响应式布局
+- GitHub 版本管理
+- Vercel 自动构建、部署与域名托管
+
+网站为公开作品集，不使用账号、数据库、CMS、在线支付或联系表单。
+
+## 本地运行
+
+要求 Node.js `>=22.13.0`。
 
 ```bash
 npm install
 npm run dev
-npm run build
 ```
 
-This starter does not use `wrangler.jsonc`.
+验证正式构建：
 
-## Included Shape
-
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
-
-## Workspace Auth Headers
-
-OpenAI workspace sites can read the current user's email from
-`oai-authenticated-user-email`.
-
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
+```bash
+npm run lint
+npm test
 ```
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+## 内容维护
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
+- 网站内容与中英文项目资料集中在 `app/site-data.ts`。
+- 页面结构集中在 `app/site.tsx`。
+- 全局样式集中在 `app/globals.css`。
+- 精选网页图片位于 `public/images/projects/curated/`。
+- 新项目发布前必须确认标题、中英文内容、图片 alt、版权和公开授权。
+- 不显示微信和电话；联系入口为邮箱、小红书和 Instagram。
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
+## 发布流程
 
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
+1. 明确本次修改范围和“不应改变”的内容。
+2. 本地修改并运行 `npm run lint` 与 `npm test`。
+3. 检查中英文页面以及 360px、桌面端布局。
+4. 提交并推送到 GitHub 的 `master` 分支。
+5. Vercel 自动部署后检查正式域名。
 
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
-
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
-
-## Useful Commands
-
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
-
-## Learn More
-
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+旧网站保存在 Git 分支 `archive/old-site-2026-07-19`，需要时可以回溯。

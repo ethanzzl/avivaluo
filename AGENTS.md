@@ -59,46 +59,35 @@ type Project = {
 
 ## 4. 技术默认方案
 
-除非需求出现账号、支付、后台或复杂动态数据，默认使用：
+当前正式网站已经使用以下方案，后续维护必须延续现有实现，除非用户明确批准技术迁移：
 
-- Astro + TypeScript
-- 静态优先输出
-- Markdown/MDX + Astro Content Collections
-- CSS Variables 作为设计令牌
-- 原生 HTML/CSS 完成主要结构与交互
-- 只有确有必要时才添加 React/Vue 小组件
-- Cloudflare Pages 或 Vercel 部署
+- Next.js 16 + React 19 + TypeScript
+- 服务端渲染为主，尽量减少客户端 JavaScript
+- `app/site-data.ts` 维护结构化中英文内容
+- CSS Variables 与原生 CSS 维护视觉系统
+- GitHub 版本管理，Vercel 自动部署
 
 不得为了技术展示引入不必要的客户端框架、数据库、CMS 或大量 JavaScript。
 
 ## 5. 推荐目录
 
 ```text
+app/
+  [...slug]/
+  site-data.ts
+  site.tsx
+  globals.css
 public/
-  fonts/
   images/
-    originals-manifest/
     projects/
-src/
-  components/
-    ui/
-    sections/
-  content/
-    projects/
-  data/
-  i18n/
-  layouts/
-  pages/
-    en/
-  styles/
-    tokens.css
-    global.css
+      curated/
+docs/
 tests/
 ```
 
 - 组件按内容意图命名，例如 `FeaturedProjects`，不得使用 `HomepageSection3`。
 - UI 原子、业务区块、页面布局分层维护。
-- 中英文共享组件和项目数据，不复制两套视觉实现。
+- 中英文共享组件和 `site-data.ts` 项目数据，不复制两套视觉实现。
 
 ## 6. 设计实现规则
 
