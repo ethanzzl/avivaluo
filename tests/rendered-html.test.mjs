@@ -55,11 +55,21 @@ test("server-renders the finished portfolio homepage", async () => {
   assert.match(html, /Aviva大双/);
   assert.match(html, /为品牌画出被记住的温度/);
   assert.match(html, /Gegelato 品牌视觉/);
-  assert.match(html, /柠檬茶包装/);
   assert.match(html, /巴黎书店与城市插画/);
-  assert.match(html, /餐饮与空间插画精选/);
   assert.match(html, /插画周边与手作/);
+  assert.match(html, /让品牌被看见/);
+  assert.match(html, /把插画带进/);
+  assert.match(html, /class="home-feature home-feature-paper"/);
+  assert.match(html, /class="site-footer site-footer-home"/);
+  assert.match(html, /avivaluojing@163\.com/);
   assert.doesNotMatch(html, /codex-preview|Building your site|react-loading-skeleton/i);
+});
+
+test("desktop navigation includes a current Home link", async () => {
+  const response = await render("/");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /class="desktop-nav"[\s\S]*href="\/" aria-current="page"[\s\S]*首页/);
 });
 
 test("work page lists the eight curated projects", async () => {
@@ -81,7 +91,33 @@ test("work page lists the eight curated projects", async () => {
   }
   assert.ok(html.indexOf("/work/food-hospitality") < html.indexOf("/work/illustrated-objects"));
   assert.ok(html.indexOf("/work/illustrated-objects") < html.indexOf("/work/lemon-tea-packaging"));
+  assert.match(html, /class="work-card-heading"/);
+  assert.match(html, /class="page-intro-count">8/);
+  assert.match(html, /个精选项目/);
   assert.match(html, /class="mobile-panel"[\s\S]*href="\/"[\s\S]*首页/);
+});
+
+test("interior pages use the unified editorial sections", async () => {
+  const aboutResponse = await render("/about");
+  assert.equal(aboutResponse.status, 200);
+  const aboutHtml = await aboutResponse.text();
+  assert.match(aboutHtml, /class="about-story"/);
+  assert.match(aboutHtml, /class="about-process"/);
+
+  const contactResponse = await render("/contact");
+  assert.equal(contactResponse.status, 200);
+  const contactHtml = await contactResponse.text();
+  assert.match(contactHtml, /class="contact-heading"/);
+  assert.match(contactHtml, /class="contact-intro"/);
+});
+
+test("unknown routes return a styled 404 with noindex metadata", async () => {
+  const response = await render("/not-a-real-page");
+  assert.equal(response.status, 404);
+  const html = await response.text();
+  assert.match(html, /not-found-page/);
+  assert.match(html, /页面未找到｜Aviva大双/);
+  assert.match(html, /name="robots" content="noindex"/);
 });
 
 test("English mobile navigation includes a Home link", async () => {

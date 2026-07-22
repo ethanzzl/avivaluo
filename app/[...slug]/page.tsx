@@ -33,9 +33,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         },
       };
     }
+    return {
+      title: locale === "zh" ? "页面未找到" : "Page not found",
+      robots: { index: false, follow: false },
+    };
+  }
+  if (!labels[key] || path.length !== 1) {
+    return {
+      title: locale === "zh" ? "页面未找到" : "Page not found",
+      robots: { index: false, follow: false },
+    };
   }
   return {
-    title: labels[key]?.[locale] ?? "Aviva大双",
+    title: labels[key][locale],
     description:
       locale === "zh"
         ? "Aviva大双插画作品与商业合作网站。"
