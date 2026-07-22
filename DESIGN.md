@@ -28,7 +28,7 @@ Aviva大双的网站首先是一个商业合作入口，其次才是完整的个
 首要行动：**发起合作 / Start a Project**。  
 次要行动：**查看作品 / View Work**。
 
-邮箱已确认为 `avivaluojing@163.com`，小红书链接已确认为 `https://xhslink.com/m/7SoyMlHCsdd`，Instagram 链接已确认为 `https://www.instagram.com/jingluo_?igsh=NXc4bW9kd2o5OGlj&utm_source=qr`。微信与电话入口已取消；不得编造联系方式，也不得制作无法真正提交的表单。
+邮箱已确认为 `avivaluojing@163.com`，小红书链接已确认为 `https://xhslink.com/m/7SoyMlHCsdd`，Instagram 链接已确认为 `https://www.instagram.com/jingluo_/`。微信与电话入口已取消；不得编造联系方式，也不得制作无法真正提交的表单。
 
 已确认的个人背景：Aviva大双本名罗经，是插画设计师与创意工作室主理人；曾在法国学习生活八年，现工作与生活于上海和天津；是 Fluffy、Gegelato、丛欢酒饭及丛欢意大利小酒馆的联合创始人。
 

@@ -94,7 +94,7 @@ function Footer({ locale }: { locale: Locale }) {
             </a>
             <a
               className="social-link social-link-light"
-              href="https://www.instagram.com/jingluo_?igsh=NXc4bW9kd2o5OGlj&utm_source=qr"
+              href="https://www.instagram.com/jingluo_/"
               target="_blank"
               rel="noreferrer"
               aria-label={locale === "zh" ? "访问 Aviva大双的 Instagram" : "Visit Aviva Dashuang on Instagram"}
@@ -244,6 +244,22 @@ function Home({ locale }: { locale: Locale }) {
 }
 
 function Work({ locale }: { locale: Locale }) {
+  const workOrder = [
+    "gegelato-brand",
+    "food-hospitality",
+    "illustrated-objects",
+    "lemon-tea-packaging",
+    "paris-printemps",
+    "everyday-observations",
+    "christmas-stories",
+    "portraits-family",
+  ];
+  const orderedProjects = workOrder.map((slug) => {
+    const project = projects.find((item) => item.slug === slug);
+    if (!project) throw new Error(`Missing work page project: ${slug}`);
+    return project;
+  });
+
   return (
     <>
       <section className="page-intro">
@@ -259,7 +275,7 @@ function Work({ locale }: { locale: Locale }) {
         </div>
       </section>
       <section className="project-list" aria-label={locale === "zh" ? "作品列表" : "Project list"}>
-        {projects.map((project) => (
+        {orderedProjects.map((project) => (
           <WorkCard project={project} locale={locale} key={project.slug} />
         ))}
       </section>
@@ -414,7 +430,7 @@ function Contact({ locale }: { locale: Locale }) {
           <dd>
             <a
               className="contact-value-link"
-              href="https://www.instagram.com/jingluo_?igsh=NXc4bW9kd2o5OGlj&utm_source=qr"
+              href="https://www.instagram.com/jingluo_/"
               target="_blank"
               rel="noreferrer"
             >

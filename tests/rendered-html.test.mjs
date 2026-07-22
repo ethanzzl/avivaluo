@@ -79,6 +79,8 @@ test("work page lists the eight curated projects", async () => {
   for (const slug of slugs) {
     assert.match(html, new RegExp(`/work/${slug}`));
   }
+  assert.ok(html.indexOf("/work/food-hospitality") < html.indexOf("/work/illustrated-objects"));
+  assert.ok(html.indexOf("/work/illustrated-objects") < html.indexOf("/work/lemon-tea-packaging"));
 });
 
 test("illustrated objects project renders the selected handmade collection", async () => {
@@ -86,10 +88,37 @@ test("illustrated objects project renders the selected handmade collection", asy
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /个人创作系列/);
+  assert.match(html, /instagram-candlestick\.webp/);
   assert.match(html, /illustrated-objects-cover\.webp/);
   assert.match(html, /illustrated-objects-wine-stoppers\.webp/);
   assert.match(html, /illustrated-objects-embroidered-bag\.webp/);
   assert.match(html, /illustrated-objects-brooches\.webp/);
+  assert.match(html, /instagram-painted-spoon\.webp/);
+});
+
+test("Instagram selections strengthen the bilingual lifestyle and seasonal projects", async () => {
+  const everydayResponse = await render("/work/everyday-observations");
+  assert.equal(everydayResponse.status, 200);
+  const everydayHtml = await everydayResponse.text();
+  assert.match(everydayHtml, /水粉与日常观察/);
+  assert.match(everydayHtml, /instagram-breakfast-gouache\.webp/);
+  assert.match(everydayHtml, /instagram-tulips-detail\.webp/);
+  assert.match(everydayHtml, /instagram-orange-trees\.webp/);
+
+  const seasonalResponse = await render("/en/work/christmas-stories");
+  assert.equal(seasonalResponse.status, 200);
+  const seasonalHtml = await seasonalResponse.text();
+  assert.match(seasonalHtml, /Seasonal Character Stories/);
+  assert.match(seasonalHtml, /instagram-lantern-festival\.webp/);
+  assert.match(seasonalHtml, /instagram-christmas-eve\.webp/);
+});
+
+test("contact page uses the canonical Instagram profile URL", async () => {
+  const response = await render("/contact");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /https:\/\/www\.instagram\.com\/jingluo_\//);
+  assert.doesNotMatch(html, /igsh=|utm_source=qr/);
 });
 
 test("project detail renders its curated gallery without internal publication notes", async () => {

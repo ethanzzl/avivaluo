@@ -47,7 +47,7 @@ Aviva大双网站是中英双语的插画师作品集和商业合作入口。商
 - 品牌角色：Fluffy、Gegelato、丛欢酒饭及丛欢意大利小酒馆的联合创始人
 - 邮箱：`avivaluojing@163.com`
 - 小红书：<https://xhslink.com/m/7SoyMlHCsdd>
-- Instagram：<https://www.instagram.com/jingluo_?igsh=NXc4bW9kd2o5OGlj&utm_source=qr>
+- Instagram：<https://www.instagram.com/jingluo_/>
 - 微信和电话：不在网站显示
 
 ## 3. 完整开发流程回顾
