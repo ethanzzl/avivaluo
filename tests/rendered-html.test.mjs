@@ -94,7 +94,18 @@ test("work page lists the eight curated projects", async () => {
   assert.match(html, /class="work-card-heading"/);
   assert.match(html, /class="page-intro-count">8/);
   assert.match(html, /个精选项目/);
+  assert.match(html, /\/images\/projects\/protected\/curated\//);
+  assert.match(html, /draggable="false"/);
   assert.match(html, /class="mobile-panel"[\s\S]*href="\/"[\s\S]*首页/);
+});
+
+test("published artwork uses protected derivatives while previous public paths are unavailable", async () => {
+  const protectedImage = await render("/images/projects/protected/curated/gegelato-brand-a24.webp");
+  assert.equal(protectedImage.status, 200);
+  assert.match(protectedImage.headers.get("content-type") ?? "", /^image\/webp\b/i);
+
+  const previousImage = await render("/images/projects/curated/gegelato-brand-a24.webp");
+  assert.equal(previousImage.status, 404);
 });
 
 test("interior pages use the unified editorial sections", async () => {
@@ -176,6 +187,7 @@ test("project detail renders its curated gallery without internal publication no
   assert.match(html, /gegelato-brand-a28\.webp/);
   assert.match(html, /gegelato-brand-a27\.webp/);
   assert.match(html, /gegelato-brand-a23\.webp/);
+  assert.match(html, /作品仅供浏览，未经授权不得复制、转载或用于商业用途/);
 });
 
 test("English project route uses rewritten English content", async () => {
@@ -184,6 +196,7 @@ test("English project route uses rewritten English content", async () => {
   const html = await response.text();
   assert.match(html, /Everyday Observations/);
   assert.match(html, /Personal work collection/);
+  assert.match(html, /Artwork is presented for viewing only/);
   assert.doesNotMatch(html, /Publication is confirmed/);
   assert.doesNotMatch(html, /missing client, date, or collaboration details/);
 });

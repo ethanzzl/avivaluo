@@ -2,7 +2,7 @@
   {
     "source": "tulips-gouache-01.jpg",
     "instagramProfile": "https://www.instagram.com/jingluo_/",
-    "output": "/images/projects/recovered/instagram-tulips-process.webp",
+    "publishedOutput": "/images/projects/protected/recovered/instagram-tulips-process.webp",
     "width": 1440,
     "height": 1800,
     "format": "webp",
@@ -12,7 +12,7 @@
   {
     "source": "tulips-gouache-02.jpg",
     "instagramProfile": "https://www.instagram.com/jingluo_/",
-    "output": "/images/projects/recovered/instagram-tulips-detail.webp",
+    "publishedOutput": "/images/projects/protected/recovered/instagram-tulips-detail.webp",
     "width": 1440,
     "height": 1800,
     "format": "webp",
@@ -22,7 +22,7 @@
   {
     "source": "colorful-weekend.jpg",
     "instagramProfile": "https://www.instagram.com/jingluo_/",
-    "output": "/images/projects/recovered/instagram-colorful-weekend.webp",
+    "publishedOutput": "/images/projects/protected/recovered/instagram-colorful-weekend.webp",
     "width": 1440,
     "height": 1080,
     "format": "webp",
@@ -32,7 +32,7 @@
   {
     "source": "smile-character.jpg",
     "instagramProfile": "https://www.instagram.com/jingluo_/",
-    "output": "/images/projects/recovered/instagram-smile-character.webp",
+    "publishedOutput": "/images/projects/protected/recovered/instagram-smile-character.webp",
     "width": 1440,
     "height": 1800,
     "format": "webp",
@@ -42,7 +42,7 @@
   {
     "source": "lantern-festival.jpg",
     "instagramProfile": "https://www.instagram.com/jingluo_/",
-    "output": "/images/projects/recovered/instagram-lantern-festival.webp",
+    "publishedOutput": "/images/projects/protected/recovered/instagram-lantern-festival.webp",
     "width": 1440,
     "height": 1606,
     "format": "webp",
@@ -52,7 +52,7 @@
   {
     "source": "christmas-eve.jpg",
     "instagramProfile": "https://www.instagram.com/jingluo_/",
-    "output": "/images/projects/recovered/instagram-christmas-eve.webp",
+    "publishedOutput": "/images/projects/protected/recovered/instagram-christmas-eve.webp",
     "width": 1440,
     "height": 1800,
     "format": "webp",
@@ -62,7 +62,7 @@
   {
     "source": "nutcracker-market.jpg",
     "instagramProfile": "https://www.instagram.com/jingluo_/",
-    "output": "/images/projects/recovered/instagram-nutcracker-market.webp",
+    "publishedOutput": "/images/projects/protected/recovered/instagram-nutcracker-market.webp",
     "width": 1440,
     "height": 1800,
     "format": "webp",
@@ -72,7 +72,7 @@
   {
     "source": "little-candlestick-02.jpg",
     "instagramProfile": "https://www.instagram.com/jingluo_/",
-    "output": "/images/projects/recovered/instagram-candlestick.webp",
+    "publishedOutput": "/images/projects/protected/recovered/instagram-candlestick.webp",
     "width": 1440,
     "height": 1794,
     "format": "webp",
@@ -82,7 +82,7 @@
   {
     "source": "orange-tree-gouache-01.jpg",
     "instagramProfile": "https://www.instagram.com/jingluo_/",
-    "output": "/images/projects/recovered/instagram-orange-trees.webp",
+    "publishedOutput": "/images/projects/protected/recovered/instagram-orange-trees.webp",
     "width": 1440,
     "height": 1440,
     "format": "webp",
@@ -92,7 +92,7 @@
   {
     "source": "orange-tree-gouache-02.jpg",
     "instagramProfile": "https://www.instagram.com/jingluo_/",
-    "output": "/images/projects/recovered/instagram-orange-tree-detail.webp",
+    "publishedOutput": "/images/projects/protected/recovered/instagram-orange-tree-detail.webp",
     "width": 1440,
     "height": 1440,
     "format": "webp",
@@ -102,7 +102,7 @@
   {
     "source": "painted-spoon.jpg",
     "instagramProfile": "https://www.instagram.com/jingluo_/",
-    "output": "/images/projects/recovered/instagram-painted-spoon.webp",
+    "publishedOutput": "/images/projects/protected/recovered/instagram-painted-spoon.webp",
     "width": 1440,
     "height": 1800,
     "format": "webp",
@@ -112,7 +112,7 @@
   {
     "source": "breakfast-gouache.jpg",
     "instagramProfile": "https://www.instagram.com/jingluo_/",
-    "output": "/images/projects/recovered/instagram-breakfast-gouache.webp",
+    "publishedOutput": "/images/projects/protected/recovered/instagram-breakfast-gouache.webp",
     "width": 1440,
     "height": 1080,
     "format": "webp",

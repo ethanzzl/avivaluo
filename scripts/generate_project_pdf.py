@@ -306,14 +306,14 @@ def build_story() -> list:
             Paragraph("开发、上线与维护手册", STYLES["cover_subtitle"]),
             Spacer(1, 18 * mm),
             image_flowable(
-                ROOT / "public" / "images" / "projects" / "curated" / "paris-printemps-a14.webp",
+                ROOT / "source-assets" / "projects" / "curated" / "paris-printemps-a14.webp",
                 max_width=170 * mm,
                 max_height=86 * mm,
             ),
             Spacer(1, 10 * mm),
             Paragraph(
                 "正式网站：<link href=\"https://www.avivaluo.com\" color=\"#C94F3D\">www.avivaluo.com</link><br/>"
-                "版本 1.0 · 2026-07-20",
+                "版本 1.1 · 2026-07-22",
                 STYLES["cover_subtitle"],
             ),
             PageBreak(),

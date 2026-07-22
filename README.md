@@ -38,7 +38,7 @@ npm test
 - 网站内容与中英文项目资料集中在 `app/site-data.ts`。
 - 页面结构集中在 `app/site.tsx`。
 - 全局样式集中在 `app/globals.css`。
-- 精选网页图片位于 `public/images/projects/curated/`。
+- 网站公开图片位于 `public/images/projects/protected/`；较大来源文件保存在不对外提供 URL 的 `source-assets/projects/`。
 - 新项目发布前必须确认标题、中英文内容、图片 alt、版权和公开授权。
 - 不显示微信和电话；联系入口为邮箱、小红书和 Instagram。
 

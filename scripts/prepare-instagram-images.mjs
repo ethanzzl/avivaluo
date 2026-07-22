@@ -4,7 +4,7 @@ import sharp from "sharp";
 
 const root = process.cwd();
 const recoveredRoot = path.join(root, "recovered-assets", "instagram", "raw");
-const outputRoot = path.join(root, "public", "images", "projects", "recovered");
+const outputRoot = path.join(root, "source-assets", "projects", "recovered");
 
 const selections = [
   ["tulips-gouache-01.jpg", "instagram-tulips-process.webp"],
@@ -45,7 +45,7 @@ for (const [sourceName, outputName] of selections) {
   manifest.push({
     source: sourceName,
     instagramProfile: "https://www.instagram.com/jingluo_/",
-    output: `/images/projects/recovered/${outputName}`,
+    publishedOutput: `/images/projects/protected/recovered/${outputName}`,
     width: result.width,
     height: result.height,
     format: result.format,

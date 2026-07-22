@@ -29,7 +29,7 @@ function artwork(
   en: string,
 ): ProjectImage {
   return {
-    src: `/images/projects/curated/${project}-${id.toLowerCase()}.webp`,
+    src: `/images/projects/protected/curated/${project}-${id.toLowerCase()}.webp`,
     width,
     height,
     alt: { zh, en },
@@ -44,7 +44,7 @@ function recoveredArtwork(
   en: string,
 ): ProjectImage {
   return {
-    src: `/images/projects/recovered/${file}`,
+    src: `/images/projects/protected/recovered/${file}`,
     width,
     height,
     alt: { zh, en },

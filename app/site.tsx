@@ -148,6 +148,7 @@ function WorkCard({ project, locale, index }: { project: Project; locale: Locale
           height={cover.height}
           alt={cover.alt[locale]}
           loading="lazy"
+          draggable={false}
         />
       </div>
       <div className="work-card-copy">
@@ -225,6 +226,7 @@ function Home({ locale }: { locale: Locale }) {
               height={heroCover.height}
               alt={heroCover.alt[locale]}
               fetchPriority="high"
+              draggable={false}
             />
           </a>
         </div>
@@ -250,6 +252,7 @@ function Home({ locale }: { locale: Locale }) {
                 height={project.cover.height}
                 alt={project.cover.alt[locale]}
                 loading="lazy"
+                draggable={false}
               />
             </a>
           </div>
@@ -350,6 +353,7 @@ function ProjectDetail({ locale, project }: { locale: Locale; project: Project }
           height={cover.height}
           alt={cover.alt[locale]}
           fetchPriority="high"
+          draggable={false}
         />
       </div>
       <section className="project-body">
@@ -381,12 +385,18 @@ function ProjectDetail({ locale, project }: { locale: Locale; project: Project }
                   height={image.height}
                   alt={image.alt[locale]}
                   loading="lazy"
+                  draggable={false}
                 />
               </div>
             );
           })}
         </section>
       )}
+      <p className="project-rights">
+        {locale === "zh"
+          ? "© Aviva大双。作品仅供浏览，未经授权不得复制、转载或用于商业用途。"
+          : "© Aviva Dashuang. Artwork is presented for viewing only and may not be copied, republished, or used commercially without permission."}
+      </p>
     </>
   );
 }

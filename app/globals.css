@@ -40,6 +40,8 @@ img {
   display: block;
   max-width: 100%;
   height: auto;
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 button,
@@ -824,6 +826,15 @@ summary {
 .project-gallery .gallery-portrait {
   width: min(86%, 560px);
   justify-self: center;
+}
+
+.project-rights {
+  width: var(--page);
+  margin: calc(clamp(110px, 12vw, 180px) * -0.55) auto clamp(90px, 10vw, 150px);
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.76rem;
 }
 
 .about-story,

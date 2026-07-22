@@ -1,7 +1,7 @@
 [
   {
     "source": "clay-plates/raw/09.webp",
-    "output": "/images/projects/recovered/illustrated-objects-cover.webp",
+    "publishedOutput": "/images/projects/protected/recovered/illustrated-objects-cover.webp",
     "width": 1080,
     "height": 1440,
     "format": "webp",
@@ -10,7 +10,7 @@
   },
   {
     "source": "clay-plates/raw/02.webp",
-    "output": "/images/projects/recovered/illustrated-objects-plates-group.webp",
+    "publishedOutput": "/images/projects/protected/recovered/illustrated-objects-plates-group.webp",
     "width": 1080,
     "height": 1440,
     "format": "webp",
@@ -19,7 +19,7 @@
   },
   {
     "source": "clay-plates/raw/03.webp",
-    "output": "/images/projects/recovered/illustrated-objects-plate-dove.webp",
+    "publishedOutput": "/images/projects/protected/recovered/illustrated-objects-plate-dove.webp",
     "width": 1080,
     "height": 1440,
     "format": "webp",
@@ -28,7 +28,7 @@
   },
   {
     "source": "clay-plates/raw/05.webp",
-    "output": "/images/projects/recovered/illustrated-objects-green-plate.webp",
+    "publishedOutput": "/images/projects/protected/recovered/illustrated-objects-green-plate.webp",
     "width": 1080,
     "height": 1440,
     "format": "webp",
@@ -37,7 +37,7 @@
   },
   {
     "source": "clay-wine-stoppers/raw/01.webp",
-    "output": "/images/projects/recovered/illustrated-objects-wine-stoppers.webp",
+    "publishedOutput": "/images/projects/protected/recovered/illustrated-objects-wine-stoppers.webp",
     "width": 1280,
     "height": 960,
     "format": "webp",
@@ -46,7 +46,7 @@
   },
   {
     "source": "clay-wine-stoppers/raw/02.webp",
-    "output": "/images/projects/recovered/illustrated-objects-small-objects.webp",
+    "publishedOutput": "/images/projects/protected/recovered/illustrated-objects-small-objects.webp",
     "width": 1280,
     "height": 960,
     "format": "webp",
@@ -55,7 +55,7 @@
   },
   {
     "source": "embroidered-bag/raw/04.webp",
-    "output": "/images/projects/recovered/illustrated-objects-embroidery-sketch.webp",
+    "publishedOutput": "/images/projects/protected/recovered/illustrated-objects-embroidery-sketch.webp",
     "width": 1080,
     "height": 1440,
     "format": "webp",
@@ -64,7 +64,7 @@
   },
   {
     "source": "embroidered-bag/raw/05.webp",
-    "output": "/images/projects/recovered/illustrated-objects-embroidery-process.webp",
+    "publishedOutput": "/images/projects/protected/recovered/illustrated-objects-embroidery-process.webp",
     "width": 1080,
     "height": 1439,
     "format": "webp",
@@ -73,7 +73,7 @@
   },
   {
     "source": "embroidered-bag/raw/07.webp",
-    "output": "/images/projects/recovered/illustrated-objects-embroidered-bag.webp",
+    "publishedOutput": "/images/projects/protected/recovered/illustrated-objects-embroidered-bag.webp",
     "width": 1080,
     "height": 1439,
     "format": "webp",
@@ -82,7 +82,7 @@
   },
   {
     "source": "brooch-rings/raw/02.webp",
-    "output": "/images/projects/recovered/illustrated-objects-brooch-collection.webp",
+    "publishedOutput": "/images/projects/protected/recovered/illustrated-objects-brooch-collection.webp",
     "width": 1080,
     "height": 1441,
     "format": "webp",
@@ -91,7 +91,7 @@
   },
   {
     "source": "brooch-rings/raw/03.webp",
-    "output": "/images/projects/recovered/illustrated-objects-brooches.webp",
+    "publishedOutput": "/images/projects/protected/recovered/illustrated-objects-brooches.webp",
     "width": 1080,
     "height": 1441,
     "format": "webp",
@@ -100,7 +100,7 @@
   },
   {
     "source": "brooch-rings/raw/01.webp",
-    "output": "/images/projects/recovered/illustrated-objects-ring.webp",
+    "publishedOutput": "/images/projects/protected/recovered/illustrated-objects-ring.webp",
     "width": 1080,
     "height": 1421,
     "format": "webp",
@@ -109,7 +109,7 @@
   },
   {
     "source": "clay-life-scenes/raw/01.webp",
-    "output": "/images/projects/recovered/illustrated-objects-fruit-relief.webp",
+    "publishedOutput": "/images/projects/protected/recovered/illustrated-objects-fruit-relief.webp",
     "width": 1080,
     "height": 1184,
     "format": "webp",
@@ -118,7 +118,7 @@
   },
   {
     "source": "clay-life-scenes/raw/03.webp",
-    "output": "/images/projects/recovered/illustrated-objects-parrot-relief.webp",
+    "publishedOutput": "/images/projects/protected/recovered/illustrated-objects-parrot-relief.webp",
     "width": 1080,
     "height": 1183,
     "format": "webp",
@@ -127,7 +127,7 @@
   },
   {
     "source": "paris-bookshop-shanghai/raw/05.webp",
-    "output": "/images/projects/recovered/paris-bookshop-framed-work.webp",
+    "publishedOutput": "/images/projects/protected/recovered/paris-bookshop-framed-work.webp",
     "width": 1080,
     "height": 1441,
     "format": "webp",
@@ -136,7 +136,7 @@
   },
   {
     "source": "paris-bookshop-shanghai/raw/03.webp",
-    "output": "/images/projects/recovered/paris-bookshop-making.webp",
+    "publishedOutput": "/images/projects/protected/recovered/paris-bookshop-making.webp",
     "width": 1441,
     "height": 1080,
     "format": "webp",
@@ -145,7 +145,7 @@
   },
   {
     "source": "paris-bookshop-shanghai/raw/02.webp",
-    "output": "/images/projects/recovered/paris-bookshop-large-print.webp",
+    "publishedOutput": "/images/projects/protected/recovered/paris-bookshop-large-print.webp",
     "width": 1080,
     "height": 1441,
     "format": "webp",
@@ -154,7 +154,7 @@
   },
   {
     "source": "paris-bookshop-shanghai/raw/01.webp",
-    "output": "/images/projects/recovered/paris-bookshop-gallery-wall.webp",
+    "publishedOutput": "/images/projects/protected/recovered/paris-bookshop-gallery-wall.webp",
     "width": 1441,
     "height": 1080,
     "format": "webp",

@@ -11,6 +11,7 @@
     "start": "next start",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
+    "images:protect": "node scripts/protect-images.mjs",
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {

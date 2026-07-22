@@ -4,7 +4,7 @@ import sharp from "sharp";
 
 const root = process.cwd();
 const recoveredRoot = path.join(root, "recovered-assets", "xiaohongshu");
-const outputRoot = path.join(root, "public", "images", "projects", "recovered");
+const outputRoot = path.join(root, "source-assets", "projects", "recovered");
 
 const selections = [
   ["clay-plates/raw/09.webp", "illustrated-objects-cover.webp"],
@@ -51,7 +51,7 @@ for (const [sourceName, outputName] of selections) {
 
   manifest.push({
     source: sourceName,
-    output: `/images/projects/recovered/${outputName}`,
+    publishedOutput: `/images/projects/protected/recovered/${outputName}`,
     width: result.width,
     height: result.height,
     format: result.format,
