@@ -81,6 +81,14 @@ test("work page lists the eight curated projects", async () => {
   }
   assert.ok(html.indexOf("/work/food-hospitality") < html.indexOf("/work/illustrated-objects"));
   assert.ok(html.indexOf("/work/illustrated-objects") < html.indexOf("/work/lemon-tea-packaging"));
+  assert.match(html, /class="mobile-panel"[\s\S]*href="\/"[\s\S]*首页/);
+});
+
+test("English mobile navigation includes a Home link", async () => {
+  const response = await render("/en/work");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /class="mobile-panel"[\s\S]*href="\/en\/"[\s\S]*Home/);
 });
 
 test("illustrated objects project renders the selected handmade collection", async () => {

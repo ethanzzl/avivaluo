@@ -506,6 +506,7 @@ export const projects: Project[] = [
 export const copy = {
   zh: {
     nav: {
+      home: "首页",
       work: "作品",
       services: "合作方向",
       about: "关于",
@@ -549,6 +550,7 @@ export const copy = {
   },
   en: {
     nav: {
+      home: "Home",
       work: "Work",
       services: "Services",
       about: "About",

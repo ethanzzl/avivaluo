@@ -80,10 +80,33 @@ summary {
 }
 
 .brand {
+  position: relative;
   font-size: clamp(1.32rem, 2vw, 1.78rem);
   font-weight: 700;
   letter-spacing: -0.045em;
   white-space: nowrap;
+  transition: color 180ms ease;
+}
+
+.brand::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -7px;
+  height: 2px;
+  background: var(--accent);
+  transition: right 180ms ease;
+}
+
+.brand:hover,
+.brand:focus-visible {
+  color: var(--accent-dark);
+}
+
+.brand:hover::after,
+.brand:focus-visible::after {
+  right: 0;
 }
 
 .desktop-nav {
@@ -683,6 +706,11 @@ summary {
     min-height: 48px;
     display: flex;
     align-items: center;
+  }
+
+  .mobile-panel a[aria-current="page"] {
+    color: var(--accent-dark);
+    font-weight: 600;
   }
 
   .hero,

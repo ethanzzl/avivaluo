@@ -53,6 +53,9 @@ function Header({ locale, path }: { locale: Locale; path: string[] }) {
       <details className="mobile-nav">
         <summary>{c.menu}</summary>
         <nav className="mobile-panel" aria-label={locale === "zh" ? "移动导航" : "Mobile navigation"}>
+          <a href={localePath(locale)} aria-current={current === "" ? "page" : undefined}>
+            {c.home}
+          </a>
           {items.map((item) => (
             <a href={item.href} key={item.key}>
               {item.label}
