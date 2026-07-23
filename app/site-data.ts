@@ -10,6 +10,9 @@ export type ProjectImage = {
 export type Project = {
   slug: string;
   legacySlugs?: string[];
+  featured: boolean;
+  draft: boolean;
+  rightsConfirmed: boolean;
   title: Record<Locale, string>;
   category: Record<Locale, string>;
   services: Record<Locale, string>;
@@ -51,10 +54,13 @@ function recoveredArtwork(
   };
 }
 
-export const projects: Project[] = [
+export const projectCatalog: Project[] = [
   {
     slug: "gegelato-brand",
     legacySlugs: ["gelato-motif"],
+    featured: true,
+    draft: false,
+    rightsConfirmed: true,
     title: { zh: "Gegelato 品牌视觉", en: "Gegelato Brand Visuals" },
     category: { zh: "餐饮与饮品", en: "Food & Drink" },
     services: {
@@ -85,6 +91,9 @@ export const projects: Project[] = [
   },
   {
     slug: "illustrated-objects",
+    featured: true,
+    draft: false,
+    rightsConfirmed: true,
     title: { zh: "插画周边与手作", en: "Illustrated Objects & Handmade Pieces" },
     category: { zh: "包装与周边", en: "Packaging & Objects" },
     services: {
@@ -217,6 +226,9 @@ export const projects: Project[] = [
   },
   {
     slug: "lemon-tea-packaging",
+    featured: false,
+    draft: false,
+    rightsConfirmed: true,
     title: { zh: "柠檬茶包装", en: "Lemon Tea Packaging" },
     category: { zh: "包装与周边", en: "Packaging & Objects" },
     services: {
@@ -253,6 +265,9 @@ export const projects: Project[] = [
   },
   {
     slug: "paris-printemps",
+    featured: true,
+    draft: false,
+    rightsConfirmed: true,
     title: { zh: "巴黎书店与城市插画", en: "Paris Bookshops & City Stories" },
     category: { zh: "品牌插画", en: "Brand Illustration" },
     services: {
@@ -315,6 +330,9 @@ export const projects: Project[] = [
   },
   {
     slug: "food-hospitality",
+    featured: false,
+    draft: false,
+    rightsConfirmed: true,
     legacySlugs: ["corner-cafe", "be-wave-gelato"],
     title: { zh: "餐饮与空间插画精选", en: "Food & Hospitality Illustration Studies" },
     category: { zh: "餐饮与饮品", en: "Food & Drink" },
@@ -354,6 +372,9 @@ export const projects: Project[] = [
   },
   {
     slug: "christmas-stories",
+    featured: false,
+    draft: false,
+    rightsConfirmed: true,
     title: { zh: "节日与角色故事", en: "Seasonal Character Stories" },
     category: { zh: "节日品牌插画", en: "Seasonal Illustration" },
     services: {
@@ -403,6 +424,9 @@ export const projects: Project[] = [
   },
   {
     slug: "portraits-family",
+    featured: false,
+    draft: false,
+    rightsConfirmed: true,
     title: { zh: "人物肖像与家庭故事", en: "Portraits & Family Stories" },
     category: { zh: "人物与个人创作", en: "Characters & Personal" },
     services: {
@@ -437,6 +461,9 @@ export const projects: Project[] = [
   },
   {
     slug: "everyday-observations",
+    featured: false,
+    draft: false,
+    rightsConfirmed: true,
     title: { zh: "水粉与日常观察", en: "Gouache & Everyday Observations" },
     category: { zh: "编辑与生活方式", en: "Editorial & Lifestyle" },
     services: {
@@ -503,6 +530,10 @@ export const projects: Project[] = [
   },
 ];
 
+export const projects = projectCatalog.filter(
+  (project) => !project.draft && project.rightsConfirmed,
+);
+
 export const copy = {
   zh: {
     nav: {
@@ -536,9 +567,9 @@ export const copy = {
       title: "从一幅画，到完整的品牌应用。",
       intro: "根据品牌目标和实际使用场景，选择合适的插画语言与延展方式。",
       items: [
-        ["品牌插画系统", "品牌人物、主视觉、节日与社交传播插画。"],
-        ["包装与餐饮视觉", "包装、菜单、杯套、外带物料与空间应用。"],
-        ["插画周边开发", "礼盒、文创、服饰、印刷品与联名产品。"],
+        { title: "品牌插画系统", translation: "Brand Illustration", body: "品牌人物、主视觉、节日与社交传播插画。" },
+        { title: "包装与餐饮视觉", translation: "Packaging & Food Visuals", body: "包装、菜单、杯套、外带物料与空间应用。" },
+        { title: "插画周边开发", translation: "Illustration & Objects", body: "礼盒、文创、服饰、印刷品与联名产品。" },
       ],
     },
     footer: {
@@ -580,9 +611,9 @@ export const copy = {
       title: "From one illustration to a complete brand application.",
       intro: "The visual language and deliverables are shaped around your brand goal and the places the work needs to live.",
       items: [
-        ["Brand illustration systems", "Characters, key visuals, seasonal campaigns, and social illustration."],
-        ["Packaging & food visuals", "Packaging, menus, cup sleeves, takeaway materials, and spatial applications."],
-        ["Illustrated objects", "Gift boxes, merchandise, apparel, printed matter, and collaborations."],
+        { title: "Brand illustration systems", translation: "", body: "Characters, key visuals, seasonal campaigns, and social illustration." },
+        { title: "Packaging & food visuals", translation: "", body: "Packaging, menus, cup sleeves, takeaway materials, and spatial applications." },
+        { title: "Illustrated objects", translation: "", body: "Gift boxes, merchandise, apparel, printed matter, and collaborations." },
       ],
     },
     footer: {

@@ -52,6 +52,7 @@ test("server-renders the finished portfolio homepage", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
+  assert.match(html, /<html lang="zh-CN">/);
   assert.match(html, /Aviva大双/);
   assert.match(html, /为品牌画出被记住的温度/);
   assert.match(html, /Gegelato 品牌视觉/);
@@ -135,7 +136,48 @@ test("English mobile navigation includes a Home link", async () => {
   const response = await render("/en/work");
   assert.equal(response.status, 200);
   const html = await response.text();
-  assert.match(html, /class="mobile-panel"[\s\S]*href="\/en\/"[\s\S]*Home/);
+  assert.match(html, /<html lang="en">/);
+  assert.match(html, /class="mobile-panel"[\s\S]*href="\/en"[\s\S]*Home/);
+});
+
+test("metadata uses the fixed production domain and project artwork", async () => {
+  const response = await render("/en/work/paris-printemps");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /rel="canonical" href="https:\/\/www\.avivaluo\.com\/en\/work\/paris-printemps"/);
+  assert.match(html, /property="og:url" content="https:\/\/www\.avivaluo\.com\/en\/work\/paris-printemps"/);
+  assert.match(html, /property="og:image" content="https:\/\/www\.avivaluo\.com\/images\/projects\/protected\/curated\/paris-printemps-a13\.webp"/);
+  assert.doesNotMatch(html, /127\.0\.0\.1:43119/);
+});
+
+test("robots and sitemap publish only the canonical production domain", async () => {
+  const robotsResponse = await render("/robots.txt");
+  assert.equal(robotsResponse.status, 200);
+  const robots = await robotsResponse.text();
+  assert.match(robots, /Host: https:\/\/www\.avivaluo\.com/);
+  assert.match(robots, /Sitemap: https:\/\/www\.avivaluo\.com\/sitemap\.xml/);
+  assert.doesNotMatch(robots, /127\.0\.0\.1/);
+
+  const sitemapResponse = await render("/sitemap.xml");
+  assert.equal(sitemapResponse.status, 200);
+  const sitemap = await sitemapResponse.text();
+  assert.match(sitemap, /https:\/\/www\.avivaluo\.com\/work\/gegelato-brand/);
+  assert.match(sitemap, /https:\/\/www\.avivaluo\.com\/en\/work\/gegelato-brand/);
+  assert.match(sitemap, /hreflang="zh-CN"/);
+  assert.match(sitemap, /hreflang="en"/);
+  assert.match(sitemap, /<lastmod>2026-07-22T16:00:00\.000Z<\/lastmod>/);
+  assert.doesNotMatch(sitemap, /127\.0\.0\.1/);
+});
+
+test("English unknown routes return an English-only 404", async () => {
+  const response = await render("/en/not-a-real-page");
+  assert.equal(response.status, 404);
+  const html = await response.text();
+  assert.match(html, /\\"lang\\":\\"en\\"/);
+  assert.match(html, /Nothing here yet\./);
+  assert.match(html, /Return home to explore the work\./);
+  assert.match(html, /name="robots" content="noindex"/);
+  assert.doesNotMatch(html, /这里还没有内容|返回首页继续浏览作品/);
 });
 
 test("illustrated objects project renders the selected handmade collection", async () => {

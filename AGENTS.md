@@ -16,7 +16,7 @@
 - 不确定事实统一标记为“待确认 / To be confirmed”。
 - 邮箱使用用户已确认的 `avivaluojing@163.com`；小红书使用已确认的 `https://xhslink.com/m/7SoyMlHCsdd`；Instagram 使用已确认的 `https://www.instagram.com/jingluo_/`；微信与电话入口不显示。
 - 已确认背景：Aviva大双本名罗经，是插画设计师与创意工作室主理人；曾在法国学习生活八年，现工作与生活于上海和天津；是 Fluffy、Gegelato、丛欢酒饭及丛欢意大利小酒馆的联合创始人。
-- 用户已确认作品自动分组一致，现有 57 个图片文件均可公开；首版按商业价值整理为 7 个项目/合集并精选展示 39 张图片，重复文件不重复引用，未入选素材继续保留。
+- 用户已确认作品自动分组一致，现有作品均可公开；当前生产站点发布 8 个项目/合集、引用 64 张网页衍生图，重复文件不重复引用，未入选素材继续保留。
 - 没有真实接收端时，不得制作看似可提交的联系表单。
 - 客户 Logo、品牌项目和商业图片发布前必须确认公开与使用授权。
 
@@ -62,7 +62,7 @@ type Project = {
 当前正式网站已经使用以下方案，后续维护必须延续现有实现，除非用户明确批准技术迁移：
 
 - Next.js 16 + React 19 + TypeScript
-- 服务端渲染为主，尽量减少客户端 JavaScript
+- 公开内容页与项目详情静态生成，尽量减少客户端 JavaScript
 - `app/site-data.ts` 维护结构化中英文内容
 - CSS Variables 与原生 CSS 维护视觉系统
 - GitHub 版本管理，Vercel 自动部署
@@ -73,15 +73,24 @@ type Project = {
 
 ```text
 app/
-  [...slug]/
+  (zh)/
+  en/
   site-data.ts
   site.tsx
+  site-shell.tsx
+  site-config.ts
+  site-metadata.ts
+  robots.ts
+  sitemap.ts
   globals.css
 public/
   images/
     projects/
-      curated/
+      protected/
+source-assets/
+  projects/
 docs/
+scripts/
 tests/
 ```
 

@@ -1,141 +1,7 @@
 /* eslint-disable @next/next/no-img-element -- source artwork uses prepared static derivatives */
-import { notFound, redirect } from "next/navigation";
 import { SiInstagram, SiXiaohongshu } from "react-icons/si";
 import { copy, type Locale, type Project, projects } from "./site-data";
-
-type SitePageProps = {
-  path: string[];
-};
-
-function localePath(locale: Locale, path = "") {
-  const normalized = path ? `/${path.replace(/^\/+/, "")}` : "";
-  return locale === "en" ? `/en${normalized || "/"}` : normalized || "/";
-}
-
-function languagePath(locale: Locale, path: string[]) {
-  if (locale === "zh") return `/en/${path.join("/")}`.replace(/\/$/, "/");
-  return `/${path.join("/")}`.replace(/\/$/, "/");
-}
-
-function Header({ locale, path }: { locale: Locale; path: string[] }) {
-  const c = copy[locale].nav;
-  const current = path[0] ?? "";
-  const items = [
-    { key: "work", label: c.work, href: localePath(locale, "work") },
-    { key: "services", label: c.services, href: `${localePath(locale)}#services` },
-    { key: "about", label: c.about, href: localePath(locale, "about") },
-    { key: "contact", label: c.contact, href: localePath(locale, "contact") },
-  ];
-
-  return (
-    <header className="site-header">
-      <a className="brand" href={localePath(locale)} aria-label="Aviva大双">
-        Aviva大双
-      </a>
-      <nav className="desktop-nav" aria-label={locale === "zh" ? "主导航" : "Primary navigation"}>
-        <a
-          className="nav-link"
-          href={localePath(locale)}
-          aria-current={current === "" ? "page" : undefined}
-        >
-          {c.home}
-        </a>
-        {items.map((item) => (
-          <a
-            className="nav-link"
-            href={item.href}
-            key={item.key}
-            aria-current={current === item.key ? "page" : undefined}
-          >
-            {item.label}
-          </a>
-        ))}
-        <a className="nav-link" href={languagePath(locale, path)} lang={locale === "zh" ? "en" : "zh-CN"}>
-          {c.language}
-        </a>
-        <a className="outline-cta" href={localePath(locale, "contact")}>
-          {copy[locale].footer.cta}
-        </a>
-      </nav>
-      <details className="mobile-nav">
-        <summary>{c.menu}</summary>
-        <nav className="mobile-panel" aria-label={locale === "zh" ? "移动导航" : "Mobile navigation"}>
-          <a href={localePath(locale)} aria-current={current === "" ? "page" : undefined}>
-            {c.home}
-          </a>
-          {items.map((item) => (
-            <a href={item.href} key={item.key}>
-              {item.label}
-            </a>
-          ))}
-          <a href={languagePath(locale, path)} lang={locale === "zh" ? "en" : "zh-CN"}>
-            {c.language}
-          </a>
-        </nav>
-      </details>
-    </header>
-  );
-}
-
-function Footer({ locale, home = false }: { locale: Locale; home?: boolean }) {
-  const c = copy[locale].footer;
-  return (
-    <footer className={`site-footer ${home ? "site-footer-home" : ""}`}>
-      <div className="site-footer-inner">
-        <div className="footer-prompt">
-          <div>
-            <h2>{c.title}</h2>
-            {home && (
-              <p className="footer-intro">
-                {locale === "zh"
-                  ? "从一个想法开始，把它变成被记住的画面。"
-                  : "Start with an idea, then turn it into something memorable."}
-              </p>
-            )}
-          </div>
-          <a className={home ? "solid-cta" : "outline-cta"} href={localePath(locale, "contact")}>
-            {c.cta} <span aria-hidden="true">↗</span>
-          </a>
-        </div>
-        <div className="footer-bottom">
-          <p>© {new Date().getFullYear()} Aviva大双</p>
-          <div className="footer-socials">
-            {home ? (
-              <a className="footer-email" href="mailto:avivaluojing@163.com">
-                avivaluojing@163.com
-              </a>
-            ) : (
-              <p>{c.note}</p>
-            )}
-            <a
-              className="social-link social-link-light"
-              href="https://xhslink.com/m/7SoyMlHCsdd"
-              target="_blank"
-              rel="noreferrer"
-              aria-label={locale === "zh" ? "访问 Aviva大双的小红书" : "Visit Aviva Dashuang on Xiaohongshu"}
-              title={locale === "zh" ? "小红书" : "Xiaohongshu"}
-            >
-              <SiXiaohongshu aria-hidden="true" />
-            </a>
-            <a
-              className="social-link social-link-light"
-              href="https://www.instagram.com/jingluo_/"
-              target="_blank"
-              rel="noreferrer"
-              aria-label={locale === "zh" ? "访问 Aviva大双的 Instagram" : "Visit Aviva Dashuang on Instagram"}
-              title="Instagram"
-            >
-              <SiInstagram aria-hidden="true" />
-            </a>
-          </div>
-          <a className="text-link" href={localePath(locale, "privacy")}>
-            {c.privacy}
-          </a>
-        </div>
-      </div>
-    </footer>
-  );
-}
+import { PageShell, localePath } from "./site-shell";
 
 function WorkCard({ project, locale, index }: { project: Project; locale: Locale; index: number }) {
   const cover = project.cover;
@@ -261,17 +127,11 @@ function Home({ locale }: { locale: Locale }) {
 
       <section className="services home-services" id="services">
         <div className="services-list">
-          {c.services.items.map(([title, body]) => (
+          {c.services.items.map(({ title, translation, body }) => (
             <div className="service-row" key={title}>
               <h3>{title}</h3>
               <p className="service-en" lang={locale === "zh" ? "en" : "zh-CN"}>
-                {locale === "zh"
-                  ? title === "品牌插画系统"
-                    ? "Brand Illustration"
-                    : title === "包装与餐饮视觉"
-                      ? "Packaging & Food Visuals"
-                      : "Illustration & Objects"
-                  : ""}
+                {translation}
               </p>
               <p>{body}</p>
             </div>
@@ -538,37 +398,32 @@ function Privacy({ locale }: { locale: Locale }) {
   );
 }
 
-export function SitePage({ path }: SitePageProps) {
-  const locale: Locale = path[0] === "en" ? "en" : "zh";
-  const route = locale === "en" ? path.slice(1) : path;
-  const key = route[0] ?? "";
-  let content: React.ReactNode;
+export function HomePage({ locale }: { locale: Locale }) {
+  return <PageShell locale={locale} path={[]}><Home locale={locale} /></PageShell>;
+}
 
-  if (key === "") content = <Home locale={locale} />;
-  else if (key === "work" && route.length === 1) content = <Work locale={locale} />;
-  else if (key === "work" && route.length === 2) {
-    const project = projects.find((item) => item.slug === route[1]);
-    if (!project) {
-      const legacyProject = projects.find((item) => item.legacySlugs?.includes(route[1]));
-      if (legacyProject) redirect(localePath(locale, `work/${legacyProject.slug}`));
-      notFound();
-    }
-    content = <ProjectDetail locale={locale} project={project} />;
-  } else if (key === "about" && route.length === 1) content = <About locale={locale} />;
-  else if (key === "contact" && route.length === 1) content = <Contact locale={locale} />;
-  else if (key === "privacy" && route.length === 1) content = <Privacy locale={locale} />;
-  else notFound();
+export function WorkPage({ locale }: { locale: Locale }) {
+  return <PageShell locale={locale} path={["work"]}><Work locale={locale} /></PageShell>;
+}
 
+export function ProjectPage({ locale, project }: { locale: Locale; project: Project }) {
   return (
-    <>
-      <a className="skip-link" href="#main">
-        {locale === "zh" ? "跳到主要内容" : "Skip to main content"}
-      </a>
-      <Header locale={locale} path={route} />
-      <main className="site-main" id="main">
-        {content}
-      </main>
-      <Footer locale={locale} home={key === ""} />
-    </>
+    <PageShell locale={locale} path={["work", project.slug]}>
+      <ProjectDetail locale={locale} project={project} />
+    </PageShell>
   );
 }
+
+export function AboutPage({ locale }: { locale: Locale }) {
+  return <PageShell locale={locale} path={["about"]}><About locale={locale} /></PageShell>;
+}
+
+export function ContactPage({ locale }: { locale: Locale }) {
+  return <PageShell locale={locale} path={["contact"]}><Contact locale={locale} /></PageShell>;
+}
+
+export function PrivacyPage({ locale }: { locale: Locale }) {
+  return <PageShell locale={locale} path={["privacy"]}><Privacy locale={locale} /></PageShell>;
+}
+
+export { NotFoundPage } from "./site-shell";
