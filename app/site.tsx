@@ -277,7 +277,17 @@ function About({ locale }: { locale: Locale }) {
         </div>
       </section>
       <section className="about-story">
-        <p className="about-story-label">Aviva Dashuang<br />Luo Jing</p>
+        <figure className="about-portrait">
+          <img
+            src="/images/about/aviva-paris-portrait.webp"
+            width="1440"
+            height="1800"
+            alt={locale === "zh" ? "Aviva大双站在河畔桥上，背景为城市建筑" : "Aviva Dashuang standing on a riverside bridge with city architecture behind her"}
+            loading="lazy"
+            draggable={false}
+          />
+          <figcaption>Aviva Dashuang<br />Luo Jing</figcaption>
+        </figure>
         <div className="about-story-copy">
           <article>
             <p className="eyebrow">{locale === "zh" ? "创作与生活" : "Practice & life"}</p>

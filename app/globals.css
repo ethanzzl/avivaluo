@@ -853,8 +853,20 @@ summary {
   border-top: 1px solid var(--line);
 }
 
-.about-story-label {
+.about-portrait {
   margin: 0;
+}
+
+.about-portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.about-portrait figcaption {
+  margin-top: 14px;
   color: var(--accent-dark);
   font-size: 0.8rem;
   line-height: 1.55;
@@ -1317,6 +1329,10 @@ summary {
     grid-template-columns: 1fr;
   }
 
+  .about-portrait {
+    width: min(72vw, 480px);
+  }
+
   .about-story-copy article + article {
     padding: 46px 0 0;
     border-top: 1px solid var(--line);
@@ -1545,6 +1561,10 @@ summary {
   .privacy-content,
   .contact-panel {
     gap: 34px;
+  }
+
+  .about-portrait {
+    width: 100%;
   }
 
   .about-process ol,

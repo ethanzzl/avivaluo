@@ -114,7 +114,15 @@ test("interior pages use the unified editorial sections", async () => {
   assert.equal(aboutResponse.status, 200);
   const aboutHtml = await aboutResponse.text();
   assert.match(aboutHtml, /class="about-story"/);
+  assert.match(aboutHtml, /class="about-portrait"/);
+  assert.match(aboutHtml, /\/images\/about\/aviva-paris-portrait\.webp/);
+  assert.match(aboutHtml, /Aviva大双站在河畔桥上/);
   assert.match(aboutHtml, /class="about-process"/);
+
+  const englishAboutResponse = await render("/en/about");
+  assert.equal(englishAboutResponse.status, 200);
+  const englishAboutHtml = await englishAboutResponse.text();
+  assert.match(englishAboutHtml, /Aviva Dashuang standing on a riverside bridge/);
 
   const contactResponse = await render("/contact");
   assert.equal(contactResponse.status, 200);
