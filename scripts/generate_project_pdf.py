@@ -313,7 +313,7 @@ def build_story() -> list:
             Spacer(1, 10 * mm),
             Paragraph(
                 "正式网站：<link href=\"https://www.avivaluo.com\" color=\"#C94F3D\">www.avivaluo.com</link><br/>"
-                "版本 1.2 · 2026-07-23",
+                "版本 1.3 · 2026-07-29",
                 STYLES["cover_subtitle"],
             ),
             PageBreak(),
