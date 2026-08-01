@@ -14,7 +14,8 @@
     "typecheck": "tsc --noEmit --incremental false",
     "validate": "node scripts/validate-content.mjs",
     "images:protect": "node scripts/protect-images.mjs",
-    "images:sign": "node scripts/protect-images.mjs --sign-only"
+    "images:sign": "node scripts/protect-images.mjs --sign-only",
+    "images:about": "node scripts/prepare-about-images.mjs"
   },
   "dependencies": {
     "next": "16.2.6",

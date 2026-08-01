@@ -23,6 +23,47 @@ export type Project = {
   className?: string;
 };
 
+export const aboutTalk = {
+  year: 2022,
+  event: "Today at Apple",
+  venue: {
+    zh: "Apple 上海环贸 iapm",
+    en: "Apple Shanghai iapm",
+  },
+  eyebrow: {
+    zh: "公开分享",
+    en: "Talks & Workshops",
+  },
+  title: {
+    zh: "把品牌实践带进公开课堂。",
+    en: "Sharing brand practice in a public workshop.",
+  },
+  description: {
+    zh: "2022年，受邀参与 Today at Apple 上海环贸 iapm 设计实验室，分享 Fluffy 的品牌实践，内容涵盖品牌 IP、限定视觉系统、产品与空间应用，以及 iPad 在品牌设计与日常创作中的使用方式。",
+    en: "In 2022, Aviva was invited to present Fluffy’s brand-building practice in a Today at Apple Design Lab at Apple Shanghai iapm, covering character IP, seasonal visual systems, product and spatial applications, and an iPad-based creative workflow.",
+  },
+  images: [
+    {
+      src: "/images/about/today-at-apple-shanghai-iapm-presentation.webp",
+      width: 1707,
+      height: 1280,
+      alt: {
+        zh: "Aviva大双在 Apple 上海环贸 iapm 的 Today at Apple 设计实验室向现场观众分享 Fluffy 品牌设计",
+        en: "Aviva Dashuang presenting Fluffy’s brand design to an audience at a Today at Apple Design Lab in Apple Shanghai iapm",
+      },
+    },
+    {
+      src: "/images/about/today-at-apple-fluffy-workflow.webp",
+      width: 1800,
+      height: 1012,
+      alt: {
+        zh: "Today at Apple 现场屏幕展示使用 iPad 创作并应用于 Fluffy 品牌移动空间的过程",
+        en: "A Today at Apple presentation showing an iPad illustration workflow applied to a Fluffy mobile brand space",
+      },
+    },
+  ],
+} as const;
+
 function artwork(
   project: string,
   id: string,

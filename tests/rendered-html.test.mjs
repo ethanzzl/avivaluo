@@ -117,12 +117,18 @@ test("interior pages use the unified editorial sections", async () => {
   assert.match(aboutHtml, /class="about-portrait"/);
   assert.match(aboutHtml, /\/images\/about\/aviva-paris-portrait\.webp/);
   assert.match(aboutHtml, /Aviva大双站在河畔桥上/);
+  assert.match(aboutHtml, /class="about-talk"/);
+  assert.match(aboutHtml, /2022年，受邀参与 Today at Apple 上海环贸 iapm 设计实验室/);
+  assert.match(aboutHtml, /today-at-apple-shanghai-iapm-presentation\.webp/);
+  assert.match(aboutHtml, /today-at-apple-fluffy-workflow\.webp/);
   assert.match(aboutHtml, /class="about-process"/);
 
   const englishAboutResponse = await render("/en/about");
   assert.equal(englishAboutResponse.status, 200);
   const englishAboutHtml = await englishAboutResponse.text();
   assert.match(englishAboutHtml, /Aviva Dashuang standing on a riverside bridge/);
+  assert.match(englishAboutHtml, /Talks &amp; Workshops/);
+  assert.match(englishAboutHtml, /Today at Apple Design Lab at Apple Shanghai iapm/);
 
   const contactResponse = await render("/contact");
   assert.equal(contactResponse.status, 200);
@@ -173,7 +179,7 @@ test("robots and sitemap publish only the canonical production domain", async ()
   assert.match(sitemap, /https:\/\/www\.avivaluo\.com\/en\/work\/gegelato-brand/);
   assert.match(sitemap, /hreflang="zh-CN"/);
   assert.match(sitemap, /hreflang="en"/);
-  assert.match(sitemap, /<lastmod>2026-07-22T16:00:00\.000Z<\/lastmod>/);
+  assert.match(sitemap, /<lastmod>2026-07-31T16:00:00\.000Z<\/lastmod>/);
   assert.doesNotMatch(sitemap, /127\.0\.0\.1/);
 });
 

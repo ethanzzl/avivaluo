@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element -- source artwork uses prepared static derivatives */
 import { SiInstagram, SiXiaohongshu } from "react-icons/si";
-import { copy, type Locale, type Project, projects } from "./site-data";
+import { aboutTalk, copy, type Locale, type Project, projects } from "./site-data";
 import { PageShell, localePath } from "./site-shell";
 
 function WorkCard({ project, locale, index }: { project: Project; locale: Locale; index: number }) {
@@ -306,6 +306,32 @@ function About({ locale }: { locale: Locale }) {
               ? "2023年，她曾现场向 Tim Cook 介绍 Fluffy 的创意，以及 iPad 在品牌设计与日常创作中的使用方式。"
               : "In 2023, she shared Fluffy’s creative approach with Tim Cook and demonstrated how the iPad supported the brand’s design and everyday creative work."}</p>
           </article>
+        </div>
+      </section>
+      <section className="about-talk">
+        <div className="about-talk-copy">
+          <p className="eyebrow">{aboutTalk.eyebrow[locale]}</p>
+          <h2>{aboutTalk.title[locale]}</h2>
+          <p>{aboutTalk.description[locale]}</p>
+          <p className="about-talk-meta">
+            <span>{aboutTalk.year}</span>
+            <span>{aboutTalk.event}</span>
+            <span>{aboutTalk.venue[locale]}</span>
+          </p>
+        </div>
+        <div className="about-talk-images">
+          {aboutTalk.images.map((image, index) => (
+            <figure className={index === 0 ? "about-talk-main" : "about-talk-support"} key={image.src}>
+              <img
+                src={image.src}
+                width={image.width}
+                height={image.height}
+                alt={image.alt[locale]}
+                loading="lazy"
+                draggable={false}
+              />
+            </figure>
+          ))}
         </div>
       </section>
       <section className="about-process">

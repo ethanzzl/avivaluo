@@ -45,8 +45,9 @@ npm test
 - 页面内容位于 `app/site.tsx`，导航与页脚位于 `app/site-shell.tsx`。
 - 固定域名和 SEO 规则位于 `app/site-config.ts`、`app/site-metadata.ts`、`app/robots.ts` 与 `app/sitemap.ts`。
 - 全局样式集中在 `app/globals.css`。
-- 网站公开图片位于 `public/images/projects/protected/`；较大来源文件保存在不对外提供 URL 的 `source-assets/projects/`。
+- 网站公开图片位于 `public/images/`；较大来源文件保存在不对外提供 URL 的 `source-assets/`。
 - 8 张容易脱离项目语境被直接使用的完整插画带有轻量 `© Aviva Dashuang` 署名；配置集中在 `scripts/protect-images.mjs`，可用 `npm run images:sign` 单独重新生成。
+- 关于页面的个人照片与 Today at Apple 现场资料保存在 `source-assets/about/`，可用 `npm run images:about` 重新生成网页衍生图。
 - 新项目发布前必须确认标题、中英文内容、图片 alt、版权和公开授权。
 - 不显示微信和电话；联系入口为邮箱、小红书和 Instagram。
 

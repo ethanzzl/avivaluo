@@ -1,8 +1,8 @@
 # Aviva大双网站项目文档
 
 > 开发、上线与维护手册  
-> 版本：1.3
-> 更新日期：2026-07-29
+> 版本：1.4
+> 更新日期：2026-08-01
 > 正式网站：[www.avivaluo.com](https://www.avivaluo.com)  
 > 代码仓库：[github.com/ethanzzl/avivaluo](https://github.com/ethanzzl/avivaluo)
 
@@ -37,6 +37,7 @@ Aviva大双网站是中英双语的插画师作品集和商业合作入口。商
 - 图片已经转换为适合网页使用的衍生文件，原始母版不被覆盖。
 - 正式域名已经通过 Vercel 上线。
 - GitHub 保存完整版本历史，旧网站另存于 `archive/old-site-2026-07-19` 分支。
+- 关于页面已加入 2022 年 Today at Apple 上海环贸 iapm 设计实验室的公开分享记录。
 
 ### 2.3 已确认的基础信息
 
@@ -45,6 +46,7 @@ Aviva大双网站是中英双语的插画师作品集和商业合作入口。商
 - 身份：插画设计师、创意工作室主理人
 - 经历：曾在法国学习生活八年，现工作与生活于上海和天津
 - 品牌角色：Fluffy、Gegelato、丛欢酒饭及丛欢意大利小酒馆的联合创始人
+- 公开分享：2022 年受邀参与 Today at Apple 上海环贸 iapm 设计实验室，分享 Fluffy 的品牌实践
 - 邮箱：`avivaluojing@163.com`
 - 小红书：<https://xhslink.com/m/7SoyMlHCsdd>
 - Instagram：<https://www.instagram.com/jingluo_/>
@@ -84,6 +86,8 @@ Aviva大双网站是中英双语的插画师作品集和商业合作入口。商
 - 联系方式保留邮箱、小红书和 Instagram，取消微信和电话。
 
 项目始终遵循“不编造客户、年份、成果、评价和数据”的原则。
+
+关于页面的公开分享仅使用已确认的 2022 年上海环贸 iapm 线下现场资料。11 月 9 日“在线创意空间”海报属于相关线上场次，不与线下照片混用；5 秒活动预告视频作为档案保留，不进入网站。
 
 ### 3.4 素材整理与项目分组
 
@@ -150,6 +154,9 @@ Aviva大双网站是中英双语的插画师作品集和商业合作入口。商
 | `app/globals.css` | 全局视觉、排版和响应式规则 |
 | `public/images/projects/protected/` | 限制分辨率并写入版权元数据的网站公开作品图 |
 | `source-assets/projects/` | 不通过网站公开 URL 提供的较大来源文件 |
+| `public/images/about/` | 关于页面使用的压缩 WebP 人物与活动图片 |
+| `source-assets/about/` | 关于页面人物照与活动现场原始照片归档 |
+| `scripts/prepare-about-images.mjs` | 重新生成关于页面网页衍生图并写入版权元数据 |
 | `scripts/validate-content.mjs` | 构建前验证双语、slug、版权、图片文件与比例 |
 | `tests/rendered-html.test.mjs` | 正式构建后的内容、路由、SEO 与图片测试 |
 | `.github/workflows/quality.yml` | GitHub 自动质量检查 |
@@ -169,6 +176,8 @@ Aviva大双网站是中英双语的插画师作品集和商业合作入口。商
 当前署名图包括：圣诞故事主图、阅读人物与黑猫、雨天卧室、巴黎梳妆场景、巴黎餐桌场景、早餐水粉、橙树插画和白色郁金香水粉。署名根据画面明暗放在左下或右下，不覆盖主体、品牌文字和原有签名。
 
 这些措施用于降低未经授权直接取用的便利度，不能完全阻止截图或通过开发者工具保存。替换或增加作品时，先将来源图放入 `source-assets/projects/`，再运行 `npm run images:protect` 生成公开衍生图；如只需重新生成已配置的 8 张署名图，可运行 `npm run images:sign`。不要直接把母版放入 `public/`。
+
+关于页面的照片同样采用“原始文件与公开衍生图分离”的方式：原始照片保存在 `source-assets/about/`，网站只引用 `public/images/about/` 中的 WebP 文件。替换或重新处理这些照片时运行 `npm run images:about`。
 
 ### 3.8 验证与发布
 
