@@ -179,7 +179,7 @@ test("robots and sitemap publish only the canonical production domain", async ()
   assert.match(sitemap, /https:\/\/www\.avivaluo\.com\/en\/work\/gegelato-brand/);
   assert.match(sitemap, /hreflang="zh-CN"/);
   assert.match(sitemap, /hreflang="en"/);
-  assert.match(sitemap, /<lastmod>2026-07-31T16:00:00\.000Z<\/lastmod>/);
+  assert.match(sitemap, /<lastmod>2026-08-10T16:00:00\.000Z<\/lastmod>/);
   assert.doesNotMatch(sitemap, /127\.0\.0\.1/);
 });
 
@@ -222,6 +222,18 @@ test("Instagram selections strengthen the bilingual lifestyle and seasonal proje
   assert.match(seasonalHtml, /Seasonal Character Stories/);
   assert.match(seasonalHtml, /instagram-lantern-festival\.webp/);
   assert.match(seasonalHtml, /instagram-christmas-eve\.webp/);
+});
+
+test("portrait collection uses the revised cover and character studies", async () => {
+  const response = await render("/work/portraits-family");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /portraits-family-a37\.webp/);
+  assert.match(html, /portraits-family-a33\.webp/);
+  assert.doesNotMatch(html, /portraits-family-a54\.webp/);
+
+  const removedArtwork = await render("/images/projects/protected/curated/portraits-family-a54.webp");
+  assert.equal(removedArtwork.status, 404);
 });
 
 test("contact page uses the canonical Instagram profile URL", async () => {
