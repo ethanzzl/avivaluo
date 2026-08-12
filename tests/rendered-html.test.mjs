@@ -66,6 +66,17 @@ test("server-renders the finished portfolio homepage", async () => {
   assert.doesNotMatch(html, /codex-preview|Building your site|react-loading-skeleton/i);
 });
 
+test("homepage serves responsive optimized artwork to mobile browsers", async () => {
+  const response = await render("/");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+
+  assert.match(html, /srcSet="[^\"]*\/_next\/image\?url=%2Fimages%2Fprojects%2Fprotected%2Fcurated%2Fparis-printemps-a14\.webp/);
+  assert.match(html, /sizes="\(max-width: 720px\) 100vw, 70vw"/);
+  assert.match(html, /imageSrcSet="[^\"]*w=480&amp;q=75 480w/);
+  assert.doesNotMatch(html, /<img[^>]+src="\/images\/projects\/protected\//);
+});
+
 test("desktop navigation includes a current Home link", async () => {
   const response = await render("/");
   assert.equal(response.status, 200);

@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element -- source artwork uses prepared static derivatives */
+import Image from "next/image";
 import { SiInstagram, SiXiaohongshu } from "react-icons/si";
 import { aboutTalk, copy, type Locale, type Project, projects } from "./site-data";
 import { PageShell, localePath } from "./site-shell";
@@ -8,11 +8,12 @@ function WorkCard({ project, locale, index }: { project: Project; locale: Locale
   return (
     <a className={`work-card ${project.className ?? ""}`} href={localePath(locale, `work/${project.slug}`)}>
       <div className="work-card-image">
-        <img
+        <Image
           src={cover.src}
           width={cover.width}
           height={cover.height}
           alt={cover.alt[locale]}
+          sizes="(max-width: 720px) 100vw, (max-width: 1100px) 56vw, 50vw"
           loading="lazy"
           draggable={false}
         />
@@ -86,12 +87,13 @@ function Home({ locale }: { locale: Locale }) {
             href={localePath(locale, `work/${heroProject.slug}`)}
             aria-label={heroProject.title[locale]}
           >
-            <img
+            <Image
               src={heroCover.src}
               width={heroCover.width}
               height={heroCover.height}
               alt={heroCover.alt[locale]}
-              fetchPriority="high"
+              sizes="(max-width: 720px) 100vw, 70vw"
+              preload
               draggable={false}
             />
           </a>
@@ -112,11 +114,12 @@ function Home({ locale }: { locale: Locale }) {
               </a>
             </div>
             <a className="home-feature-art" href={localePath(locale, `work/${project.slug}`)}>
-              <img
+              <Image
                 src={project.cover.src}
                 width={project.cover.width}
                 height={project.cover.height}
                 alt={project.cover.alt[locale]}
+                sizes="(max-width: 720px) 100vw, 64vw"
                 loading="lazy"
                 draggable={false}
               />
@@ -207,12 +210,13 @@ function ProjectDetail({ locale, project }: { locale: Locale; project: Project }
         </dl>
       </section>
       <div className="detail-hero">
-        <img
+        <Image
           src={cover.src}
           width={cover.width}
           height={cover.height}
           alt={cover.alt[locale]}
-          fetchPriority="high"
+          sizes="100vw"
+          preload
           draggable={false}
         />
       </div>
@@ -239,11 +243,12 @@ function ProjectDetail({ locale, project }: { locale: Locale; project: Project }
                   : "gallery-square";
             return (
               <div className={orientation} key={image.src}>
-                <img
+                <Image
                   src={image.src}
                   width={image.width}
                   height={image.height}
                   alt={image.alt[locale]}
+                  sizes={orientation === "gallery-wide" ? "100vw" : "(max-width: 720px) 100vw, 62vw"}
                   loading="lazy"
                   draggable={false}
                 />
@@ -278,11 +283,12 @@ function About({ locale }: { locale: Locale }) {
       </section>
       <section className="about-story">
         <figure className="about-portrait">
-          <img
+          <Image
             src="/images/about/aviva-paris-portrait.webp"
             width="1440"
             height="1800"
             alt={locale === "zh" ? "Aviva大双站在河畔桥上，背景为城市建筑" : "Aviva Dashuang standing on a riverside bridge with city architecture behind her"}
+            sizes="(max-width: 720px) 100vw, 36vw"
             loading="lazy"
             draggable={false}
           />
@@ -322,11 +328,12 @@ function About({ locale }: { locale: Locale }) {
         <div className="about-talk-images">
           {aboutTalk.images.map((image, index) => (
             <figure className={index === 0 ? "about-talk-main" : "about-talk-support"} key={image.src}>
-              <img
+              <Image
                 src={image.src}
                 width={image.width}
                 height={image.height}
                 alt={image.alt[locale]}
+                sizes={index === 0 ? "(max-width: 720px) 100vw, 66vw" : "(max-width: 720px) 100vw, 32vw"}
                 loading="lazy"
                 draggable={false}
               />
