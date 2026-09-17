@@ -48,7 +48,7 @@ export function StyleMenuPage({ locale }: { locale: Locale }) {
 
         <section className="style-portrait" aria-labelledby="style-portrait-title">
           <div className="style-portrait-copy">
-            <p className="style-menu-index">01-A / {zh ? "重点入口" : "Featured"}</p>
+            <p className="style-menu-index">{zh ? "特别专题 / 顾客肖像" : "Special feature / Personal Portraits"}</p>
             <h2 id="style-portrait-title">{zh ? "顾客肖像" : "Personal Portraits"}</h2>
             <p className="style-portrait-subtitle">A portrait that still feels like you</p>
             <p>{zh ? "画你、画你们，或画想留住的人。以照片中的真实特征为起点，用大双的人物语言重新组织姿态、表情与情绪。" : "A portrait of you, your loved ones, or someone you want to remember. Real features are the starting point; gesture, expression, and feeling make the image personal."}</p>
@@ -60,7 +60,7 @@ export function StyleMenuPage({ locale }: { locale: Locale }) {
 
         <section className="style-directions" aria-labelledby="style-directions-title">
           <div className="style-directions-heading">
-            <h2 id="style-directions-title">{zh ? "更多创作方向" : "More ways to tell your story"}</h2>
+            <h2 id="style-directions-title">{zh ? "四种创作方向" : "Four creative directions"}</h2>
             <p>{zh ? "顾客肖像是“纸上观察”的专项应用。每个项目都会重新设计。" : "Personal Portraits is a focused application of Paper Observation. Every project is designed anew."}</p>
           </div>
           <div className="style-directions-grid">

@@ -82,6 +82,9 @@ test("style menu is reachable from both homepages and keeps the locale", async (
     assert.match(html, /Night Metaphor/);
     assert.match(html, new RegExp(`href="${switchTo}"`));
     assert.match(html, /href="(?:\/en)?\/contact"/);
+    assert.match(html, new RegExp(home === "/" ? "特别专题 / 顾客肖像" : "Special feature / Personal Portraits"));
+    assert.match(html, new RegExp(home === "/" ? "四种创作方向" : "Four creative directions"));
+    assert.doesNotMatch(html, new RegExp(home === "/" ? "有一个想一起完成的项目" : "Have a project in mind"));
   }
 });
 

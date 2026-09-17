@@ -56,12 +56,12 @@ function Header({ locale, path }: { locale: Locale; path: string[] }) {
   );
 }
 
-function Footer({ locale, home = false }: { locale: Locale; home?: boolean }) {
+function Footer({ locale, home = false, showPrompt = true }: { locale: Locale; home?: boolean; showPrompt?: boolean }) {
   const c = copy[locale].footer;
   return (
-    <footer className={`site-footer ${home ? "site-footer-home" : ""}`}>
+    <footer className={`site-footer${home ? " site-footer-home" : ""}${showPrompt ? "" : " site-footer-compact"}`}>
       <div className="site-footer-inner">
-        <div className="footer-prompt">
+        {showPrompt && <div className="footer-prompt">
           <div>
             <h2>{c.title}</h2>
             {home && (
@@ -75,7 +75,7 @@ function Footer({ locale, home = false }: { locale: Locale; home?: boolean }) {
           <a className={home ? "solid-cta" : "outline-cta"} href={localePath(locale, "contact")}>
             {c.cta} <span aria-hidden="true">↗</span>
           </a>
-        </div>
+        </div>}
         <div className="footer-bottom">
           <p>© {new Date().getFullYear()} Aviva大双</p>
           <div className="footer-socials">
@@ -126,7 +126,7 @@ export function PageShell({
       <a className="skip-link" href="#main">{locale === "zh" ? "跳到主要内容" : "Skip to main content"}</a>
       <Header locale={locale} path={path} />
       <main className="site-main" id="main">{children}</main>
-      <Footer locale={locale} home={(path[0] ?? "") === ""} />
+      <Footer locale={locale} home={(path[0] ?? "") === ""} showPrompt={path[0] !== "styles"} />
     </>
   );
 }

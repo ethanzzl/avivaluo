@@ -1138,6 +1138,11 @@ summary {
   border-top: 1px solid var(--line);
 }
 
+.site-footer-compact {
+  padding-top: 0;
+  border-top: 0;
+}
+
 .footer-prompt {
   display: flex;
   justify-content: space-between;
