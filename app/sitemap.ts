@@ -3,7 +3,7 @@ import { projects } from "./site-data";
 import { localizedPath } from "./site-metadata";
 import { CONTENT_LAST_MODIFIED, SITE_URL } from "./site-config";
 
-const staticPaths = ["", "work", "about", "contact", "privacy"];
+const staticPaths = ["", "work", "styles", "about", "contact", "privacy"];
 
 function absolute(path: string) {
   return new URL(path, SITE_URL).toString();

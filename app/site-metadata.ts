@@ -10,6 +10,7 @@ const descriptions: Record<Locale, string> = {
 const pageTitles = {
   home: { zh: "Aviva大双｜插画创作与品牌视觉", en: "Aviva Dashuang｜Illustration & Brand Visuals" },
   work: { zh: "作品", en: "Work" },
+  styles: { zh: "插画风格与顾客肖像", en: "Illustration Styles & Personal Portraits" },
   about: { zh: "关于", en: "About" },
   contact: { zh: "发起合作", en: "Start a Project" },
   privacy: { zh: "隐私说明", en: "Privacy" },
@@ -75,7 +76,11 @@ export function layoutMetadata(locale: Locale): Metadata {
 
 export function pageMetadata(locale: Locale, page: PageKey): Metadata {
   const title = pageTitles[page][locale];
-  const description = page === "home"
+  const description = page === "styles"
+    ? locale === "zh"
+      ? "了解 Aviva大双的顾客肖像与四种插画创作方向，找到适合你故事的表达方式。"
+      : "Explore Aviva Dashuang's personal portraits and four illustration approaches for your story."
+    : page === "home"
     ? descriptions[locale]
     : locale === "zh"
       ? "Aviva大双插画作品与商业合作网站。"

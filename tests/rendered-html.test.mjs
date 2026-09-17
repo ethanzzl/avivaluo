@@ -66,6 +66,25 @@ test("server-renders the finished portfolio homepage", async () => {
   assert.doesNotMatch(html, /codex-preview|Building your site|react-loading-skeleton/i);
 });
 
+test("style menu is reachable from both homepages and keeps the locale", async () => {
+  for (const [home, styles, label, switchTo] of [
+    ["/", "/styles", "顾客肖像", "/en/styles"],
+    ["/en", "/en/styles", "Personal Portraits", "/styles"],
+  ]) {
+    const homeResponse = await render(home);
+    assert.equal(homeResponse.status, 200);
+    assert.match(await homeResponse.text(), new RegExp(`href="${styles}"`));
+
+    const stylesResponse = await render(styles);
+    assert.equal(stylesResponse.status, 200);
+    const html = await stylesResponse.text();
+    assert.match(html, new RegExp(label));
+    assert.match(html, /Night Metaphor/);
+    assert.match(html, new RegExp(`href="${switchTo}"`));
+    assert.match(html, /href="(?:\/en)?\/contact"/);
+  }
+});
+
 test("homepage serves responsive optimized artwork to mobile browsers", async () => {
   const response = await render("/");
   assert.equal(response.status, 200);

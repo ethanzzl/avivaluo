@@ -140,6 +140,10 @@ function Home({ locale }: { locale: Locale }) {
             </div>
           ))}
         </div>
+        <a className="style-menu-home-link" href={localePath(locale, "styles")}>
+          <span>{locale === "zh" ? "还不确定从哪种画面开始？" : "Not sure where to begin?"}</span>
+          <strong>{locale === "zh" ? "浏览插画风格与顾客肖像" : "Explore styles and personal portraits"} <span aria-hidden="true">↗</span></strong>
+        </a>
       </section>
     </>
   );
