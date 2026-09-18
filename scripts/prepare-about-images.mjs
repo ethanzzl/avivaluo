@@ -14,6 +14,10 @@ const images = [
     source: "today-at-apple-fluffy-workflow-original.jpg",
     output: "today-at-apple-fluffy-workflow.webp",
   },
+  {
+    source: "aviva-tim-cook-fluffy-2023-original.png",
+    output: "aviva-tim-cook-fluffy-2023.webp",
+  },
 ];
 
 for (const image of images) {

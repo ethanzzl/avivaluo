@@ -54,13 +54,15 @@ test("server-renders the finished portfolio homepage", async () => {
   const html = await response.text();
   assert.match(html, /<html lang="zh-CN">/);
   assert.match(html, /Aviva大双/);
-  assert.match(html, /为品牌画出被记住的温度/);
+  assert.match(html, /<span>为品牌画出<\/span><span>被记住的温度。<\/span>/);
+  assert.match(html, /class="editorial-project editorial-project-hero"[^>]*><strong>餐饮与空间插画<\/strong>/);
   assert.match(html, /Gegelato 品牌视觉/);
-  assert.match(html, /巴黎书店与城市插画/);
   assert.match(html, /插画周边与手作/);
-  assert.match(html, /让品牌被看见/);
-  assert.match(html, /把插画带进/);
-  assert.match(html, /class="home-feature home-feature-paper"/);
+  assert.match(html, /冰激凌品牌里的角色与店铺/);
+  assert.match(html, /把插画放进包装、菜单、杯子、店铺和真实使用场景/);
+  assert.match(html, /如果你还不确定从哪里开始，也没关系/);
+  assert.match(html, /class="editorial-home"/);
+  assert.doesNotMatch(html, /Draw a warmer everyday|editorial-note|editorial-folio|editorial-number|service-index/);
   assert.match(html, /class="site-footer site-footer-home"/);
   assert.match(html, /avivaluojing@163\.com/);
   assert.doesNotMatch(html, /codex-preview|Building your site|react-loading-skeleton/i);
@@ -71,8 +73,8 @@ test("homepage serves responsive optimized artwork to mobile browsers", async ()
   assert.equal(response.status, 200);
   const html = await response.text();
 
-  assert.match(html, /srcSet="[^\"]*\/_next\/image\?url=%2Fimages%2Fprojects%2Fprotected%2Fcurated%2Fparis-printemps-a14\.webp/);
-  assert.match(html, /sizes="\(max-width: 720px\) 100vw, 70vw"/);
+  assert.match(html, /srcSet="[^\"]*\/_next\/image\?url=%2Fimages%2Fprojects%2Fprotected%2Fcurated%2Ffood-hospitality-a35\.webp/);
+  assert.match(html, /sizes="\(max-width: 720px\) 100vw, 62vw"/);
   assert.match(html, /imageSrcSet="[^\"]*w=480&amp;q=75 480w/);
   assert.doesNotMatch(html, /<img[^>]+src="\/images\/projects\/protected\//);
 });
@@ -82,6 +84,28 @@ test("desktop navigation includes a current Home link", async () => {
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /class="desktop-nav"[\s\S]*href="\/" aria-current="page"[\s\S]*首页/);
+});
+
+test("style menu is reachable from both homepages and keeps the locale", async () => {
+  for (const [home, styles, label, switchTo] of [
+    ["/", "/styles", "顾客肖像", "/en/styles"],
+    ["/en", "/en/styles", "Personal Portraits", "/styles"],
+  ]) {
+    const homeResponse = await render(home);
+    assert.equal(homeResponse.status, 200);
+    assert.match(await homeResponse.text(), new RegExp(`href="${styles}"`));
+
+    const stylesResponse = await render(styles);
+    assert.equal(stylesResponse.status, 200);
+    const html = await stylesResponse.text();
+    assert.match(html, new RegExp(label));
+    assert.match(html, /Night Metaphor/);
+    assert.match(html, new RegExp(`href="${switchTo}"`));
+    assert.match(html, /href="(?:\/en)?\/contact"/);
+    assert.match(html, new RegExp(home === "/" ? "特别专题 / 顾客肖像" : "Special feature / Personal Portraits"));
+    assert.match(html, new RegExp(home === "/" ? "四种创作方向" : "Four creative directions"));
+    assert.doesNotMatch(html, new RegExp(home === "/" ? "有一个想一起完成的项目" : "Have a project in mind"));
+  }
 });
 
 test("work page lists the eight curated projects", async () => {
@@ -101,6 +125,7 @@ test("work page lists the eight curated projects", async () => {
   for (const slug of slugs) {
     assert.match(html, new RegExp(`/work/${slug}`));
   }
+  assert.doesNotMatch(html, /work-card-services|work-card-heading"><span>/);
   assert.ok(html.indexOf("/work/food-hospitality") < html.indexOf("/work/illustrated-objects"));
   assert.ok(html.indexOf("/work/illustrated-objects") < html.indexOf("/work/lemon-tea-packaging"));
   assert.match(html, /class="work-card-heading"/);
@@ -125,21 +150,41 @@ test("interior pages use the unified editorial sections", async () => {
   assert.equal(aboutResponse.status, 200);
   const aboutHtml = await aboutResponse.text();
   assert.match(aboutHtml, /class="about-story"/);
+  assert.match(aboutHtml, /Aviva 大双/);
+  assert.match(aboutHtml, /插画设计师，也在做自己的品牌和小店/);
   assert.match(aboutHtml, /class="about-portrait"/);
   assert.match(aboutHtml, /\/images\/about\/aviva-paris-portrait\.webp/);
   assert.match(aboutHtml, /Aviva大双站在河畔桥上/);
+  assert.match(aboutHtml, /现在主要在上海和天津之间工作和生活/);
+  assert.match(aboutHtml, /参与创立和经营过几家餐饮与生活方式品牌/);
   assert.match(aboutHtml, /class="about-talk"/);
-  assert.match(aboutHtml, /2022年，受邀参与 Today at Apple 上海环贸 iapm 设计实验室/);
+  assert.match(aboutHtml, /2022(?:<!-- -->)? · (?:<!-- -->)?Apple 上海环贸 iapm/);
+  assert.match(aboutHtml, /分享了 Fluffy 的品牌创作/);
   assert.match(aboutHtml, /today-at-apple-shanghai-iapm-presentation\.webp/);
   assert.match(aboutHtml, /today-at-apple-fluffy-workflow\.webp/);
-  assert.match(aboutHtml, /class="about-process"/);
+  assert.match(aboutHtml, /class="about-moment"/);
+  assert.match(aboutHtml, /Fluffy · 2023/);
+  assert.match(aboutHtml, /aviva-tim-cook-fluffy-2023\.webp/);
+  assert.match(aboutHtml, /2023 年的一次交流中，我向 Tim Cook 介绍了 Fluffy，也聊了我们平时怎么用 iPad 画画/);
+  assert.match(aboutHtml, /<figcaption>Fluffy · 2023<\/figcaption>/);
+  assert.doesNotMatch(aboutHtml, /class="about-story-note"/);
+  assert.match(aboutHtml, /class="about-closing"/);
+  assert.doesNotMatch(aboutHtml, /class="about-process"/);
+  assert.match(aboutHtml, /href="\/contact"[^>]*>联系我/);
 
   const englishAboutResponse = await render("/en/about");
   assert.equal(englishAboutResponse.status, 200);
   const englishAboutHtml = await englishAboutResponse.text();
   assert.match(englishAboutHtml, /Aviva Dashuang standing on a riverside bridge/);
-  assert.match(englishAboutHtml, /Talks &amp; Workshops/);
-  assert.match(englishAboutHtml, /Today at Apple Design Lab at Apple Shanghai iapm/);
+  assert.match(englishAboutHtml, /I’m an illustrator/);
+  assert.match(englishAboutHtml, /2022(?:<!-- -->)? · (?:<!-- -->)?Apple Shanghai iapm/);
+  assert.match(englishAboutHtml, /I shared Fluffy’s creative ideas with Tim Cook/);
+  assert.match(englishAboutHtml, /Aviva Dashuang and Tim Cook standing together in front of the Fluffy food truck/);
+  assert.match(englishAboutHtml, /href="\/en\/contact"[^>]*>Get in touch/);
+
+  const momentImage = await render("/images/about/aviva-tim-cook-fluffy-2023.webp");
+  assert.equal(momentImage.status, 200);
+  assert.match(momentImage.headers.get("content-type") ?? "", /^image\/webp\b/i);
 
   const contactResponse = await render("/contact");
   assert.equal(contactResponse.status, 200);
@@ -259,14 +304,45 @@ test("project detail renders its curated gallery without internal publication no
   const response = await render("/work/gegelato-brand");
   assert.equal(response.status, 200);
   const html = await response.text();
-  assert.match(html, /联合创始人项目/);
+  assert.match(html, /Gegelato 是我参与共同创立的 Gelato 品牌/);
+  assert.match(html, /class="gegelato-services">品牌插画 · LOGO · 角色与应用/);
+  assert.match(html, /<h2>LOGO<\/h2>/);
+  assert.match(html, /<h2>在店里<\/h2>/);
+  assert.doesNotMatch(html, /项目信息|年份待补充|<h2>字标<\/h2>/);
   assert.doesNotMatch(html, /作品公开展示已确认/);
   assert.doesNotMatch(html, /缺少的客户、年份或合作信息/);
   assert.match(html, /gegelato-brand-a24\.webp/);
   assert.match(html, /gegelato-brand-a28\.webp/);
   assert.match(html, /gegelato-brand-a27\.webp/);
   assert.match(html, /gegelato-brand-a23\.webp/);
+  assert.match(html, /class="gegelato-intro"/);
+  assert.match(html, /关于这个项目/);
+  assert.match(html, /class="gegelato-gallery"/);
+  assert.match(html, /class="gegelato-wordmark"/);
+  assert.match(html, /class="gegelato-character"/);
+  assert.match(html, /class="gegelato-in-use"/);
+  assert.ok(html.indexOf('class="gegelato-wordmark"') < html.indexOf('class="gegelato-character"'));
+  assert.ok(html.indexOf('class="gegelato-character"') < html.indexOf('class="gegelato-in-use"'));
+  assert.doesNotMatch(html, /class="project-gallery"|Challenge|Strategy|Solution|KPI/);
   assert.match(html, /作品仅供浏览，未经授权不得复制、转载或用于商业用途/);
+});
+
+test("English Gegelato uses the same artwork sequence while other projects keep the shared gallery", async () => {
+  const english = await render("/en/work/gegelato-brand");
+  assert.equal(english.status, 200);
+  const englishHtml = await english.text();
+  assert.match(englishHtml, /About the project/);
+  assert.match(englishHtml, /I helped co-found Gegelato/);
+  assert.match(englishHtml, /<h2>Logo<\/h2>/);
+  assert.match(englishHtml, /Character/);
+  assert.match(englishHtml, /<h2>In the shop<\/h2>/);
+  assert.doesNotMatch(englishHtml, /Co-founder project|Project info|Date to be confirmed|Wordmark/);
+
+  const other = await render("/work/illustrated-objects");
+  assert.equal(other.status, 200);
+  const otherHtml = await other.text();
+  assert.match(otherHtml, /class="project-gallery"/);
+  assert.doesNotMatch(otherHtml, /gegelato-intro|gegelato-gallery/);
 });
 
 test("English project route uses rewritten English content", async () => {

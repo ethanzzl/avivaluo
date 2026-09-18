@@ -30,17 +30,9 @@ export const aboutTalk = {
     zh: "Apple 上海环贸 iapm",
     en: "Apple Shanghai iapm",
   },
-  eyebrow: {
-    zh: "公开分享",
-    en: "Talks & Workshops",
-  },
-  title: {
-    zh: "把品牌实践带进公开课堂。",
-    en: "Sharing brand practice in a public workshop.",
-  },
   description: {
-    zh: "2022年，受邀参与 Today at Apple 上海环贸 iapm 设计实验室，分享 Fluffy 的品牌实践，内容涵盖品牌 IP、限定视觉系统、产品与空间应用，以及 iPad 在品牌设计与日常创作中的使用方式。",
-    en: "In 2022, Aviva was invited to present Fluffy’s brand-building practice in a Today at Apple Design Lab at Apple Shanghai iapm, covering character IP, seasonal visual systems, product and spatial applications, and an iPad-based creative workflow.",
+    zh: "2022 年，我在 Apple 上海环贸 iapm 的 Today at Apple 活动中，分享了 Fluffy 的品牌创作，以及我们如何用 iPad 完成日常插画和设计。",
+    en: "In 2022, I joined a Today at Apple session at Apple Shanghai iapm to share how we create for Fluffy and use iPad in our everyday illustration and design work.",
   },
   images: [
     {
@@ -62,6 +54,27 @@ export const aboutTalk = {
       },
     },
   ],
+} as const;
+
+export const aboutFluffyMoment = {
+  heading: "Fluffy · 2023",
+  description: {
+    zh: "2023 年的一次交流中，我向 Tim Cook 介绍了 Fluffy，也聊了我们平时怎么用 iPad 画画、做设计和处理日常工作。",
+    en: "In 2023, I shared Fluffy’s creative ideas with Tim Cook and talked about how we use iPad in our everyday design work.",
+  },
+  image: {
+    src: "/images/about/aviva-tim-cook-fluffy-2023.webp",
+    width: 1448,
+    height: 1086,
+    alt: {
+      zh: "2023 年，Aviva 大双与 Tim Cook 站在 Fluffy 餐车前合影",
+      en: "Aviva Dashuang and Tim Cook standing together in front of the Fluffy food truck in 2023",
+    },
+    caption: {
+      zh: "Fluffy · 2023",
+      en: "Fluffy, 2023 — sharing our creative work and iPad process with Tim Cook.",
+    },
+  },
 } as const;
 
 function artwork(
@@ -105,12 +118,12 @@ export const projectCatalog: Project[] = [
     title: { zh: "Gegelato 品牌视觉", en: "Gegelato Brand Visuals" },
     category: { zh: "餐饮与饮品", en: "Food & Drink" },
     services: {
-      zh: "品牌插画 · 标志图形 · 应用延展",
-      en: "Brand Illustration · Lettering · Visual Extension",
+      zh: "品牌插画 · LOGO · 角色与应用",
+      en: "Brand illustration · Logo · Character & applications",
     },
     summary: {
-      zh: "围绕意式 Gelato 品牌建立轻松、亲切的视觉语言，将冰淇淋角色、字标和场景图形延展到品牌应用中。",
-      en: "A warm and approachable visual language for an Italian gelato brand, extending character illustration, lettering, and playful graphics across brand applications.",
+      zh: "Gegelato 是我参与共同创立的 Gelato 品牌。围绕品牌日常经营中的真实需求，我为它画了冰淇淋角色、LOGO 和场景图形，并把这些画慢慢带进店铺与品牌应用里。",
+      en: "I helped co-found Gegelato, an Italian gelato brand. Drawing from the everyday needs of the shop, I made its gelato character, logo, and scene illustrations, then brought them into the space and other brand uses.",
     },
     projectInfo: {
       zh: "联合创始人项目 · 年份待补充",
@@ -589,7 +602,7 @@ export const copy = {
     hero: {
       eyebrow: "插画创作与品牌视觉",
       title: "为品牌画出被记住的温度。",
-      body: "用细腻的观察和温暖的角色，把故事、情绪与风格融入品牌，让插画在日常中被看见、被记住。",
+      body: "为餐饮、饮品和生活方式品牌画角色、包装和日常里的故事。",
       link: "了解合作方向",
     },
     groups: {
@@ -605,12 +618,12 @@ export const copy = {
     },
     services: {
       eyebrow: "合作方向",
-      title: "从一幅画，到完整的品牌应用。",
-      intro: "根据品牌目标和实际使用场景，选择合适的插画语言与延展方式。",
+      title: "画在品牌里，\n也画在日常里。",
+      intro: "我会从一幅画开始，再慢慢把它带进包装、空间和小物里。",
       items: [
-        { title: "品牌插画系统", translation: "Brand Illustration", body: "品牌人物、主视觉、节日与社交传播插画。" },
-        { title: "包装与餐饮视觉", translation: "Packaging & Food Visuals", body: "包装、菜单、杯套、外带物料与空间应用。" },
-        { title: "插画周边开发", translation: "Illustration & Objects", body: "礼盒、文创、服饰、印刷品与联名产品。" },
+        { title: "品牌插画", translation: "Brand Illustration", body: "画角色、主视觉，也画品牌日常传播里的故事。" },
+        { title: "包装与餐饮视觉", translation: "Packaging & Food Visuals", body: "把插画放进包装、菜单、杯子、店铺和真实使用场景。" },
+        { title: "插画与小物", translation: "Illustration & Objects", body: "有时候，也把画变成布袋、餐盘、胸针和印刷品。" },
       ],
     },
     footer: {
@@ -649,12 +662,12 @@ export const copy = {
     },
     services: {
       eyebrow: "Services",
-      title: "From one illustration to a complete brand application.",
-      intro: "The visual language and deliverables are shaped around your brand goal and the places the work needs to live.",
+      title: "Illustration for brands and everyday life.",
+      intro: "I usually begin with a drawing, then find its place on packaging, in spaces, or on small objects.",
       items: [
-        { title: "Brand illustration systems", translation: "", body: "Characters, key visuals, seasonal campaigns, and social illustration." },
-        { title: "Packaging & food visuals", translation: "", body: "Packaging, menus, cup sleeves, takeaway materials, and spatial applications." },
-        { title: "Illustrated objects", translation: "", body: "Gift boxes, merchandise, apparel, printed matter, and collaborations." },
+        { title: "Brand illustration", translation: "", body: "Characters, key visuals, and stories for a brand's everyday communications." },
+        { title: "Packaging & food visuals", translation: "", body: "Illustration for packaging, menus, cups, shops, and the places people use them." },
+        { title: "Illustrated objects", translation: "", body: "Sometimes a drawing becomes a tote bag, plate, brooch, or print." },
       ],
     },
     footer: {
