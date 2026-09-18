@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { PiArrowRight } from "react-icons/pi";
 import { SiInstagram, SiXiaohongshu } from "react-icons/si";
 import { aboutTalk, copy, type Locale, type Project, projects } from "./site-data";
 import { PageShell, localePath } from "./site-shell";
@@ -42,96 +43,118 @@ function Home({ locale }: { locale: Locale }) {
     if (!project) throw new Error(`Missing homepage project: ${slug}`);
     return project;
   };
+  const foodHospitality = projectBySlug("food-hospitality");
   const gegelato = projectBySlug("gegelato-brand");
   const illustratedObjects = projectBySlug("illustrated-objects");
-  const parisStories = projectBySlug("paris-printemps");
-  const heroProject = parisStories;
-  const heroCover = heroProject.gallery[0] ?? heroProject.cover;
-
-  const highlights = [
-    {
-      project: gegelato,
-      eyebrow: locale === "zh" ? "餐饮与饮品" : "Food & Drink",
-      title: locale === "zh" ? "让品牌被看见，\n也被记住。" : "Make a brand visible—\nand memorable.",
-      detail:
-        locale === "zh"
-          ? "餐饮与饮品插画\n图案设计 · 场景开发"
-          : "Food & drink illustration\nMotif design · Spatial applications",
-      tone: "home-feature-paper",
-    },
-    {
-      project: illustratedObjects,
-      eyebrow: locale === "zh" ? "包装与周边" : "Packaging & Objects",
-      title: locale === "zh" ? "把插画带进\n真实生活。" : "Bring illustration\ninto everyday life.",
-      detail:
-        locale === "zh"
-          ? "包装插画 · 视觉延展\n生活物件 · 手作周边"
-          : "Packaging illustration · Visual extension\nObjects · Handmade pieces",
-      tone: "home-feature-warm",
-    },
-  ];
+  const heroProject = foodHospitality;
 
   return (
     <>
-      <section className="home-hero">
-        <div className="home-hero-copy">
-          <h1>{c.hero.title}</h1>
-          <div className="hero-rule" />
-          <p>{c.hero.body}</p>
-          <a className="text-link" href="#services">
-            {c.hero.link} <span aria-hidden="true">→</span>
-          </a>
+      <section className="editorial-home" aria-labelledby="home-title">
+        <div className="editorial-intro">
+          <p className="editorial-note" lang={locale === "zh" ? "en" : "zh-CN"}>
+            {locale === "zh" ? "Draw a warmer everyday" : "让日常更温暖"}
+          </p>
+          <div className="editorial-copy">
+            <h1 id="home-title">{c.hero.title}</h1>
+            <div className="hero-rule" />
+            <p>{c.hero.body}</p>
+            <a className="editorial-link" href="#services">
+              {c.hero.link} <PiArrowRight aria-hidden="true" />
+            </a>
+          </div>
         </div>
-        <div className="home-hero-art">
-          <a
-            href={localePath(locale, `work/${heroProject.slug}`)}
-            aria-label={heroProject.title[locale]}
-          >
-            <Image
-              src={heroCover.src}
-              width={heroCover.width}
-              height={heroCover.height}
-              alt={heroCover.alt[locale]}
-              sizes="(max-width: 720px) 100vw, 70vw"
-              preload
-              draggable={false}
-            />
-          </a>
+
+        <a
+          className="editorial-hero-art"
+          href={localePath(locale, `work/${heroProject.slug}`)}
+          aria-label={heroProject.title[locale]}
+        >
+          <Image
+            src={heroProject.cover.src}
+            width={heroProject.cover.width}
+            height={heroProject.cover.height}
+            alt={heroProject.cover.alt[locale]}
+            sizes="(max-width: 720px) 100vw, 62vw"
+            preload
+            draggable={false}
+          />
+        </a>
+
+        <a className="editorial-project editorial-project-hero" href={localePath(locale, `work/${heroProject.slug}`)}>
+          <span className="editorial-number">01</span>
+          <span className="editorial-project-rule" />
+          <strong>{heroProject.title[locale]}</strong>
+          <small>{heroProject.category[locale]}</small>
+          <span className="editorial-project-note">
+            {locale === "zh" ? "人物、餐桌与城市日常" : "People, tables, and city life"}
+          </span>
+        </a>
+
+        <a className="editorial-project editorial-project-gegelato" href={localePath(locale, `work/${gegelato.slug}`)}>
+          <span className="editorial-number">02</span>
+          <span className="editorial-project-rule" />
+          <strong>{gegelato.title[locale]}</strong>
+          <small>{gegelato.category[locale]}</small>
+          <span className="editorial-project-note">
+            {locale === "zh" ? "甜蜜灵感，进入真实品牌场景。" : "Sweet ideas for a sweeter day."}
+          </span>
+        </a>
+
+        <a className="editorial-secondary-art editorial-gegelato-art" href={localePath(locale, `work/${gegelato.slug}`)}>
+          <Image
+            src={gegelato.cover.src}
+            width={gegelato.cover.width}
+            height={gegelato.cover.height}
+            alt={gegelato.cover.alt[locale]}
+            sizes="(max-width: 720px) 100vw, 43vw"
+            loading="eager"
+            draggable={false}
+          />
+        </a>
+
+        <a className="editorial-secondary-art editorial-objects-art" href={localePath(locale, `work/${illustratedObjects.slug}`)}>
+          <Image
+            src={illustratedObjects.cover.src}
+            width={illustratedObjects.cover.width}
+            height={illustratedObjects.cover.height}
+            alt={illustratedObjects.cover.alt[locale]}
+            sizes="(max-width: 720px) 100vw, 24vw"
+            loading="lazy"
+            draggable={false}
+          />
+        </a>
+
+        <a className="editorial-project editorial-project-objects" href={localePath(locale, `work/${illustratedObjects.slug}`)}>
+          <span className="editorial-number">03</span>
+          <span className="editorial-project-rule" />
+          <strong>{illustratedObjects.title[locale]}</strong>
+          <small>{illustratedObjects.category[locale]}</small>
+          <span className="editorial-project-note">
+            {locale === "zh" ? "小物件，也能承载大感受。" : "Small objects, big feelings."}
+          </span>
+        </a>
+
+        <div className="editorial-folio" aria-hidden="true">
+          <span>AVIVA DASHUANG</span>
+          <span>DRAW / PEOPLE / FOOD / DAILY LIFE</span>
         </div>
       </section>
 
-      {highlights.map(({ project, eyebrow, title, detail, tone }) => (
-        <section className={`home-feature ${tone}`} key={project.slug}>
-          <div className="home-feature-inner">
-            <div className="home-feature-copy">
-              <p className="home-feature-eyebrow">{eyebrow}</p>
-              <h2>{title}</h2>
-              <div className="hero-rule" />
-              <p className="home-feature-project">{project.title[locale]}</p>
-              <p className="home-feature-detail">{detail}</p>
-              <a className="text-link" href={localePath(locale, `work/${project.slug}`)}>
-                {locale === "zh" ? "查看项目" : "View project"} <span aria-hidden="true">→</span>
-              </a>
-            </div>
-            <a className="home-feature-art" href={localePath(locale, `work/${project.slug}`)}>
-              <Image
-                src={project.cover.src}
-                width={project.cover.width}
-                height={project.cover.height}
-                alt={project.cover.alt[locale]}
-                sizes="(max-width: 720px) 100vw, 64vw"
-                loading="lazy"
-                draggable={false}
-              />
-            </a>
-          </div>
-        </section>
-      ))}
-
-      <section className="services home-services" id="services">
+      <section className="editorial-services services home-services" id="services">
+        <header className="editorial-services-heading">
+          <p className="eyebrow">{c.services.eyebrow}</p>
+          <h2>
+            {c.services.title.split("\n").map((line) => (
+              <span key={line}>{line}</span>
+            ))}
+          </h2>
+          <p>{c.services.intro}</p>
+        </header>
         <div className="services-list">
-          {c.services.items.map(({ title, translation, body }) => (
+          {c.services.items.map(({ title, translation, body }, index) => (
             <div className="service-row" key={title}>
+              <span className="service-index">0{index + 1}</span>
               <h3>{title}</h3>
               <p className="service-en" lang={locale === "zh" ? "en" : "zh-CN"}>
                 {translation}

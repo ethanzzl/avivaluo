@@ -605,7 +605,7 @@ export const copy = {
     },
     services: {
       eyebrow: "合作方向",
-      title: "从一幅画，到完整的品牌应用。",
+      title: "从一幅画，\n到完整的品牌应用。",
       intro: "根据品牌目标和实际使用场景，选择合适的插画语言与延展方式。",
       items: [
         { title: "品牌插画系统", translation: "Brand Illustration", body: "品牌人物、主视觉、节日与社交传播插画。" },

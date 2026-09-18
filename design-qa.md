@@ -1,64 +1,63 @@
-# Aviva大双全站设计验收报告
+# Design QA — Editorial Illustrator × Typography Interaction
 
-## 视觉基准
+## Evidence
 
-- 参考图：`/var/folders/c_/qjpq5t6s185gz5v2h36ghk_h0000gn/T/codex-clipboard-5c6f50b1-f762-42ab-aecc-456265e3f760.png`
-- 参考图尺寸：857 × 1835 像素。
-- 对比图：`/Users/zhuokai/Desktop/Personal-Web/design-qa-comparison.png`。
-- 视觉目标：暖白纸张感、克制红色点缀、大字号编辑排版、真实作品优先和清晰合作入口。
+- Source visual truth: `/Users/zhuokai/.codex/generated_images/01a08e18-d464-7130-b5ff-f4d2b88d7073/exec-93483ccd-842a-43af-b819-9ecaa2808ae3.png`
+- Typography refinement reference: `/var/folders/c_/qjpq5t6s185gz5v2h36ghk_h0000gn/T/codex-clipboard-4568ecc8-25af-48c0-b24e-a5109dec69a7.png` (2880 × 694 px).
+- Source pixels: 1486 × 1059; designed as a 1440 × 1024 desktop homepage direction.
+- Implementation: `http://localhost:4173/`
+- Implementation screenshot: browser-rendered captures from the Codex in-app browser in the current task; the browser API did not return filesystem paths.
+- CSS viewport and density: 1440 × 1024 CSS px at 1×. Additional checks: 1280 × 720 and a 464 × 674 narrow viewport for the typography refinement, plus the earlier 1024 × 900, 768 × 1024, and 360 × 844 checks.
+- State: Chinese homepage, default interaction state. The typography refinement was checked at the `#services` anchor; English homepage and expanded mobile navigation were checked separately.
 
-## 实现证据
+## Full-view comparison evidence
 
-- 首页桌面：`/Users/zhuokai/Desktop/Personal-Web/implementation-home-desktop.png`
-- 首页手机：`/Users/zhuokai/Desktop/Personal-Web/implementation-home-mobile.png`
-- 作品桌面：`/Users/zhuokai/Desktop/Personal-Web/implementation-work-desktop.png`
-- 作品手机：`/Users/zhuokai/Desktop/Personal-Web/implementation-work-mobile.png`
-- 项目详情桌面：`/Users/zhuokai/Desktop/Personal-Web/implementation-project-desktop.png`
-- 项目详情手机：`/Users/zhuokai/Desktop/Personal-Web/implementation-project-mobile.png`
-- 关于桌面：`/Users/zhuokai/Desktop/Personal-Web/implementation-about-desktop.png`
-- 关于手机：`/Users/zhuokai/Desktop/Personal-Web/implementation-about-mobile.png`
-- 联系桌面：`/Users/zhuokai/Desktop/Personal-Web/implementation-contact-desktop.png`
-- 联系手机：`/Users/zhuokai/Desktop/Personal-Web/implementation-contact-mobile.png`
-- 桌面 CSS 视口：1440 × 1024；手机 CSS 视口：390 × 844。
+The source and browser-rendered implementation were opened consecutively at the same desktop state and compared visually. The implementation preserves the selected direction's main hierarchy: narrow editorial statement column, dominant straight-edged hero artwork, right-side numbered project caption, asymmetric second project row, small italic marginal notes, warm paper background, restrained vermilion rules, and generous negative space.
 
-## 全站统一结果
+The source mock labels the café artwork as “Paris Stories”, which conflicts with the project's structured content. The implementation intentionally corrects it to “餐饮与空间插画精选 / Food & Hospitality Illustration Studies”. Project 02 uses the real Gegelato artwork and Project 03 uses the real illustrated-object photograph.
 
-- 首页保留已确认的逐幕叙事与三段重点内容。
-- 作品列表由等尺寸卡片墙改为大幅作品与说明交替的编辑式项目目录，8 个项目及顺序保持不变。
-- 项目详情使用大标题、分栏元数据、主视觉和真实比例图集，内容不被统一裁切。
-- 关于页重排为个人背景、品牌经验和四步合作流程，没有新增未经确认的事实。
-- 联系页使用大标题与三行真实联系方式，没有伪造表单、微信或电话。
-- 隐私页和 404 使用相同的字体、留白、分隔线和按钮语言；未知页面设置为不索引。
-- 内页页脚统一为暖白背景，避免从首页突然切换到大面积黑色。
+## Focused region comparison evidence
 
-## 响应式与交互检查
+- Hero: title hierarchy, left/right balance, image scale, red rule, and project 01 caption were inspected at 1440 and 1024 px.
+- Project sequence: Gegelato and illustrated-object image subjects, aspect ratios, project numbers, categories, and red rules were inspected at 1440 and 360 px.
+- Navigation: desktop navigation, CTA, 44 px mobile menu target, expanded menu, and language switch were inspected in-browser.
+- Services: section typography, four-column desktop rows, and two-column mobile reflow were inspected in the rendered page.
 
-- 已检查 360、768、1024 和 1440 像素宽度。
-- 已检查 `/work`、项目详情、`/about`、`/contact`、`/privacy`、英文作品页和 404。
-- 所有检查页面的页面宽度与视口宽度一致，没有横向溢出。
-- 手机菜单可正常展开，包含首页、作品、合作方向、关于、联系和当前路径对应的英文入口。
-- 桌面导航当前页面状态清楚；主要合作入口保持可见。
-- 浏览器控制台没有警告或错误。
-- 图片最终均可加载；首次检查作品列表时，8 张懒加载图片尚未进入视口，后续视口检查全部加载成功。
+## Required fidelity surfaces
 
-## 视觉对比
+- Fonts and typography: two-family system retained—editorial serif for display/project titles and the existing sans-serif stack for navigation/body copy. Scale, wrapping, line height, and optical weight remain readable from 360 through 1440 px. The source's handwriting is represented by restrained serif italics to avoid adding an unlicensed third font.
+- Spacing and layout rhythm: 12-column desktop composition, six-column tablet composition, and single-column mobile narrative preserve the source hierarchy without horizontal overflow. Measured document `scrollWidth` equals viewport width at 360, 768, 1024, and 1440 px.
+- Colors and visual tokens: existing paper, ink, muted line, and vermilion accent tokens match the approved site direction. No gradients, heavy shadows, glass surfaces, or rounded project cards were introduced.
+- Image quality and asset fidelity: all visible portfolio images use the existing published derivatives through `next/image`; no AI-generated replacement artwork, placeholder, CSS drawing, or custom SVG substitute is used. Crops preserve the subjects and image proportions.
+- Copy and content: Chinese and English content comes from the existing structured project data. The three project/category mappings are truthful and their links resolve to the correct detail routes.
+- Accessibility and behavior: semantic heading order, bilingual alt text, visible focus styles, reduced-motion support, keyboard-reachable links, expanded mobile navigation, and language switching were checked. Project 02 navigation resolved to `/work/gegelato-brand`.
 
-- 字体：延续系统无衬线和苹方，标题保持参考图的紧凑字距与较低字重。
-- 网格：内页沿用参考图的左侧标签、右侧主体和大面积呼吸空间，不复制首页内容结构。
-- 色彩：暖纸色、墨色、灰色正文和红色重点与参考图一致。
-- 图片：只使用 Aviva大双已确认公开的真实作品；无图库、AI 图片或代码绘图替代。
-- 转化：页面结尾和导航均保留“发起合作 / Start a Project”，联系信息均为已确认地址。
+## Comparison history
 
-## 迭代记录
+1. Initial browser pass found a P2 image-loading issue at the 1024 px viewport: the Gegelato artwork entered the first fold lazily and Next.js emitted an LCP warning.
+2. Fix: changed the Gegelato image to eager loading while retaining the hero preload.
+3. Post-fix evidence: a fresh in-app browser tab at 1440 × 1024 rendered all first-fold artwork with no console errors or warnings.
+4. Typography refinement pass found a P2 title-wrap issue in the services heading: the phrase “完整的品牌应用” was split between lines in the supplied desktop reference.
+5. Fix: stored an intentional Chinese line break in structured copy, rendered each line as a block, widened the desktop title track, moved the supporting paragraph down by 10 px on desktop, and slightly reduced the narrow-screen title scale.
+6. Post-fix evidence: fresh in-app browser captures at 1280 × 720 and 464 × 674 show “从一幅画，” and “到完整的品牌应用。” as two intact lines. The supporting paragraph remains secondary, the service rows retain their alignment, and the browser console contains no errors or warnings.
 
-1. 首页第一轮：收紧首屏与重点项目留白，放大 Gegelato，调整烛台焦点并缩短手机页面。
-2. 全站第一轮：作品页改为交替项目行；详情、关于、联系、隐私和 404 建立相同编辑语言。
-3. 全站第二轮：检查桌面和手机截图，修正中间尺寸布局、手机项目顺序和内页浅色页脚。
-4. 最终检查：完成四个断点、中文和英文代表路径、菜单、404、图片加载和控制台验证。
+## Findings
 
-## 验收结论
+- No actionable P0, P1, or P2 mismatches remain.
+- P3: the marginal annotations are typographic italics rather than a literal handwriting font. This is an intentional licensing/performance trade-off and can be revisited after a deployable handwritten typeface is approved.
 
-- 未发现 P0、P1 或 P2 问题。
-- [P3] 作品列表较长，是完整展示 8 个精选项目与保护作品比例的结果；后续如项目继续增加，可再评估分类筛选，但首版不需要。
+## Implementation checklist
+
+- [x] Correct project-to-image mapping.
+- [x] Faithful desktop editorial composition.
+- [x] Responsive layouts at 360, 768, 1024, and 1440 px.
+- [x] Chinese and English homepage states.
+- [x] Mobile navigation and project navigation.
+- [x] Browser console free of warnings and errors on the final pass.
+- [x] Type check, lint, content validation, and production build.
+
+## Follow-up polish
+
+- Evaluate a legally deployable handwritten accent face only if it improves the marginal notes without introducing a third competing type voice.
 
 final result: passed
