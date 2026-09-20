@@ -86,10 +86,10 @@ test("desktop navigation includes a current Home link", async () => {
   assert.match(html, /class="desktop-nav"[\s\S]*href="\/" aria-current="page"[\s\S]*首页/);
 });
 
-test("style menu is reachable from both homepages and keeps the locale", async () => {
+test("style cards are reachable from both homepages and keep the locale", async () => {
   for (const [home, styles, label, switchTo] of [
     ["/", "/styles", "顾客肖像", "/en/styles"],
-    ["/en", "/en/styles", "Personal Portraits", "/styles"],
+    ["/en", "/en/styles", "Customer Portrait", "/styles"],
   ]) {
     const homeResponse = await render(home);
     assert.equal(homeResponse.status, 200);
@@ -102,8 +102,14 @@ test("style menu is reachable from both homepages and keeps the locale", async (
     assert.match(html, /Night Metaphor/);
     assert.match(html, new RegExp(`href="${switchTo}"`));
     assert.match(html, /href="(?:\/en)?\/contact"/);
-    assert.match(html, new RegExp(home === "/" ? "特别专题 / 顾客肖像" : "Special feature / Personal Portraits"));
-    assert.match(html, new RegExp(home === "/" ? "四种创作方向" : "Four creative directions"));
+    assert.match(html, new RegExp(home === "/" ? "五种画面方向" : "Five visual directions"));
+    assert.match(html, /01-A/);
+    assert.match(html, /03-B/);
+    assert.match(html, /05-C/);
+    assert.match(html, /\/images\/style-menu\/cards\/04-B\.webp/);
+    assert.match(html, /\/images\/style-menu\/cards\/04-C\.webp/);
+    assert.match(html, new RegExp(`alt="${home === "/" ? "蓝色杯子与勺子组成的 Be-Wave 角色图形" : "Blue Be-Wave cup character with a spoon"}" loading="eager"`));
+    assert.doesNotMatch(html, new RegExp(home === "/" ? ">主要案例<|>辅助案例<|>边界<|>AVIVA / STYLE CARDS<|>风格卡 01—05<" : ">Supporting<|>Boundary<|>STYLE CARDS<|>Style cards 01—05<"));
     assert.doesNotMatch(html, new RegExp(home === "/" ? "有一个想一起完成的项目" : "Have a project in mind"));
   }
 });
