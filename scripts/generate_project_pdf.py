@@ -30,7 +30,7 @@ from reportlab.platypus import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "docs" / "Aviva大双网站项目文档.md"
+SOURCE = ROOT / "docs" / "project.md"
 OUTPUT = ROOT / "output" / "pdf" / "Aviva大双网站项目文档.pdf"
 
 PAPER = colors.HexColor("#FAF8F2")

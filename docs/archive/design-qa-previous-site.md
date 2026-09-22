@@ -1,26 +1,26 @@
 # Aviva大双全站设计验收报告（上一版）
 
-> 归档说明：本报告原位于项目根目录 `design-qa.md`。根目录文件现用于最新的 A+「Editorial Illustrator × Typography Interaction」首页验收，本文件保留上一版全站验收记录。
+> 归档说明：本报告原位于项目根目录 `design-qa.md`。当前验收文档已整理到 [`../design-qa.md`](../design-qa.md)，本文件保留上一版全站验收记录。
 
 ## 视觉基准
 
 - 参考图：`/var/folders/c_/qjpq5t6s185gz5v2h36ghk_h0000gn/T/codex-clipboard-5c6f50b1-f762-42ab-aecc-456265e3f760.png`
 - 参考图尺寸：857 × 1835 像素。
-- 对比图：`/Users/zhuokai/Desktop/Personal-Web/design-qa-comparison.png`。
+- 对比图：[`qa-assets/design-qa-comparison.png`](qa-assets/design-qa-comparison.png)。
 - 视觉目标：暖白纸张感、克制红色点缀、大字号编辑排版、真实作品优先和清晰合作入口。
 
 ## 实现证据
 
-- 首页桌面：`/Users/zhuokai/Desktop/Personal-Web/implementation-home-desktop.png`
-- 首页手机：`/Users/zhuokai/Desktop/Personal-Web/implementation-home-mobile.png`
-- 作品桌面：`/Users/zhuokai/Desktop/Personal-Web/implementation-work-desktop.png`
-- 作品手机：`/Users/zhuokai/Desktop/Personal-Web/implementation-work-mobile.png`
-- 项目详情桌面：`/Users/zhuokai/Desktop/Personal-Web/implementation-project-desktop.png`
-- 项目详情手机：`/Users/zhuokai/Desktop/Personal-Web/implementation-project-mobile.png`
-- 关于桌面：`/Users/zhuokai/Desktop/Personal-Web/implementation-about-desktop.png`
-- 关于手机：`/Users/zhuokai/Desktop/Personal-Web/implementation-about-mobile.png`
-- 联系桌面：`/Users/zhuokai/Desktop/Personal-Web/implementation-contact-desktop.png`
-- 联系手机：`/Users/zhuokai/Desktop/Personal-Web/implementation-contact-mobile.png`
+- 首页桌面：[`qa-assets/implementation-home-desktop.png`](qa-assets/implementation-home-desktop.png)
+- 首页手机：[`qa-assets/implementation-home-mobile.png`](qa-assets/implementation-home-mobile.png)
+- 作品桌面：[`qa-assets/implementation-work-desktop.png`](qa-assets/implementation-work-desktop.png)
+- 作品手机：[`qa-assets/implementation-work-mobile.png`](qa-assets/implementation-work-mobile.png)
+- 项目详情桌面：[`qa-assets/implementation-project-desktop.png`](qa-assets/implementation-project-desktop.png)
+- 项目详情手机：[`qa-assets/implementation-project-mobile.png`](qa-assets/implementation-project-mobile.png)
+- 关于桌面：[`qa-assets/implementation-about-desktop.png`](qa-assets/implementation-about-desktop.png)
+- 关于手机：[`qa-assets/implementation-about-mobile.png`](qa-assets/implementation-about-mobile.png)
+- 联系桌面：[`qa-assets/implementation-contact-desktop.png`](qa-assets/implementation-contact-desktop.png)
+- 联系手机：[`qa-assets/implementation-contact-mobile.png`](qa-assets/implementation-contact-mobile.png)
 - 桌面 CSS 视口：1440 × 1024；手机 CSS 视口：390 × 844。
 
 ## 全站统一结果

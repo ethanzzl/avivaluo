@@ -37,15 +37,13 @@ yarn-error.log*
 # typescript
 next-env.d.ts
 /dist/
+/build/
 /.wrangler/
+/output/
 /outputs/
 /work/
 /tmp/
 
-# local planning and visual QA artifacts
-/*.pdf
-/网站项目Brief模板.md
-/个人与企业网站开发蓝图.md
-/qa-home-desktop.png
+# local source and review artifacts retained outside the production build
 /artwork-review/
 /recovered-assets/

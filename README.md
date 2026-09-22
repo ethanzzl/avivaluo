@@ -4,7 +4,7 @@ Aviva大双的中英双语插画师作品集与商业合作网站，面向餐饮
 
 - 正式网站：https://www.avivaluo.com
 - GitHub：https://github.com/ethanzzl/avivaluo
-- 完整项目文档：[docs/Aviva大双网站项目文档.md](docs/Aviva大双网站项目文档.md)
+- 完整项目文档：[docs/project.md](docs/project.md)
 - 设计规范：[DESIGN.md](DESIGN.md)
 - 开发规则：[AGENTS.md](AGENTS.md)
 
