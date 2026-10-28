@@ -189,6 +189,10 @@ test("interior pages use the unified editorial sections", async () => {
   const englishAboutResponse = await render("/en/about");
   assert.equal(englishAboutResponse.status, 200);
   const englishAboutHtml = await englishAboutResponse.text();
+  assert.match(englishAboutHtml, /class="brand" href="\/en" aria-label="Aviva Luo"[^>]*>Aviva Luo<\/a>/);
+  assert.match(englishAboutHtml, />Chinese<\/a>/);
+  assert.match(englishAboutHtml, /including Fluffy, Gegelato, and Joyeux Bistro/);
+  assert.doesNotMatch(englishAboutHtml, /丛欢酒饭|丛欢意大利小酒馆/);
   assert.match(englishAboutHtml, /Aviva Dashuang standing on a riverside bridge/);
   assert.match(englishAboutHtml, /I’m an illustrator/);
   assert.match(englishAboutHtml, /2022(?:<!-- -->)? · (?:<!-- -->)?Apple Shanghai iapm/);
@@ -221,7 +225,8 @@ test("the English brand links home while mobile navigation stays minimal", async
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /<html lang="en">/);
-  assert.match(html, /class="brand" href="\/en" aria-label="Aviva大双"/);
+  assert.match(html, /class="brand" href="\/en" aria-label="Aviva Luo"[^>]*>Aviva Luo<\/a>/);
+  assert.match(html, />Chinese<\/a>/);
   assert.doesNotMatch(html, /class="mobile-panel"[\s\S]*>Home<|href="\/en#services"/);
 });
 

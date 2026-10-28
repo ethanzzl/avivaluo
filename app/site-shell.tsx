@@ -15,6 +15,7 @@ function languagePath(locale: Locale, path: string[]) {
 function Header({ locale, path }: { locale: Locale; path: string[] }) {
   const c = copy[locale].nav;
   const current = path[0] ?? "";
+  const brandName = locale === "zh" ? "Aviva大双" : "Aviva Luo";
   const items = [
     { key: "work", label: c.work, href: localePath(locale, "work") },
     { key: "about", label: c.about, href: localePath(locale, "about") },
@@ -23,7 +24,7 @@ function Header({ locale, path }: { locale: Locale; path: string[] }) {
 
   return (
     <header className="site-header">
-      <a className="brand" href={localePath(locale)} aria-label="Aviva大双" aria-current={current === "" ? "page" : undefined}>Aviva大双</a>
+      <a className="brand" href={localePath(locale)} aria-label={brandName} aria-current={current === "" ? "page" : undefined}>{brandName}</a>
       <nav className="desktop-nav" aria-label={locale === "zh" ? "主导航" : "Primary navigation"}>
         {items.map((item) => (
           <a
@@ -35,7 +36,7 @@ function Header({ locale, path }: { locale: Locale; path: string[] }) {
             {item.label}
           </a>
         ))}
-        <a className="nav-link" href={languagePath(locale, path)} lang={locale === "zh" ? "en" : "zh-CN"}>
+        <a className="nav-link" href={languagePath(locale, path)} lang="en" hrefLang={locale === "zh" ? "en" : "zh-CN"}>
           {c.language}
         </a>
         <a className="outline-cta" href={localePath(locale, "contact")}>{copy[locale].footer.cta}</a>
@@ -44,7 +45,7 @@ function Header({ locale, path }: { locale: Locale; path: string[] }) {
         <summary>{c.menu}</summary>
         <nav className="mobile-panel" aria-label={locale === "zh" ? "移动导航" : "Mobile navigation"}>
           {items.map((item) => <a href={item.href} key={item.key}>{item.label}</a>)}
-          <a href={languagePath(locale, path)} lang={locale === "zh" ? "en" : "zh-CN"}>{c.language}</a>
+          <a href={languagePath(locale, path)} lang="en" hrefLang={locale === "zh" ? "en" : "zh-CN"}>{c.language}</a>
         </nav>
       </details>
     </header>
@@ -78,7 +79,7 @@ function Footer({ locale, home = false, showPrompt = true }: { locale: Locale; h
           </a>
         )}
         <div className="footer-bottom">
-          <p>© {new Date().getFullYear()} Aviva大双</p>
+          <p>© {new Date().getFullYear()} {locale === "zh" ? "Aviva大双" : "Aviva Luo"}</p>
           <div className="footer-socials">
             {home ? (
               <a className="footer-email" href="mailto:avivaluojing@163.com">avivaluojing@163.com</a>
@@ -134,9 +135,10 @@ export function PageShell({
 
 export function NotFoundPage({ locale }: { locale: Locale }) {
   const home = localePath(locale);
+  const brandName = locale === "zh" ? "Aviva大双" : "Aviva Luo";
   return (
     <main className="not-found-page">
-      <a className="brand" href={home} aria-label="Aviva大双">Aviva大双</a>
+      <a className="brand" href={home} aria-label={brandName}>{brandName}</a>
       <section className="not-found-content">
         <p className="eyebrow">404 / Page not found</p>
         <h1>{locale === "zh" ? "这里还没有内容。" : "Nothing here yet."}</h1>

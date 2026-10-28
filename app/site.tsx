@@ -298,7 +298,7 @@ function About({ locale }: { locale: Locale }) {
             : "I spent eight years studying and living in France. These days, I mainly work and live between Shanghai and Tianjin. People, food, and the small details of city life often find their way into my drawings."}</p>
           <p>{locale === "zh"
             ? "除了插画项目，这些年我也参与创立和经营过几家餐饮与生活方式品牌，包括 Fluffy、Gegelato、丛欢酒饭和丛欢意大利小酒馆。这些经历让我更清楚，一幅画最后会怎样出现在包装、菜单、店铺和客人真正会接触到的东西里。"
-            : "Alongside illustration, I’ve helped start and run a few food and lifestyle brands, including Fluffy, Gegelato, 丛欢酒饭, and 丛欢意大利小酒馆. It has shown me how a drawing becomes part of a package, a menu, a shop, or something a customer actually holds."}</p>
+            : "Alongside illustration, I’ve helped start and run a few food and lifestyle brands, including Fluffy, Gegelato, and Joyeux Bistro. It has shown me how a drawing becomes part of a package, a menu, a shop, or something a customer actually holds."}</p>
         </div>
       </section>
       <section className="about-talk">

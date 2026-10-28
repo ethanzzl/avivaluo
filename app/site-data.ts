@@ -640,7 +640,7 @@ export const copy = {
       services: "Services",
       about: "About",
       contact: "Contact",
-      language: "中文",
+      language: "Chinese",
       menu: "Menu",
     },
     hero: {
