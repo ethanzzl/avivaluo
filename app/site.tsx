@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { PiArrowRight } from "react-icons/pi";
 import { SiInstagram, SiXiaohongshu } from "react-icons/si";
-import { aboutFluffyMoment, aboutTalk, copy, type Locale, type Project, projects } from "./site-data";
+import { aboutFluffyMoment, aboutTalk, type Locale, type Project, projects } from "./site-data";
 import { PageShell, localePath } from "./site-shell";
 
 function WorkCard({ project, locale }: { project: Project; locale: Locale }) {
@@ -32,113 +32,51 @@ function WorkCard({ project, locale }: { project: Project; locale: Locale }) {
 }
 
 function Home({ locale }: { locale: Locale }) {
-  const c = copy[locale];
-  const projectBySlug = (slug: string) => {
+  const homeOrder = [
+    "gegelato-brand",
+    "paris-printemps",
+    "everyday-observations",
+    "illustrated-objects",
+    "lemon-tea-packaging",
+    "portraits-family",
+    "food-hospitality",
+    "christmas-stories",
+  ];
+  const homeProjects = homeOrder.map((slug) => {
     const project = projects.find((item) => item.slug === slug);
     if (!project) throw new Error(`Missing homepage project: ${slug}`);
     return project;
-  };
-  const foodHospitality = projectBySlug("food-hospitality");
-  const gegelato = projectBySlug("gegelato-brand");
-  const illustratedObjects = projectBySlug("illustrated-objects");
-  const heroProject = foodHospitality;
+  });
 
   return (
-    <>
-      <section className="editorial-home" aria-labelledby="home-title">
-        <div className="editorial-intro">
-          <div className="editorial-copy">
-            <h1 id="home-title">
-              {locale === "zh" ? (
-                <><span>为品牌画出</span><span>被记住的温度。</span></>
-              ) : c.hero.title}
-            </h1>
-            <div className="hero-rule" />
-            <p>{c.hero.body}</p>
-            <a className="editorial-link" href="#services">
-              {c.hero.link} <PiArrowRight aria-hidden="true" />
-            </a>
-          </div>
-        </div>
-
+    <section className="home-project-wall" aria-labelledby="home-title">
+      <h1 className="sr-only" id="home-title">
+        {locale === "zh" ? "Aviva大双精选插画作品" : "Selected illustration work by Aviva Dashuang"}
+      </h1>
+      {homeProjects.map((project, index) => (
         <a
-          className="editorial-hero-art"
-          href={localePath(locale, `work/${heroProject.slug}`)}
-          aria-label={heroProject.title[locale]}
+          className="home-project-link"
+          href={localePath(locale, `work/${project.slug}`)}
+          aria-label={project.title[locale]}
+          key={project.slug}
         >
           <Image
-            src={heroProject.cover.src}
-            width={heroProject.cover.width}
-            height={heroProject.cover.height}
-            alt={heroProject.cover.alt[locale]}
-            sizes="(max-width: 720px) 100vw, 62vw"
-            preload
+            src={project.cover.src}
+            width={project.cover.width}
+            height={project.cover.height}
+            alt={project.cover.alt[locale]}
+            sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 33vw"
+            loading={index < 6 ? "eager" : "lazy"}
+            preload={index === 0}
             draggable={false}
           />
+          <span className="home-project-overlay" aria-hidden="true">
+            <strong>{project.title[locale]}</strong>
+            <small>{project.category[locale]}</small>
+          </span>
         </a>
-
-        <a className="editorial-project editorial-project-hero" href={localePath(locale, `work/${heroProject.slug}`)}>
-          <strong>{locale === "zh" ? "餐饮与空间插画" : "Food & hospitality illustration"}</strong>
-        </a>
-
-        <a className="editorial-project editorial-project-gegelato" href={localePath(locale, `work/${gegelato.slug}`)}>
-          <strong>{gegelato.title[locale]}</strong>
-          <small>{locale === "zh" ? "冰激凌品牌里的角色与店铺" : "Characters and a gelato shop"}</small>
-        </a>
-
-        <a className="editorial-secondary-art editorial-gegelato-art" href={localePath(locale, `work/${gegelato.slug}`)}>
-          <Image
-            src={gegelato.cover.src}
-            width={gegelato.cover.width}
-            height={gegelato.cover.height}
-            alt={gegelato.cover.alt[locale]}
-            sizes="(max-width: 720px) 100vw, 43vw"
-            loading="eager"
-            draggable={false}
-          />
-        </a>
-
-        <a className="editorial-secondary-art editorial-objects-art" href={localePath(locale, `work/${illustratedObjects.slug}`)}>
-          <Image
-            src={illustratedObjects.cover.src}
-            width={illustratedObjects.cover.width}
-            height={illustratedObjects.cover.height}
-            alt={illustratedObjects.cover.alt[locale]}
-            sizes="(max-width: 720px) 100vw, 24vw"
-            loading="lazy"
-            draggable={false}
-          />
-        </a>
-
-        <a className="editorial-project editorial-project-objects" href={localePath(locale, `work/${illustratedObjects.slug}`)}>
-          <strong>{illustratedObjects.title[locale]}</strong>
-        </a>
-      </section>
-
-      <section className="editorial-services services home-services" id="services">
-        <header className="editorial-services-heading">
-          <p className="eyebrow">{c.services.eyebrow}</p>
-          <h2>
-            {c.services.title.split("\n").map((line) => (
-              <span key={line}>{line}</span>
-            ))}
-          </h2>
-          <p>{c.services.intro}</p>
-        </header>
-        <div className="services-list">
-          {c.services.items.map(({ title, body }) => (
-            <div className="service-row" key={title}>
-              <h3>{title}</h3>
-              <p>{body}</p>
-            </div>
-          ))}
-        </div>
-        <a className="style-menu-home-link" href={localePath(locale, "styles")}>
-          <span>{locale === "zh" ? "如果你还不确定从哪里开始，也没关系。" : "If you are not sure where to begin, that's okay."}</span>
-          <strong>{locale === "zh" ? "浏览插画风格与顾客肖像" : "Explore styles and personal portraits"} <span aria-hidden="true">↗</span></strong>
-        </a>
-      </section>
-    </>
+      ))}
+    </section>
   );
 }
 

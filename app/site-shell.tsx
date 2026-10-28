@@ -17,24 +17,20 @@ function Header({ locale, path }: { locale: Locale; path: string[] }) {
   const current = path[0] ?? "";
   const items = [
     { key: "work", label: c.work, href: localePath(locale, "work") },
-    { key: "services", label: c.services, href: `${localePath(locale)}#services` },
     { key: "about", label: c.about, href: localePath(locale, "about") },
     { key: "contact", label: c.contact, href: localePath(locale, "contact") },
   ];
 
   return (
     <header className="site-header">
-      <a className="brand" href={localePath(locale)} aria-label="Aviva大双">Aviva大双</a>
+      <a className="brand" href={localePath(locale)} aria-label="Aviva大双" aria-current={current === "" ? "page" : undefined}>Aviva大双</a>
       <nav className="desktop-nav" aria-label={locale === "zh" ? "主导航" : "Primary navigation"}>
-        <a className="nav-link" href={localePath(locale)} aria-current={current === "" ? "page" : undefined}>
-          {c.home}
-        </a>
         {items.map((item) => (
           <a
             className="nav-link"
             href={item.href}
             key={item.key}
-            aria-current={item.key !== "services" && current === item.key ? "page" : undefined}
+            aria-current={current === item.key ? "page" : undefined}
           >
             {item.label}
           </a>
@@ -47,7 +43,6 @@ function Header({ locale, path }: { locale: Locale; path: string[] }) {
       <details className="mobile-nav">
         <summary>{c.menu}</summary>
         <nav className="mobile-panel" aria-label={locale === "zh" ? "移动导航" : "Mobile navigation"}>
-          <a href={localePath(locale)} aria-current={current === "" ? "page" : undefined}>{c.home}</a>
           {items.map((item) => <a href={item.href} key={item.key}>{item.label}</a>)}
           <a href={languagePath(locale, path)} lang={locale === "zh" ? "en" : "zh-CN"}>{c.language}</a>
         </nav>
@@ -76,6 +71,12 @@ function Footer({ locale, home = false, showPrompt = true }: { locale: Locale; h
             {c.cta} <span aria-hidden="true">↗</span>
           </a>
         </div>}
+        {home && (
+          <a className="style-menu-home-link" href={localePath(locale, "styles")}>
+            <span>{locale === "zh" ? "如果你还不确定从哪里开始，也没关系。" : "If you are not sure where to begin, that's okay."}</span>
+            <strong>{locale === "zh" ? "浏览插画风格与顾客肖像" : "Explore styles and personal portraits"} <span aria-hidden="true">↗</span></strong>
+          </a>
+        )}
         <div className="footer-bottom">
           <p>© {new Date().getFullYear()} Aviva大双</p>
           <div className="footer-socials">

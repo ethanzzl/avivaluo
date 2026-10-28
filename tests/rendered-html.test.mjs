@@ -54,15 +54,22 @@ test("server-renders the finished portfolio homepage", async () => {
   const html = await response.text();
   assert.match(html, /<html lang="zh-CN">/);
   assert.match(html, /Aviva大双/);
-  assert.match(html, /<span>为品牌画出<\/span><span>被记住的温度。<\/span>/);
-  assert.match(html, /class="editorial-project editorial-project-hero"[^>]*><strong>餐饮与空间插画<\/strong>/);
-  assert.match(html, /Gegelato 品牌视觉/);
-  assert.match(html, /插画周边与手作/);
-  assert.match(html, /冰激凌品牌里的角色与店铺/);
-  assert.match(html, /把插画放进包装、菜单、杯子、店铺和真实使用场景/);
+  for (const slug of [
+    "gegelato-brand",
+    "paris-printemps",
+    "everyday-observations",
+    "illustrated-objects",
+    "lemon-tea-packaging",
+    "portraits-family",
+    "food-hospitality",
+    "christmas-stories",
+  ]) {
+    assert.match(html, new RegExp(`/work/${slug}`));
+  }
   assert.match(html, /如果你还不确定从哪里开始，也没关系/);
-  assert.match(html, /class="editorial-home"/);
-  assert.doesNotMatch(html, /Draw a warmer everyday|editorial-note|editorial-folio|editorial-number|service-index/);
+  assert.match(html, /class="home-project-wall"/);
+  assert.match(html, /class="home-project-overlay"/);
+  assert.doesNotMatch(html, /class="editorial-home"|id="services"|<figcaption/);
   assert.match(html, /class="site-footer site-footer-home"/);
   assert.match(html, /avivaluojing@163\.com/);
   assert.doesNotMatch(html, /codex-preview|Building your site|react-loading-skeleton/i);
@@ -73,17 +80,18 @@ test("homepage serves responsive optimized artwork to mobile browsers", async ()
   assert.equal(response.status, 200);
   const html = await response.text();
 
-  assert.match(html, /srcSet="[^\"]*\/_next\/image\?url=%2Fimages%2Fprojects%2Fprotected%2Fcurated%2Ffood-hospitality-a35\.webp/);
-  assert.match(html, /sizes="\(max-width: 720px\) 100vw, 62vw"/);
+  assert.match(html, /srcSet="[^\"]*\/_next\/image\?url=%2Fimages%2Fprojects%2Fprotected%2Fcurated%2Fgegelato-brand-a24\.webp/);
+  assert.match(html, /sizes="\(max-width: 720px\) 100vw, \(max-width: 1100px\) 50vw, 33vw"/);
   assert.match(html, /imageSrcSet="[^\"]*w=480&amp;q=75 480w/);
   assert.doesNotMatch(html, /<img[^>]+src="\/images\/projects\/protected\//);
 });
 
-test("desktop navigation includes a current Home link", async () => {
+test("the brand is the current homepage link and navigation stays minimal", async () => {
   const response = await render("/");
   assert.equal(response.status, 200);
   const html = await response.text();
-  assert.match(html, /class="desktop-nav"[\s\S]*href="\/" aria-current="page"[\s\S]*首页/);
+  assert.match(html, /class="brand" href="\/" aria-label="Aviva大双" aria-current="page"/);
+  assert.doesNotMatch(html, /class="desktop-nav"[\s\S]*>首页<|href="\/#services"/);
 });
 
 test("style cards are reachable from both homepages and keep the locale", async () => {
@@ -139,7 +147,7 @@ test("work page lists the eight curated projects", async () => {
   assert.match(html, /个精选项目/);
   assert.match(html, /\/images\/projects\/protected\/curated\//);
   assert.match(html, /draggable="false"/);
-  assert.match(html, /class="mobile-panel"[\s\S]*href="\/"[\s\S]*首页/);
+  assert.match(html, /class="brand" href="\/" aria-label="Aviva大双"/);
 });
 
 test("published artwork uses protected derivatives while previous public paths are unavailable", async () => {
@@ -208,12 +216,13 @@ test("unknown routes return a styled 404 with noindex metadata", async () => {
   assert.match(html, /name="robots" content="noindex"/);
 });
 
-test("English mobile navigation includes a Home link", async () => {
+test("the English brand links home while mobile navigation stays minimal", async () => {
   const response = await render("/en/work");
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /<html lang="en">/);
-  assert.match(html, /class="mobile-panel"[\s\S]*href="\/en"[\s\S]*Home/);
+  assert.match(html, /class="brand" href="\/en" aria-label="Aviva大双"/);
+  assert.doesNotMatch(html, /class="mobile-panel"[\s\S]*>Home<|href="\/en#services"/);
 });
 
 test("metadata uses the fixed production domain and project artwork", async () => {
